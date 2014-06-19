@@ -2,7 +2,7 @@
 /*
 Plugin Name: LCT Useful Shortcodes & Functions
 Plugin URI: http://lookclassy.com/wordpress-plugins/useful-shortcodes-functions/
-Version: 1.2.1
+Version: 1.2.2
 Text Domain: lct-useful-shortcodes-functions
 Author: Look Classy Technologies
 Author URI: http://lookclassy.com/
@@ -22,8 +22,8 @@ GNU General Public License for more details.
 
 
 //Globals
-$lct_g = new lct_g;
-class lct_g {
+$g_lusf = new g_lusf;
+class g_lusf {
  	public $editzz						= 'editzz';
 	public $lct_dash					= 'lct-useful-shortcodes-functions';
 	public $lct_us						= 'lct_useful_shortcodes_functions';
@@ -51,30 +51,30 @@ include ( 'activate.php' );
 
 
 function hook_activate_lct_useful_shortcodes_functions() {
-	$lct_g = new lct_g;
+	$g_lusf = new g_lusf;
 
-	add_option( $lct_g->lct_us, 'activate' );
+	add_option( $g_lusf->lct_us, 'activate' );
 }
 
 
 function hook_deactivate_lct_useful_shortcodes_functions() {
-	global $lct_g;
+	global $g_lusf;
 
-	delete_option( $lct_g->lct_us );
+	delete_option( $g_lusf->lct_us );
 
 	//Move /lct/* dir from the /uploads dir, back to the plugin dir
-	rename( lct_path_up() . '/lct', $lct_g->plugin_dir_path . 'lct' );
+	rename( lct_path_up() . '/lct', $g_lusf->plugin_dir_path . 'lct' );
 }
 
 
 
 function hook_uninstall_lct_useful_shortcodes_functions() {
-	global $lct_g;
+	global $g_lusf;
 
-	delete_option( $lct_g->lct_us );
+	delete_option( $g_lusf->lct_us );
 
 	//Move /lct/* dir from the plugin dir, to the /uploads dir
-	rename( $lct_g->plugin_dir_path . 'lct', wp_upload_dir()['basedir'] . '/lct' );
+	rename( $g_lusf->plugin_dir_path . 'lct', wp_upload_dir()['basedir'] . '/lct' );
 	//rename /lct to /lct-old-time
 	rename( wp_upload_dir()['basedir'] . '/lct', wp_upload_dir()['basedir'] . '/lct-old-' . current_time( 'timestamp', 1 ) );
 }
