@@ -2,7 +2,7 @@
 /*
 Plugin Name: LCT Useful Shortcodes & Functions
 Plugin URI: http://lookclassy.com/wordpress-plugins/useful-shortcodes-functions/
-Version: 1.2
+Version: 1.2.1
 Text Domain: lct-useful-shortcodes-functions
 Author: Look Classy Technologies
 Author URI: http://lookclassy.com/
@@ -32,7 +32,8 @@ class lct_g {
 		$this->plugin_file				= __FILE__;
 		$this->plugin_dir_url			= plugin_dir_url( __FILE__ );
 		$this->plugin_dir_path			= plugin_dir_path( __FILE__ );
-		register_activation_hook( __FILE__, 'hook_activate_' . $this->lct_us );
+
+		register_activation_hook( $this->plugin_file, 'hook_activate_' . $this->lct_us );
 		register_deactivation_hook( $this->plugin_file, 'hook_deactivate_' . $this->lct_us );
 		register_uninstall_hook( $this->plugin_file, 'hook_uninstall_' . $this->lct_us );
 	}
