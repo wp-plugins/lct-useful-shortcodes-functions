@@ -9,8 +9,8 @@ add_filter( 'widget_execphp', 'do_shortcode' );
 // Grab some custom css when this shortcode is called
 add_shortcode( 'css', 'lct_css' );
 function lct_css( $a ) {
-	$plugin_dir_path = lct_up_path() . '/lct/';
-	$plugin_dir_url = lct_up() . '/lct/';
+	$plugin_dir_path = lct_path_up() . '/lct/';
+	$plugin_dir_url = lct_url_up() . '/lct/';
 	extract(
 		shortcode_atts(
 			array(
@@ -40,8 +40,8 @@ function lct_css( $a ) {
 // Grab some custom js when this shortcode is called
 add_shortcode( 'js', 'lct_js' );
 function lct_js( $a ) {
-	$plugin_dir_path = lct_up_path() . '/lct/';
-	$plugin_dir_url = lct_up() . '/lct/';
+	$plugin_dir_path = lct_path_up() . '/lct/';
+	$plugin_dir_url = lct_url_up() . '/lct/';
 	extract(
 		shortcode_atts(
 			array(
@@ -71,7 +71,7 @@ function lct_js( $a ) {
 // Grab some custom php when this shortcode is called
 add_shortcode( 'custom_php', 'lct_php' );
 function lct_php( $a ) {
-	$plugin_dir_path = lct_up_path() . '/lct/';
+	$plugin_dir_path = lct_path_up() . '/lct/';
 	extract(
 		shortcode_atts(
 			array(
@@ -246,6 +246,8 @@ function lct_wpautop_disable( $content ) {
 			$new_content .= wptexturize( wpautop( $piece ) );
 		}
 	}
+
+	$new_content = str_replace(array("[raw]", "[/raw]"), "", $new_content);
 
 	return $new_content;
 }

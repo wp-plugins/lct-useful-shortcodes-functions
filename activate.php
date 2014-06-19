@@ -1,10 +1,12 @@
 <?php
-add_action( 'admin_init', 'activate_lct_useful_shortcodes_functions' );
+add_action( 'admin_init', 'activate_' . $lct_g->lct_us );
 function activate_lct_useful_shortcodes_functions() {
-	if ( is_admin() && get_option( 'lct_useful_shortcodes_functions' ) == 'activate' ) {
-		delete_option( 'lct_useful_shortcodes_functions' );
+	$lct_g = new lct_g;
+
+	if( is_admin() && get_option( $lct_g->lct_us ) == 'activate' ) {
+		delete_option( $lct_g->lct_us );
 
 		//Move /lct/* dir from the plugin dir, to the /uploads dir
-		rename( plugin_dir_path( __FILE__ ) . 'lct', lct_up_path() . '/lct' );
+		rename( $lct_g->plugin_dir_path . 'lct', lct_path_up() . '/lct' );
 	}
 }
