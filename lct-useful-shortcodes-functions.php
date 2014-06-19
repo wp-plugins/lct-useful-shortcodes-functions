@@ -3,7 +3,7 @@
 Plugin Name: LCT Useful Shortcodes & Functions
 Plugin URI: http://lookclassy.com/wordpress-plugins/useful-shortcodes-functions/
 Description: Shortcodes & Functions that will help make your life easier.
-Version: 1.1
+Version: 1.1.1
 Text Domain: lct-useful-shortcodes-functions
 Author: Look Classy Technologies
 Author URI: http://lookclassy.com/

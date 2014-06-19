@@ -94,7 +94,7 @@ function lct_php( $a ) {
 // Grab a test page when this shortcode is called
 add_shortcode( 'get_test', 'lct_get_test' );
 function lct_get_test( $a ) {
-	$plugin_dir_path = lct_up_path() . '/lct/';
+	$plugin_dir_path = lct_path_up() . '/lct/';
 	extract(
 		shortcode_atts(
 			array(
@@ -107,7 +107,7 @@ function lct_get_test( $a ) {
 	$file = $page . '.php';
 
 	if( file_exists( $plugin_dir_path . $file ) ){
-		$r = '[raw]' . do_shortcode(file_get_contents( $plugin_dir_path . $file )) . '[/raw]';
+		$r = '[raw]' . file_get_contents( $plugin_dir_path . $file ) . '[/raw]';
 		$r = str_replace("[self]", $plugin_dir_path . $file, $r );
 		return $r;
 	}

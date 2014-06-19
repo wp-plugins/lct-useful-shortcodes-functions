@@ -4,7 +4,7 @@ Donate link: http://lookclassy.com/
 Tags: Functions, Shortcodes
 Requires at least: 3.3
 Tested up to: 3.9.1
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv3 or later
 License URI: http://opensource.org/licenses/GPL-3.0
 
@@ -54,6 +54,9 @@ none
 
 
 == Changelog ==
+= 1.1.1 =
+	- [get_test] bug fix.
+
 = 1.1 =
 	- Added debug/functions.php
 	- Added new shortcode items
