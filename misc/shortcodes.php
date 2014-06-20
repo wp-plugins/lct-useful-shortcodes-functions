@@ -230,24 +230,26 @@ function lct_copyyear() {
 
 //[raw]Content to disable wpautop[/raw]
 //Disable wpautop when you use [raw] tags
-remove_filter( 'the_content', 'wpautop' );
-remove_filter( 'the_content', 'wptexturize' );
-add_filter( 'the_content', 'lct_wpautop_disable', 99 );
-function lct_wpautop_disable( $content ) {
-	$new_content = '';
-	$pattern_full = '{(\[raw\].*?\[/raw\])}is';
-	$pattern_contents = '{\[raw\](.*?)\[/raw\]}is';
-	$pieces = preg_split( $pattern_full, $content, -1, PREG_SPLIT_DELIM_CAPTURE );
+if( ! function_exists( 'wpautop_Disable' ) ) {
+	function lct_wpautop_disable( $content ) {
+		$new_content = '';
+		$pattern_full = '{(\[raw\].*?\[/raw\])}is';
+		$pattern_contents = '{\[raw\](.*?)\[/raw\]}is';
+		$pieces = preg_split( $pattern_full, $content, -1, PREG_SPLIT_DELIM_CAPTURE );
 
-	foreach( $pieces as $piece ) {
-		if( preg_match( $pattern_contents, $piece, $matches ) ) {
-			$new_content .= $matches[1];
-		} else {
-			$new_content .= wptexturize( wpautop( $piece ) );
+		foreach( $pieces as $piece ) {
+			if( preg_match( $pattern_contents, $piece, $matches ) ) {
+				$new_content .= $matches[1];
+			} else {
+				$new_content .= wptexturize( wpautop( $piece ) );
+			}
 		}
+
+		$new_content = str_replace(array("[raw]", "[/raw]"), "", $new_content);
+
+		return $new_content;
 	}
-
-	$new_content = str_replace(array("[raw]", "[/raw]"), "", $new_content);
-
-	return $new_content;
+	remove_filter( 'the_content', 'wpautop' );
+	remove_filter( 'the_content', 'wptexturize' );
+	add_filter( 'the_content', 'lct_wpautop_disable', 99 );
 }
