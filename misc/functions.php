@@ -49,3 +49,17 @@ function lct_remove_edit_post_link( $link ) {
 	//return '<p><i class="uk-icon-pencil"></i> '. $link .'</p>';
 	return;
 }
+
+
+//Fix Multisite plugins_url issue
+if( ! function_exists('lct_domain_mapping_plugins_uri') && function_exists('domain_mapping_plugins_uri') ){
+	remove_filter( 'plugins_url', 'domain_mapping_plugins_uri', 1 );
+	add_filter( 'plugins_url', 'lct_domain_mapping_plugins_uri', 1 );
+	function lct_domain_mapping_plugins_uri( $full_url, $path=NULL, $plugin=NULL ) {
+		$pos = stripos( $full_url, PLUGINDIR );
+		if($pos === false)
+			return $full_url;
+		else
+			return get_option( 'siteurl' ) . substr( $full_url, $pos - 1 );
+	}
+}

@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 Requires at least: 3.3
 Tested up to: 3.9.1
 Tags: Functions, Shortcodes
@@ -54,8 +54,11 @@ none
 
 
 == Changelog ==
+= 1.2.4 =
+	- Added Fix Multisite plugins_url issue
+
 = 1.2.3 =
-	- - Fixed conflict with function 'wpautop_Disable'
+	- Fixed conflict with function 'wpautop_Disable'
 
 = 1.2.2 =
 	- Updated Globals
