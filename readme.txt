@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 Requires at least: 3.3
 Tested up to: 3.9.1
 Tags: Functions, Shortcodes
@@ -54,6 +54,9 @@ none
 
 
 == Changelog ==
+= 1.2.5 =
+	- Added function echo_br()
+
 = 1.2.4 =
 	- Added Fix Multisite plugins_url issue
 
