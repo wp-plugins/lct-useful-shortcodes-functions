@@ -21,6 +21,7 @@ function is_blog() {
 	return ( ( is_home() || is_archive() || is_single() ) && ( $post_type == 'post' ) ) ? true : false;
 }
 
+
 //execute php in the text widget
 add_filter( 'widget_text', 'lct_execute_php', 100 );
 function lct_execute_php( $html ) {

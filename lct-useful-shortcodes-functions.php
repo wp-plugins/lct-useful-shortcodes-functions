@@ -2,7 +2,7 @@
 /*
 Plugin Name: LCT Useful Shortcodes & Functions
 Plugin URI: http://lookclassy.com/wordpress-plugins/useful-shortcodes-functions/
-Version: 1.2.5
+Version: 1.2.6
 Text Domain: lct-useful-shortcodes-functions
 Author: Look Classy Technologies
 Author URI: http://lookclassy.com/
@@ -39,8 +39,19 @@ class g_lusf {
 	}
 }
 
+
+include ( 'plugin_reliant.php' );
+
+include ( 'deprecated.php' );
+
+include ( 'admin/functions.php' );
+include ( 'admin/menu.php' );
+
 include ( 'debug/functions.php' );
 include ( 'debug/shortcodes.php' );
+
+include ( 'display/fields.php' );
+include ( 'display/options.php' );
 
 include ( 'misc/functions.php' );
 include ( 'misc/shortcodes.php' );
@@ -67,7 +78,6 @@ function hook_deactivate_lct_useful_shortcodes_functions() {
 }
 
 
-
 function hook_uninstall_lct_useful_shortcodes_functions() {
 	global $g_lusf;
 
@@ -78,7 +88,3 @@ function hook_uninstall_lct_useful_shortcodes_functions() {
 	//rename /lct to /lct-old-time
 	rename( wp_upload_dir()['basedir'] . '/lct', wp_upload_dir()['basedir'] . '/lct-old-' . current_time( 'timestamp', 1 ) );
 }
-
-
-
-include ( 'deprecated/shortcodes.php' );

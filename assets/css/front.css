@@ -1,0 +1,56 @@
+/* Text & Images */
+.aligncenter{
+	text-align: center;
+	display: block;
+	margin: 0 auto 10px;
+}
+
+.center,
+.c{
+	text-align: center;
+}
+
+.nomargin,
+.nom{
+	margin: 0;
+}
+
+.nomp{
+	margin: 0;
+	padding: 0;
+}
+
+.bold{
+	font-weight: bold;
+}
+
+.small{
+	font-size: 80%;
+	line-height: 1;
+}
+
+
+/* All Elements */
+.clear{
+	clear: both;
+}
+
+#note-for-after-clear:after{
+	content: ".";
+	visibility: hidden;
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+#hidden,
+.hidden,
+#test-admin,
+img[src*="/plugins/cookies-for-comments/"]{
+	display: none;
+}
+
+#fixed{
+	position: fixed;
+	z-index: 999;
+}
