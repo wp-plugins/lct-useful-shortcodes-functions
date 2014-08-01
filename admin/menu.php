@@ -25,20 +25,20 @@ function lct_useful_settings() {
 		<h3>General Options</h3>
 		<table class="form-table"><tbody>
 			<?php
-			$v = 'Enable_Front_css';
+			$v = "Enable_Front_css";
 			echo lct_f(
 				"lct_useful_settings[$v]",
-				'checkbox',
+				"checkbox",
 				$term_meta[$v],
-				array( 'label' => 'Enable front.css' )
+				array( "label" => "Enable front.css" )
 			);
 
-			$v = 'Default_Taxonomy';
+			$v = "Default_Taxonomy";
 			echo lct_f(
 				"lct_useful_settings[$v]",
-				'select',
+				"select",
 				$term_meta[$v],
-				array( 'label' => 'Default Taxonomy to Use for lct_select_options();', 'label_override' => true, 'lct_select_options' => 'get_taxonomies', 'options_default' => false )
+				array( "label" => "Default Taxonomy to Use for lct_select_options();", "label_override" => true, "lct_select_options" => "get_taxonomies", "options_default" => false )
 			);
 			?>
 		</tbody></table>
@@ -48,12 +48,83 @@ function lct_useful_settings() {
 		<h3>Gravity Forms</h3>
 		<table class="form-table"><tbody>
 			<?php
-			$v = 'use_placeholders_instead_of_labels';
+			$v = "use_placeholders_instead_of_labels";
 			echo lct_f(
 				"lct_useful_settings[$v]",
-				'checkboxgroup',
+				"checkboxgroup",
 				$term_meta[$v],
-				array( 'label' => $v, 'lct_select_options' => 'gravity_forms', 'options_default' => false, 'options_hide' => true )
+				array( "label" => $v, "lct_select_options" => "gravity_forms", "options_default" => false, "options_hide" => true )
+			);
+
+			$v = "bad_red_color";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"text",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+
+			$v = "good_black_color";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"text",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+			?>
+		</tbody></table>
+		<p>&nbsp;</p>
+
+
+		<h3>Login Form</h3>
+		<table class="form-table"><tbody>
+			<?php
+			$v = "lct_show_login_logo";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"checkbox",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+
+			$v = "lct_login_logo";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"text",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+
+			$v = "lct_show_tag_line";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"checkbox",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+
+			$v = "lct_tag_line";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"text",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+
+			$v = "lct_show_register_link";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"checkbox",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+
+			$v = "lct_register_page";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"select",
+				$term_meta[$v],
+				array( "label" => $v, "lct_select_options" => "get_pages", "options_default" => false, "options_hide" => false )
 			);
 			?>
 		</tbody></table>

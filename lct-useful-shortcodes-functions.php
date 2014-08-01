@@ -1,17 +1,17 @@
 <?php /*
 Plugin Name: LCT Useful Shortcodes & Functions
 Plugin URI: http://lookclassy.com/wordpress-plugins/useful-shortcodes-functions/
-Version: 1.2.7
+Version: 1.2.8
 Text Domain: lct-useful-shortcodes-functions
 Author: Look Classy Technologies
 Author URI: http://lookclassy.com/
 License: GPLv3 (http://opensource.org/licenses/GPL-3.0)
 Description: Shortcodes & Functions that will help make your life easier.
-Copyright 2013 Look Classy Technologies  (email : info@lookclassy.com)
+Copyright 2014 Look Classy Technologies  (email : info@lookclassy.com)
 */
 
 /*
-Copyright (C) 2013 Look Classy Technologies
+Copyright (C) 2014 Look Classy Technologies
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -57,6 +57,7 @@ include ( 'front/functions.php' );
 include ( 'gforms/functions.php' );
 
 include ( 'misc/functions.php' );
+include ( 'misc/login.php' );
 include ( 'misc/shortcodes.php' );
 
 

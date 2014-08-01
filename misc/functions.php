@@ -52,6 +52,15 @@ function is_blog() {
 }
 
 
+function the_slug( $post_id = null ) {
+	if( ! $post_id ) return;
+
+	$post_data = get_post( $post_id, ARRAY_A );
+
+	return $post_data['post_name'] . '/';
+}
+
+
 //execute php in the text widget
 add_filter( 'widget_text', 'lct_execute_php', 100 );
 function lct_execute_php( $html ) {
@@ -93,4 +102,18 @@ if( ! function_exists('lct_domain_mapping_plugins_uri') && function_exists('doma
 		else
 			return get_option( 'siteurl' ) . substr( $full_url, $pos - 1 );
 	}
+}
+
+
+/**
+ * Allow html tags in widget titles
+ */
+add_filter( 'widget_title', 'lct_html_widget_title', 999 );
+function lct_html_widget_title( $title ) {
+	$title = str_replace( '[', '<', $title );
+	$title = str_replace( '[/', '</', $title );
+	$title = str_replace( ']', '>', $title );
+	$title = str_replace( '/]', '/>', $title );
+
+	return html_entity_decode( $title );
 }

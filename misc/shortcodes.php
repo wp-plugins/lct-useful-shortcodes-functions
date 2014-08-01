@@ -253,3 +253,21 @@ if( ! function_exists( 'wpautop_Disable' ) ) {
 	remove_filter( 'the_content', 'wptexturize' );
 	add_filter( 'the_content', 'lct_wpautop_disable', 99 );
 }
+
+
+//[lct_auto_logout]
+add_shortcode( 'lct_auto_logout', 'lct_auto_logout' );
+function lct_auto_logout() {
+	if( is_user_logged_in() ) {
+		$time = time();
+
+		echo '<a id="logout' . $time . '" href="' . wp_logout_url() . '">Logout</a>';
+
+		$script = '<script>
+			document.getElementById("logout' . $time . '").click();
+	    </script>';
+		echo $script;
+
+		die();
+	}
+}

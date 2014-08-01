@@ -41,7 +41,7 @@ function lct_map_adminLabel_to_field_id( $fields, $lead = null ) {
  */
 add_filter( 'gform_pre_render', 'lct_use_placeholders_instead_of_labels', 1 );
 function lct_use_placeholders_instead_of_labels( $form ) {
-	if( in_array( $form['id'], lct_get_lct_useful_settings( 'use_placeholders_instead_of_labels' ) ) == false ) return $form;
+	if( in_array( $form['id'], use_placeholders_instead_of_labels_array() ) == false ) return $form;
 
 	$valid_types = array( 'text', 'textarea', 'phone', 'email' );
 	$f_id = $form['id'];
@@ -57,9 +57,25 @@ function lct_use_placeholders_instead_of_labels( $form ) {
 			$input = "input_" . $f_id . "_" . $field['id'];
 
 			$field['defaultValue'] ? $placeholder = $field['defaultValue'] : $placeholder = $field['label'];
-			if( $field['isRequired'] ) $placeholder .= ' *';
+			if( $field['isRequired'] ){
+				$placeholder .= ' *';
+				$focus_Class = "jQuery('#$input').addClass('good_black');\n";
+				$focus_Class .= "jQuery('#$input').removeClass('bad_red');\n";
+				$blur_Class = "jQuery('#$input').removeClass('good_black');\n";
+				$blur_Class .= "jQuery('#$input').addClass('bad_red');\n";
+			}else{
+				$focus_Class = "";
+				$blur_Class = "";
+			}
 
-			echo "jQuery('#$input').val('$placeholder');\n";
+			echo "var placeholder = '$placeholder';\n";
+
+			if( strpos( $placeholder, ";" ) === false )
+				echo "jQuery('#$input').val('$placeholder');\n";
+			else{
+				$tmp = explode( ";", $placeholder );
+				$placeholder = trim( $tmp[1] );
+			}
 
 			$jQuery_submit .= "if( jQuery('#$input').val() == '$placeholder' )
 				jQuery('#$input').val('');\n";
@@ -67,21 +83,17 @@ function lct_use_placeholders_instead_of_labels( $form ) {
 			echo "jQuery('label[for=$input]').hide();\n";
 
 			echo "jQuery('#$input').focus(function(){
-				if(jQuery('#$input').val() == '$placeholder')
+				if(jQuery('#$input').val() == '$placeholder' || placeholder.indexOf(';') != -1 )
 					jQuery('#$input').val('');
 
-				jQuery('#$input').css({
-					'color' : '#000',
-				});
+				$focus_Class
 			});
 
 			jQuery('#$input').blur(function(){
 				if(jQuery('#$input').val() == ''){
 					jQuery('#$input').val('$placeholder');
 
-					jQuery('#$input').css({
-						'color' : 'red',
-					});
+					$blur_Class
 				}
 			});";
 	 	}
@@ -93,6 +105,22 @@ function lct_use_placeholders_instead_of_labels( $form ) {
 		});
 	});
 	</script>
+
+
+	<style>
+	.bad_red,
+	.gform_wrapper .gfield input.bad_red,
+	.gform_wrapper .gfield textarea.bad_red{
+		color: <?php echo lct_get_lct_useful_settings( 'bad_red_color' ); ?> !important;
+	}
+
+	.good_black,
+	.gform_wrapper .gfield input.good_black,
+	.gform_wrapper .gfield textarea.good_black{
+		color: <?php echo lct_get_lct_useful_settings( 'good_black_color' ); ?> !important;
+	}
+	</style>
+
 
 	<?php return $form;
 }
