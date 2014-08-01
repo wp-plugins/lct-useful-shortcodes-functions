@@ -1,4 +1,34 @@
 <?php
+/**
+ * Get details for files in a directory or a specific file.
+ *
+ * @since 2.5.0
+ *
+ * @param string $path           Path to directory or file.
+ * @param bool   $include_hidden Optional. Whether to include details of hidden ("." prefixed) files.
+ *                               Default true.
+ * @param bool   $recursive      Optional. Whether to recursively include file details in nested directories.
+ *                               Default false.
+ * @return array|bool {
+ *     Array of files. False if unable to list directory contents.
+ *
+ *     @type string 'name'        Name of the file/directory.
+ *     @type string 'perms'       *nix representation of permissions.
+ *     @type int    'permsn'      Octal representation of permissions.
+ *     @type string 'owner'       Owner name or ID.
+ *     @type int    'size'        Size of file in bytes.
+ *     @type int    'lastmodunix' Last modified unix timestamp.
+ *     @type mixed  'lastmod'     Last modified month (3 letter) and day (without leading 0).
+ *     @type int    'time'        Last modified time.
+ *     @type string 'type'        Type of resource. 'f' for file, 'd' for directory.
+ *     @type mixed  'files'       If a directory and $recursive is true, contains another array of files.
+ * }
+ */
+function lct_example_only() {
+	return;
+}
+
+
 //disregard siteurl value
 if( LCT_DEV == 1 ) {
 	add_filter( 'option_siteurl', 'lct_clean_siteurl' );

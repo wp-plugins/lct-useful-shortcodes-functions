@@ -32,6 +32,29 @@ function lct_useful_settings() {
 				$term_meta[$v],
 				array( 'label' => 'Enable front.css' )
 			);
+
+			$v = 'Default_Taxonomy';
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				'select',
+				$term_meta[$v],
+				array( 'label' => 'Default Taxonomy to Use for lct_select_options();', 'label_override' => true, 'lct_select_options' => 'get_taxonomies', 'options_default' => false )
+			);
+			?>
+		</tbody></table>
+		<p>&nbsp;</p>
+
+
+		<h3>Gravity Forms</h3>
+		<table class="form-table"><tbody>
+			<?php
+			$v = 'use_placeholders_instead_of_labels';
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				'checkboxgroup',
+				$term_meta[$v],
+				array( 'label' => $v, 'lct_select_options' => 'gravity_forms', 'options_default' => false, 'options_hide' => true )
+			);
 			?>
 		</tbody></table>
 		<p>&nbsp;</p>
