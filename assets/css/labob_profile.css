@@ -1,0 +1,15 @@
+#lct-admin-bar-on-bottom {
+	padding: 0 10px 10px 10px;
+	border: 1px solid #ccc;
+}
+
+#lct-admin-bar-on-bottom .setting-group {
+	padding: 10px;
+	border: 1px solid #aaa;
+}
+
+#lct-admin-bar-on-bottom .setting-group h3 {
+	margin: 0;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 5px;
+}

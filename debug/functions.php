@@ -2,8 +2,7 @@
 //Used instead of print_r() function. It gives you a better understnading of how array's are laid out.
 if( ! function_exists( 'P_R' ) ) {
 	function P_R( $var, $name = 'Name Not Set', $return = false ) {
-		if( ! is_user_logged_in() )
-			return;
+		if( ! is_user_logged_in() ) return;
 
 		$skip = array( 'HTTP_COOKIE' );
 
@@ -14,8 +13,7 @@ if( ! function_exists( 'P_R' ) ) {
 		$h .= '<tr><th class="' . $c . '" colspan="2">' . $name . '</th></tr>';
 
 		foreach( $var as $k => $v ) {
-			if( in_array( $k, $skip ) )
-				continue;
+			if( in_array( $k, $skip ) && $k !== 0 ) continue;
 
 			if( $c == 'even' )
 				$c = 'odd';
@@ -48,9 +46,11 @@ if( ! function_exists( 'P_R' ) ) {
 						$h .= '</pre>';
 					} else
 						$h .= $v2;
+
 					$h .= '</td>';
 					$h .= '</tr>';
 				}
+
 				$h .= '</table>';
 			} else
 				$h .= $v;
@@ -59,9 +59,8 @@ if( ! function_exists( 'P_R' ) ) {
 			$h .= '</tr>';
 		}
 
-		if( ! $var ) {
+		if( ! $var )
 			$h .= '<tr><td class="' . $c . '">none</td></tr>';
-		}
 
 		$h .= '</table>';
 

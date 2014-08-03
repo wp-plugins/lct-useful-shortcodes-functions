@@ -16,16 +16,20 @@
  * @v['post_label']
  * @v['pre_input']
  * @v['post_input']
- * @v['other_variables'] html like style, rel, etc.
  * @v['options_tax'] PASS-THRU to lct_select_options
  * @v['lct_select_options'] PASS-THRU to lct_select_options
  * @v['options_default'] PASS-THRU to lct_select_options
  * @v['options_hide'] PASS-THRU to lct_select_options
  * @v['npl_organization'] PASS-THRU to lct_select_options
  * @v['skip_npl_organization'] PASS-THRU to lct_select_options
+ * @v['other_variables'] html like style, rel, etc.
+ * @v['not_set_selected'] mixed default value if the value has never been set before.
 */
 function lct_f( $item = null, $type = null, $selected = '', $v ) {
 	if( ! $item ) return;
+
+	if( isset( $v['not_set_selected'] ) && $selected === '' )
+		$selected = $v['not_set_selected'];
 
 	if( $v['label'] && ! $v['label_override'] ) {
 		$f = array("lct_", "lcx_", "npl_", '_');
@@ -84,6 +88,24 @@ function lct_f( $item = null, $type = null, $selected = '', $v ) {
 				break;
 
 			case 'checkbox_div':
+				$pre_field			= "<div class='$pre_field_class'>";
+				$post_field			= "</div>";
+				$pre_label			= "<label for='$item'>";
+				$post_label			= "</label>";
+				break;
+
+
+			//radio items
+			case 'radiogroup':
+				$pre_field			= "<tr class='$pre_field_class'>";
+				$post_field			= "</tr>";
+				$pre_label			= "<th><label for='$item'>";
+				$post_label			= "</label></th>";
+				$pre_input			= "<td class='forminp forminp-checkbox'>";
+				$post_input			= "</td>";
+				break;
+
+			case 'radiogroup_div':
 				$pre_field			= "<div class='$pre_field_class'>";
 				$post_field			= "</div>";
 				$pre_label			= "<label for='$item'>";
@@ -239,6 +261,35 @@ function lct_f_processor_checkboxgroupinput( $item, $selected, $v ) {
 
 		$options .= "<input type='text' id='$text_item' name='$text_item' style='width: 30px;' value='" . $term_meta[$term_meta_key] . "' />";
 		$options .= "<input type='checkbox' id='$item' name='".$item."[]' class='$input_class' value='$value' $checked /> <label>" . $fe_s['label'] . "</label><br />";
+	}
+
+	$input = $options;
+
+	$output .= $v['pre_field'];
+		$output .= $v['pre_label'];
+			$output .= $v['label'];
+		$output .= $v['post_label'];
+
+		$output .= $v['pre_input'];
+			$output .= $input;
+			$output .= $description;
+		$output .= $v['post_input'];
+	$output .= $v['post_field'];
+
+	return $output;
+}
+
+
+function lct_f_processor_radiogroup( $item, $selected, $v ) {
+	$output = '';
+	$input_class = $v['input_class'];
+	$v['description'] ? $description = "<p class=\"description\">" . $v['description'] . "</p>" : $description = "";
+
+	$options = '';
+	foreach( lct_select_options( $v['lct_select_options'], $v['options_default'], $v['options_hide'], $v ) as $fe_s ){
+		$value = $fe_s['value'];
+	 	$value == $selected ? $checked = 'checked="checked"' : $checked = '';
+		$options .= "<input type='radio' id='$item' name='$item' class='$input_class' value='$value' $checked /> <label>" . $fe_s['label'] . "</label><br />";
 	}
 
 	$input = $options;

@@ -56,6 +56,38 @@ function lct_useful_settings() {
 				array( "label" => $v, "lct_select_options" => "gravity_forms", "options_default" => false, "options_hide" => true )
 			);
 
+			$v = "use_gforms_css_tweaks";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"checkbox",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+
+			$v = "gforms_css_tweaks_gform_footer_margin";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"text",
+				$term_meta[$v],
+				array( "label" => "gform_footer Margin", "label_override" => true )
+			);
+
+			$v = "gforms_css_tweaks_gform_footer_padding";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"text",
+				$term_meta[$v],
+				array( "label" => "gform_footer Padding", "label_override" => true )
+			);
+
+			$v = "gform_button_custom_class";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"text",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+
 			$v = "bad_red_color";
 			echo lct_f(
 				"lct_useful_settings[$v]",
@@ -70,6 +102,22 @@ function lct_useful_settings() {
 				"text",
 				$term_meta[$v],
 				array( "label" => $v )
+			);
+
+			$v = "store_hide_selected_gforms";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"radiogroup",
+				$term_meta[$v],
+				array( "label" => "Store Form Data", "not_set_selected" => "0", "options_default" => false, "options_hide" => true )
+			);
+
+			$v = "store_gforms";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"checkboxgroup",
+				$term_meta[$v],
+				array( "label" => "Select Forms", "lct_select_options" => "gravity_forms", "options_default" => false, "options_hide" => true )
 			);
 			?>
 		</tbody></table>

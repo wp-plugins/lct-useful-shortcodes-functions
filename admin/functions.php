@@ -9,6 +9,16 @@ function use_placeholders_instead_of_labels_array() {
 }
 
 
+function store_gforms_array() {
+	$return = lct_get_lct_useful_settings( 'store_gforms' );
+
+	if( ! $return )
+		$return = array( 0 );
+
+	return $return;
+}
+
+
 function lct_custom_redirect_wrapper( $force_exit = true, $headers_sent_already = false ) {
 	$current_user = wp_get_current_user();
 

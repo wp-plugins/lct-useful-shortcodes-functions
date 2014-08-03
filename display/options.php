@@ -16,8 +16,8 @@ function lct_select_options( $type, $default = 1, $hide = null, $v = array() ) {
 	if( ! $type ) return;
 
 	//Clean up $type
-	$f = array( "term_meta[", "]" );
-	$r = array( "", "" );
+	$f = array( "term_meta[", "lct_useful_settings[", "]" );
+	$r = array( "", "", "" );
 	$type = str_replace( $f, $r, $type );
 
 	if( ! isset( $v['options_tax'] ) ) $v['options_tax'] = lct_get_lct_useful_settings( 'Default_Taxonomy' );
@@ -207,5 +207,21 @@ function lct_select_options_states( $hide , $type, $v ){
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
 	$select_options[] = array( 'label'=>'Maryland' , 'value'=>'MD' );
 	$select_options[] = array( 'label'=>'Virginia' , 'value'=>'VA' );
+	return $select_options;
+}
+
+
+function lct_select_options_store_hide_selected_gforms( $hide , $type, $v ) {
+	$select_options = array();
+
+	$options = array(
+		0 => 'Don\'t store the selected forms',
+		1 => 'Yes, store the selected forms',
+	);
+
+	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
+	foreach( $options as $k=>$v )
+	  $select_options[] = array( 'label'=>$v , 'value'=>$k );
+
 	return $select_options;
 }

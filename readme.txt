@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 1.2.8
+Stable tag: 1.2.9
 Requires at least: 3.3
 Tested up to: 3.9.1
 Tags: Functions, Shortcodes
@@ -54,6 +54,10 @@ none
 
 
 == Changelog ==
+= 1.2.9 =
+	- ADDED lct_textimage_linking_shortcode
+	- ADDED lct_admin_bar_on_bottom
+
 = 1.2.8 =
 	- Fixed Bugs in Gravity Form Placeholder Functionality
 	- Added Login Form

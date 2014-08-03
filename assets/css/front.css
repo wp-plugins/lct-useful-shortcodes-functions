@@ -54,3 +54,9 @@ img[src*="/plugins/cookies-for-comments/"]{
 	position: fixed;
 	z-index: 999;
 }
+
+textarea{
+	-webkit-transition: height 0.2s;
+	-moz-transition: height 0.2s;
+	transition: height 0.2s;
+}

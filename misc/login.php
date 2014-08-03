@@ -160,8 +160,10 @@ function displayForm($atts){ ?>
 	<section id="contentForm">
 		<form name="loginform" id="loginform" action="" method="post">
 
-			<?php if( $tag_line = get_bloginfo( 'description' ) && lct_get_lct_useful_settings( 'lct_show_tag_line' ) ) {
-		    	echo "<h1>$tag_line</h1>";
+			<?php if( lct_get_lct_useful_settings( 'lct_tag_line' ) && lct_get_lct_useful_settings( 'lct_show_tag_line' ) ) {
+		    	echo "<h1>" . lct_get_lct_useful_settings( 'lct_tag_line' ) . "</h1>";
+		    }elseif( get_bloginfo( 'description' ) && lct_get_lct_useful_settings( 'lct_show_tag_line' ) ) {
+		    	echo "<h1>" . get_bloginfo( 'description' ) . "</h1>";
 		    }else{
 		    	echo "<h1></h1>";
 		    } ?>
@@ -177,7 +179,7 @@ function displayForm($atts){ ?>
 				<p>
 					<a href="<?php echo wp_lostpassword_url(); ?>">Forgot Password?</a>
 
-					<?php if( lct_get_lct_useful_settings( 'lct_show_register_link' ) ){ ?>
+					<?php if( lct_get_lct_useful_settings( 'lct_show_register_link' ) ) { ?>
 						&nbsp;<span class="hide-a-pipe">|</span> <a href="/<?php echo the_slug( lct_get_lct_useful_settings( 'lct_register_page' ) ); ?>">New to <?php echo get_bloginfo('name'); ?>?</a>
 					<?php } ?>
 				</p>
