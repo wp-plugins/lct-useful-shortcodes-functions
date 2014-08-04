@@ -182,6 +182,34 @@ function lct_path_theme() {
 }
 
 
+//[url_plugin]
+//Get the plugin directory URL
+add_shortcode( 'url_plugin', 'lct_url_plugin' );
+function lct_url_plugin() {
+	global $g_lusf;
+
+	$path = explode( '/' , rtrim( str_replace( '\\', '/', $g_lusf->plugin_dir_url ), '/' ) );
+	array_pop( $path );
+	$path = implode( '/', $path );
+
+	return $path;
+}
+
+
+//[path_plugin]
+//Get the plugin directory path
+add_shortcode( 'path_plugin', 'lct_path_plugin' );
+function lct_path_plugin() {
+	global $g_lusf;
+
+	$path = explode( '/' , rtrim( str_replace( '\\', '/', $g_lusf->plugin_dir_path ), '/' ) );
+	array_pop( $path );
+	$path = implode( '/', $path );
+
+	return $path;
+}
+
+
 //[url_theme_parent]
 //Get the parent theme's URL
 add_shortcode( 'url_theme_parent', 'lct_url_theme_parent' );
@@ -267,4 +295,14 @@ function lct_auto_logout() {
 
 		die();
 	}
+}
+
+
+//[lct_jquery_mask]
+//Add digit mask
+add_shortcode( 'lct_jquery_mask', 'lct_jquery_mask' );
+function lct_jquery_mask(){
+	$g_lusf = new g_lusf;
+
+	wp_enqueue_script( 'lct_jquery_mask', $g_lusf->plugin_dir_url .'assets/js/jquery_mask.js', array('jquery') );
 }

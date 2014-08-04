@@ -32,8 +32,20 @@ function lct_f( $item = null, $type = null, $selected = '', $v ) {
 		$selected = $v['not_set_selected'];
 
 	if( $v['label'] && ! $v['label_override'] ) {
-		$f = array("lct_", "lcx_", "npl_", '_');
-		$r = array("", "", "", " ");
+		$f_r = array(
+			'lct_' => '',
+			'ltm_' => '',
+			'lcx_' => '',
+			'npl_' => '',
+			'_' => ' ',
+		);
+
+		$f = array(); $r = array();
+		foreach( $f_r as $k=>$tmp ){
+			$f[] = $k;
+			$r[] = $tmp;
+		}
+
 		$v['label'] = ucwords( str_replace( $f, $r, $v['label'] ) );
 	}
 

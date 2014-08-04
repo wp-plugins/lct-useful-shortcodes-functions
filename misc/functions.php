@@ -117,3 +117,81 @@ function lct_html_widget_title( $title ) {
 
 	return html_entity_decode( $title );
 }
+
+
+//Set the timezone to the logged in users default Timezone
+add_action( 'init', 'set_user_timezone' );
+function set_user_timezone( $user_ID = null ) {
+	if( ! $user_ID )
+		$user_ID = get_current_user_id();
+
+	if( ! $user_ID ){
+		date_default_timezone_set( get_option( 'timezone_string' ) );
+		return get_option( 'timezone_string' );
+	}
+
+	$npl_user_timezone = get_user_meta( $user_ID, 'npl_user_timezone', true );
+	if( $npl_user_timezone ) {
+		date_default_timezone_set( $npl_user_timezone );
+		return $npl_user_timezone;
+	}
+}
+
+
+/**
+ * Get a single value from a WP Term
+ *
+ * @term_id int
+ * @tax string - The terms taxonomy
+ * @value string - The value you want to retrieve
+ *
+ * Possible values to call
+ * @name
+ * @slug
+ * @term_group
+ * @term_order
+ * @term_taxonomy_id
+ * @taxonomy
+ * @description
+ * @parent
+ * @count
+ * @filter
+*/
+function lct_get_term_value( $term_id, $tax="lct_option" , $key=null, $output="OBJECT", $filter="raw" ) {
+	$term = get_term( $term_id, $tax, $output, $filter );
+
+	if( ! $term ) return 0;
+
+	if( $key )
+		return $term->$key;
+
+	return $term;
+}
+
+
+function lct_get_parent_term_value( $term_id, $tax, $key = null, $output="OBJECT", $filter="raw" ) {
+	$term = get_term( $term_id, $tax, $output, $filter );
+
+	$parent_term = get_term( $term->parent, $tax, $output, $filter );
+
+	if( ! $parent_term ) return 0;
+
+	if( $key )
+		return $parent_term->$key;
+
+	return $parent_term;
+}
+
+
+function lct_get_parent_term_meta( $term_id = null, $tax = null, $key = null, $output="OBJECT", $filter="raw"  ){
+	if( ! $term_id || ! $tax ) return;
+
+	$term = get_term( $term_id, $tax, $output, $filter );
+
+	$parent_term_id = $term->parent;
+
+	if( $key )
+		return get_option( $tax . "_" . $parent_term_id )[$key];
+	else
+		return get_option( $tax . "_" . $parent_term_id );
+}

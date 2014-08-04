@@ -28,6 +28,52 @@ function lct_select_options( $type, $default = 1, $hide = null, $v = array() ) {
 	return call_user_func( 'lct_select_options_' . $type, $hide , $type, $v );
 }
 
+//Uses Taxonomy
+function lct_select_options_default( $hide, $type, $v ) {
+	$tax = $v['options_tax'];
+
+	if( $v['skip_npl_organization']){
+		$parent_term = get_term_by( 'slug', $type, $tax );
+	}else{
+		if( $v['npl_organization'] )
+			$npl_organization = get_term_by( 'id', $v['npl_organization'], 'npl_organization' );
+		else
+			$npl_organization = get_term_by( 'id', get_user_meta( get_current_user_id(), 'npl_organization', true ), 'npl_organization' );
+
+		$parent_term = get_term_by( 'slug', $npl_organization->slug . '__' . $type, $tax );
+	}
+
+	if( ! $parent_term ) return;
+
+	$args = array(
+		'type'                     => 'wp-lead',
+		'child_of'                 => $parent_term->term_id,
+		'orderby'                  => 'term_order',
+		'order'                    => 'ASC',
+		'hide_empty'               => 0,
+		'hierarchical'             => 1,
+		'taxonomy'                 => $tax,
+		'pad_counts'               => false
+	);
+	$tax_children = get_categories( $args );
+
+	$select_options = array();
+	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
+	foreach ($tax_children as $child) {
+		$term_meta = get_option( $tax . "_$child->term_id" );
+		$value = array( 'value' => $child->term_id );
+		$array = array(
+			'label'=>$child->name,
+			'color'=> $term_meta['color'],
+			'icon'=> $term_meta['icon'],
+			'level'=> $term_meta['level'],
+		);
+		$tmp = array_merge($value, $array);
+		$select_options[] = $tmp;
+	}
+	return $select_options;
+}
+
 
 //Get a list of ALL gravity forms
 function lct_select_options_gravity_forms( $hide , $type, $v ) {
@@ -79,6 +125,21 @@ function lct_select_options_get_taxonomies( $hide, $type, $v ) {
 		$select_options[] = array( 'label' => '---', 'value' => '' );
 	foreach( $taxonomies as $taxonomy )
 		$select_options[] = array( 'label' => $taxonomy, 'value' => $taxonomy );
+
+	return $select_options;
+}
+
+
+function lct_select_options_meta_key( $hide , $type, $v ) {
+	if( ! $v['options_tax'] ) return;
+
+	$meta_keys = explode( ",", ltm_get_ltm_settings( 'meta_keys_' . $v['options_tax'] ) );
+
+	$select_options = array();
+	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
+	foreach( $meta_keys as $meta_key ) {
+		$select_options[] = array( 'label'=>trim( $meta_key ) , 'value'=>trim( $meta_key ) );
+	}
 
 	return $select_options;
 }
