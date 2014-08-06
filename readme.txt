@@ -1,9 +1,9 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 1.2.93
+Stable tag: 1.2.94
 Requires at least: 3.3
-Tested up to: 3.9.1
+Tested up to: 3.9.2
 Tags: Functions, Shortcodes
 License: GPLv3 or later
 License URI: http://opensource.org/licenses/GPL-3.0
@@ -54,6 +54,9 @@ none
 
 
 == Changelog ==
+= 1.2.94 =
+	- Tested for WP 3.9.2 Compatibility
+
 = 1.2.93 =
 	- minor tweaks
 	- added sitemap-generator
