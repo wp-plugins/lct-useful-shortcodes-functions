@@ -195,3 +195,12 @@ function lct_get_parent_term_meta( $term_id = null, $tax = null, $key = null, $o
 	else
 		return get_option( $tax . "_" . $parent_term_id );
 }
+
+
+function lct_clean_number_for_math( $number ) {
+	$f = ',';
+	$r = '';
+	$new_number = floatval( preg_replace("/[^-0-9\.]/", "", $number ) );
+
+	return (float) $new_number;
+}

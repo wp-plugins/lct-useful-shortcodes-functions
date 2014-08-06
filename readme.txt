@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 1.2.92
+Stable tag: 1.2.93
 Requires at least: 3.3
 Tested up to: 3.9.1
 Tags: Functions, Shortcodes
@@ -54,6 +54,10 @@ none
 
 
 == Changelog ==
+= 1.2.93 =
+	- minor tweaks
+	- added sitemap-generator
+
 = 1.2.92 =
 	- minor tweaks
 

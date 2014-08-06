@@ -75,6 +75,38 @@ function lct_select_options_default( $hide, $type, $v ) {
 }
 
 
+//Uses Taxonomy
+function lct_select_options_all_tax( $hide, $type, $v ) {
+	$tax = $v['options_tax'];
+
+	$args = array(
+		'orderby'                  => 'term_order',
+		'order'                    => 'ASC',
+		'hide_empty'               => 0,
+		'hierarchical'             => 1,
+		'taxonomy'                 => $tax,
+		'pad_counts'               => false
+	);
+	$cats = get_categories( $args );
+
+	$select_options = array();
+	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
+	foreach ($cats as $cat) {
+		$term_meta = get_option( $tax . "_$cat->term_id" );
+		$value = array( 'value' => $cat->term_id );
+		$array = array(
+			'label'=>$cat->name,
+			'color'=> $term_meta['color'],
+			'icon'=> $term_meta['icon'],
+			'level'=> $term_meta['level'],
+		);
+		$tmp = array_merge($value, $array);
+		$select_options[] = $tmp;
+	}
+	return $select_options;
+}
+
+
 //Get a list of ALL gravity forms
 function lct_select_options_gravity_forms( $hide , $type, $v ) {
 	$select_options = array();

@@ -1,5 +1,5 @@
 <?php
-add_action( 'wp_enqueue_scripts', 'lct_login_css' );
+add_action( 'lct_login_css', 'lct_login_css' );
 function lct_login_css() {
 	$g_lusf = new g_lusf;
 
@@ -100,7 +100,8 @@ function retrieve_my_password() {
 }
 
 
-function displayForm($atts){ ?>
+function displayForm($atts){
+	do_action( 'lct_login_css' ); ?>
 	<?php if(isset($_POST['submit'])){
 		if(isset($_POST['username']) && isset($_POST['password'])){
 			$creds = array();
