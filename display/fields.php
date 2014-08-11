@@ -22,6 +22,12 @@
  * @v['options_hide'] PASS-THRU to lct_select_options
  * @v['npl_organization'] PASS-THRU to lct_select_options
  * @v['skip_npl_organization'] PASS-THRU to lct_select_options
+ * @v['number_start'] PASS-THRU to lct_select_options
+ * @v['number_end'] PASS-THRU to lct_select_options
+ * @v['number_leading_zero'] PASS-THRU to lct_select_options
+ * @v['number_increment'] PASS-THRU to lct_select_options
+ * @v['date_start'] PASS-THRU to lct_select_options
+ * @v['date_end'] PASS-THRU to lct_select_options
  * @v['other_variables'] html like style, rel, etc.
  * @v['not_set_selected'] mixed default value if the value has never been set before.
 */

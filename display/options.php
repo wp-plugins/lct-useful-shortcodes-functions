@@ -234,13 +234,14 @@ function lct_select_options_lct_standard_day( $hide , $type, $v ){
 }
 
 
-function lct_select_options_lct_standard_year( $hide , $type, $v ){
+function lct_select_options_lct_standard_year( $hide , $type, $v ) {
 	$time = current_time( 'timestamp', 1 );
+	isset( $v['date_start'] ) ? $start = $v['date_start'] : $start = date( "Y", $time );
+	isset( $v['date_end'] ) ? $end = $v['date_end'] : $end = date( "Y", $time ) + 3;
 
 	$select_options = array();
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
-
-	for ($i = date("Y", $time); $i <= date("Y", $time)+3; $i++){
+	for( $i = $start; $i <= $end; $i++ ) {
 		$value = $i;
 		$label = $i;
 
@@ -315,6 +316,27 @@ function lct_select_options_store_hide_selected_gforms( $hide , $type, $v ) {
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
 	foreach( $options as $k=>$v )
 	  $select_options[] = array( 'label'=>$v , 'value'=>$k );
+
+	return $select_options;
+}
+
+
+function lct_select_options_number( $hide , $type, $v ) {
+	$select_options = array();
+	isset( $v['number_start'] ) ? $start = $v['number_start'] : $start = 1;
+	isset( $v['number_end'] ) ? $end = $v['number_end'] : $end = 1;
+	isset( $v['number_increment'] ) ? $increment = $v['number_increment'] : $increment = 1;
+
+	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
+	for( $i = $start; $i <= $end; $i = $i + $increment ) {
+		if( $i < 10 && $v['number_leading_zero'] )
+			$value = '0'.$i;
+		else
+			$value = $i;
+		$label = $i;
+
+	    $select_options[] = array( 'label'=>$label , 'value'=>$value );
+	}
 
 	return $select_options;
 }

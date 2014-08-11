@@ -168,6 +168,15 @@ function lct_get_term_value( $term_id, $tax="lct_option" , $key=null, $output="O
 	return $term;
 }
 
+function lct_get_term_meta( $term_id, $tax="lct_option" , $key=null, $output="OBJECT", $filter="raw" ) {
+	if( ! $term_id || ! $tax ) return;
+
+	if( $key )
+		return get_option( $tax . "_" . $term_id )[$key];
+	else
+		return get_option( $tax . "_" . $term_id );
+}
+
 
 function lct_get_parent_term_value( $term_id, $tax, $key = null, $output="OBJECT", $filter="raw" ) {
 	$term = get_term( $term_id, $tax, $output, $filter );
@@ -203,4 +212,12 @@ function lct_clean_number_for_math( $number ) {
 	$new_number = floatval( preg_replace("/[^-0-9\.]/", "", $number ) );
 
 	return (float) $new_number;
+}
+
+
+add_filter( 'wpseo_opengraph_image', 'lct_opengraph_single_image_filter' );
+function lct_opengraph_single_image_filter( $val ) {
+	$val = str_replace( '//' . $_SERVER["HTTP_HOST"], '', $val );
+
+	return $val;
 }
