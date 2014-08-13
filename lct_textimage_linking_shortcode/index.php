@@ -3,7 +3,7 @@
 if ( ! function_exists( 'shortcode_textimage' ) ) {
 	define('SHORTCODE_TEXTIMAGE', 'link');
 
-	add_shortcode(SHORTCODE_TEXTIMAGE, 'shortcode_textimage');
+
 	function shortcode_textimage($t){
 		foreach( $t as $k=>$v ){
 			$t[$k] = do_shortcode( str_replace( array( "{", "}" ), array( "[", "]" ), $v ) );
@@ -67,6 +67,7 @@ if ( ! function_exists( 'shortcode_textimage' ) ) {
 		}else
 			return '<a href="'. $url .'"'. $class . $rel . $style . $title .'>'. $text .'</a>';
 	}
+	add_shortcode(SHORTCODE_TEXTIMAGE, 'shortcode_textimage');
 
 
 	add_action('init', 'wptisc_request_handler');
