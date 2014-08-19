@@ -52,12 +52,14 @@ function is_blog() {
 }
 
 
-function the_slug( $post_id = null ) {
-	if( ! $post_id ) return;
+if( ! function_exists( 'the_slug' ) ) {
+	function the_slug( $post_id = null ) {
+		if( ! $post_id ) return;
 
-	$post_data = get_post( $post_id, ARRAY_A );
+		$post_data = get_post( $post_id, ARRAY_A );
 
-	return $post_data['post_name'] . '/';
+		return $post_data['post_name'] . '/';
+	}
 }
 
 
@@ -220,4 +222,14 @@ function lct_opengraph_single_image_filter( $val ) {
 	$val = str_replace( '//' . $_SERVER["HTTP_HOST"], '', $val );
 
 	return $val;
+}
+
+
+//Remove front-end admin bar from non-admin users
+add_filter( 'show_admin_bar', 'npl_remove_admin_bar', 11 );
+function npl_remove_admin_bar() {
+	if( ! current_user_can( 'administrator' ) && ! is_admin() )
+		return false;
+	else
+		return true;
 }
