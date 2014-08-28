@@ -203,10 +203,12 @@ function lct_get_parent_term_meta( $term_id = null, $tax = null, $key = null, $o
 
 	$parent_term_id = $term->parent;
 
+	$tax_parent_term_id = get_option( $tax . "_" . $parent_term_id );
+
 	if( $key )
-		return get_option( $tax . "_" . $parent_term_id )[$key];
+		return $tax_parent_term_id[$key];
 	else
-		return get_option( $tax . "_" . $parent_term_id );
+		return $tax_parent_term_id;
 }
 
 
