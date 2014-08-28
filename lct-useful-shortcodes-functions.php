@@ -1,7 +1,7 @@
 <?php /*
 Plugin Name: LCT Useful Shortcodes & Functions
 Plugin URI: http://lookclassy.com/wordpress-plugins/useful-shortcodes-functions/
-Version: 1.4.2
+Version: 1.4.3
 Text Domain: lct-useful-shortcodes-functions
 Author: Look Classy Technologies
 Author URI: http://lookclassy.com/
@@ -102,7 +102,8 @@ function hook_uninstall_lct_useful_shortcodes_functions() {
 	delete_option( $g_lusf->lct_us );
 
 	//Move /lct/* dir from the plugin dir, to the /uploads dir
-	rename( $g_lusf->plugin_dir_path . 'lct', wp_upload_dir()['basedir'] . '/lct' );
+	$wp_upload_dir = wp_upload_dir();
+	rename( $g_lusf->plugin_dir_path . 'lct', $wp_upload_dir['basedir'] . '/lct' );
 	//rename /lct to /lct-old-time
-	rename( wp_upload_dir()['basedir'] . '/lct', wp_upload_dir()['basedir'] . '/lct-old-' . current_time( 'timestamp', 1 ) );
+	rename( $wp_upload_dir['basedir'] . '/lct', $wp_upload_dir['basedir'] . '/lct-old-' . current_time( 'timestamp', 1 ) );
 }

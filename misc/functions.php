@@ -173,10 +173,12 @@ function lct_get_term_value( $term_id, $tax="lct_option" , $key=null, $output="O
 function lct_get_term_meta( $term_id, $tax="lct_option" , $key=null, $output="OBJECT", $filter="raw" ) {
 	if( ! $term_id || ! $tax ) return;
 
+	$tax_term_id = get_option( $tax . "_" . $term_id );
+
 	if( $key )
-		return get_option( $tax . "_" . $term_id )[$key];
+		return $tax_term_id[$key];
 	else
-		return get_option( $tax . "_" . $term_id );
+		return $tax_term_id;
 }
 
 

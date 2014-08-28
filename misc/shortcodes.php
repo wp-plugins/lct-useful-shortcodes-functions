@@ -119,7 +119,8 @@ function lct_get_test( $a ) {
 add_shortcode( 'up', 'lct_url_up' );
 add_shortcode( 'url_up', 'lct_url_up' );
 function lct_url_up() {
-	return wp_upload_dir()['baseurl'];
+	$wp_upload_dir = wp_upload_dir();
+	return $wp_upload_dir['baseurl'];
 }
 
 
@@ -128,7 +129,8 @@ function lct_url_up() {
 add_shortcode( 'up_path', 'lct_path_up' );
 add_shortcode( 'path_up', 'lct_path_up' );
 function lct_path_up() {
-	return wp_upload_dir()['basedir'];
+	$wp_upload_dir = wp_upload_dir();
+	return $wp_upload_dir['basedir'];
 }
 
 
