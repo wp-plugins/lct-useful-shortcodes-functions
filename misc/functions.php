@@ -237,3 +237,14 @@ function lct_remove_admin_bar() {
 	else
 		return true;
 }
+
+
+function lct_excerpt_of_string( $content, $maxchars ) {
+	$content = substr( $content, 0, $maxchars );
+	$pos = strrpos( $content, " " );
+
+	if( $pos > 0 )
+		$content = substr( $content, 0, $pos );
+
+	return $content;
+}

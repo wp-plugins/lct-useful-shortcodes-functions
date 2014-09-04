@@ -39,6 +39,7 @@ function lct_f( $item = null, $type = null, $selected = '', $v ) {
 
 	if( $v['label'] && ! $v['label_override'] ) {
 		$f_r = array(
+			'lca_' => '',
 			'lct_' => '',
 			'ltm_' => '',
 			'lcx_' => '',
