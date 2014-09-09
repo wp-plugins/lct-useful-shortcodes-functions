@@ -124,6 +124,21 @@ function lct_useful_settings() {
 		<p>&nbsp;</p>
 
 
+		<h3>Yoast SEO</h3>
+		<table class="form-table"><tbody>
+			<?php
+			$v = "hide_og_site_name";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"checkbox",
+				$term_meta[$v],
+				array( "label" => 'Hide OG site_name', 'label_override' => true )
+			);
+			?>
+		</tbody></table>
+		<p>&nbsp;</p>
+
+
 		<h3>Login Form</h3>
 		<table class="form-table"><tbody>
 			<?php

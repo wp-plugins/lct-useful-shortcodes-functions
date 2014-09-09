@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 1.4.5
+Stable tag: 1.4.6
 Requires at least: 3.3
 Tested up to: 3.9.2
 Tags: Functions, Shortcodes
@@ -54,6 +54,9 @@ none
 
 
 == Changelog ==
+= 1.4.6 =
+	- ADDED lct_opengraph_site_name
+
 = 1.4.5 =
 	- Minor tweaks
 

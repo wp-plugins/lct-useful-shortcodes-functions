@@ -43,9 +43,18 @@ function lct_custom_redirect_wrapper( $force_exit = true, $headers_sent_already 
 }
 
 
+add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
+add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
 function _remove_script_version( $src ){
 	$parts = explode( '?', $src );
 	return $parts[0];
 }
-add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
-add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
+
+
+add_filter( 'wpseo_opengraph_site_name', 'lct_opengraph_site_name' );
+function lct_opengraph_site_name( $title ) {
+	if( lct_get_lct_useful_settings( 'hide_og_site_name' ) )
+		return false;
+
+	return $title;
+}
