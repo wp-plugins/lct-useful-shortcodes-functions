@@ -1,9 +1,9 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 1.4.6
+Stable tag: 1.4.7
 Requires at least: 3.3
-Tested up to: 3.9.2
+Tested up to: 4.0
 Tags: Functions, Shortcodes
 License: GPLv3 or later
 License URI: http://opensource.org/licenses/GPL-3.0
@@ -54,6 +54,9 @@ none
 
 
 == Changelog ==
+= 1.4.7 =
+	- WP 4.0 Ready
+
 = 1.4.6 =
 	- ADDED lct_opengraph_site_name
 
