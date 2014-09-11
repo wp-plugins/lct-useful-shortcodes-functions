@@ -60,3 +60,9 @@ textarea{
 	-moz-transition: height 0.2s;
 	transition: height 0.2s;
 }
+
+
+/* Gravity Forms */
+.hide_label label.gfield_label{
+	display: none !important;
+}

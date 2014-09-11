@@ -53,10 +53,13 @@ function is_blog() {
 
 
 if( ! function_exists( 'the_slug' ) ) {
-	function the_slug( $post_id = null ) {
+	function the_slug( $post_id = null, $slash = true ) {
 		if( ! $post_id ) return;
 
 		$post_data = get_post( $post_id, ARRAY_A );
+
+		if( ! $slash )
+			return $post_data['post_name'];
 
 		return $post_data['post_name'] . '/';
 	}

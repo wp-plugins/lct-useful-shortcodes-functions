@@ -40,10 +40,13 @@ function lct_map_adminLabel_to_field_id( $fields, $lead = null ) {
 add_filter( 'gform_pre_render', 'lct_use_placeholders_instead_of_labels', 1 );
 function lct_use_placeholders_instead_of_labels( $form ) {
 	$is_placeholder = in_array( $form['id'], use_placeholders_instead_of_labels_array() );
-	$valid_types = array( 'text', 'textarea', 'phone', 'email' );
+	$valid_types = array( 'text', 'textarea', 'phone', 'email', 'name' );
 	$f_id = $form['id'];
 	$jQuery_submit = '';
 	$useful_settings = lct_get_lct_useful_settings();
+
+	if( $is_placeholder )
+		$form['cssClass'] = 'placeholder_form';
 
 	do_action( 'lct_jquery_autosize_min_js' );
 	?>
@@ -56,48 +59,61 @@ function lct_use_placeholders_instead_of_labels( $form ) {
 			foreach( $form['fields'] as &$field ){
 				if( ! in_array( $field['type'], $valid_types ) || strpos( $field['cssClass'], 'no-placeholder' ) !== false ) continue;
 
-				$input = "input_" . $f_id . "_" . $field['id'];
+				$inputs = array();
+				$name_placeholders = array();
+				if( $field['type'] == 'name' ){
+					$inputs[] = "input_" . $f_id . "_" . $field['id'] . "_" . "3";
+					$inputs[] = "input_" . $f_id . "_" . $field['id'] . "_" . "6";
+					$name_placeholders["input_" . $f_id . "_" . $field['id'] . "_" . "3"] = "First";
+					$name_placeholders["input_" . $f_id . "_" . $field['id'] . "_" . "6"] = "Last";
+				}else
+					$inputs[] = "input_" . $f_id . "_" . $field['id'];
 
-				$field['defaultValue'] ? $placeholder = $field['defaultValue'] : $placeholder = $field['label'];
-				if( $field['isRequired'] ){
-					$placeholder .= ' *';
-					$focus_Class = "jQuery('#$input').addClass('good_black');\n";
-					$focus_Class .= "jQuery('#$input').removeClass('bad_red');\n";
-					$blur_Class = "jQuery('#$input').removeClass('good_black');\n";
-					$blur_Class .= "jQuery('#$input').addClass('bad_red');\n";
-				}else{
-					$focus_Class = "";
-					$blur_Class = "";
-				}
+				foreach( $inputs as $input ){
+					$field['defaultValue'] ? $placeholder = $field['defaultValue'] : $placeholder = $field['label'];
+					if( $name_placeholders )
+						$placeholder = $name_placeholders[$input] . ' ' . $placeholder;
 
-				echo "var placeholder = '$placeholder';\n";
-
-				if( strpos( $placeholder, ";" ) === false )
-					echo "jQuery('#$input').val('$placeholder');\n";
-				else{
-					$tmp = explode( ";", $placeholder );
-					$placeholder = trim( $tmp[1] );
-				}
-
-				$jQuery_submit .= "if( jQuery('#$input').val() == '$placeholder' )
-					jQuery('#$input').val('');\n";
-
-				echo "jQuery('label[for=$input]').hide();\n";
-
-				echo "jQuery('#$input').focus(function(){
-					if(jQuery('#$input').val() == '$placeholder' || placeholder.indexOf(';') != -1 )
-						jQuery('#$input').val('');
-
-					$focus_Class
-				});
-
-				jQuery('#$input').blur(function(){
-					if(jQuery('#$input').val() == ''){
-						jQuery('#$input').val('$placeholder');
-
-						$blur_Class
+					if( $field['isRequired'] ){
+						$placeholder .= ' *';
+						$focus_Class = "jQuery('#$input').addClass('good_black');\n";
+						$focus_Class .= "jQuery('#$input').removeClass('bad_red');\n";
+						$blur_Class = "jQuery('#$input').removeClass('good_black');\n";
+						$blur_Class .= "jQuery('#$input').addClass('bad_red');\n";
+					}else{
+						$focus_Class = "";
+						$blur_Class = "";
 					}
-				});";
+
+					echo "var placeholder = '$placeholder';\n";
+
+					if( strpos( $placeholder, ";" ) === false )
+						echo "jQuery('#$input').val('$placeholder');\n";
+					else{
+						$tmp = explode( ";", $placeholder );
+						$placeholder = trim( $tmp[1] );
+					}
+
+					$jQuery_submit .= "if( jQuery('#$input').val() == '$placeholder' )
+						jQuery('#$input').val('');\n";
+
+					echo "jQuery('label[for=$input]').hide();\n";
+
+					echo "jQuery('#$input').focus(function(){
+						if(jQuery('#$input').val() == '$placeholder' || placeholder.indexOf(';') != -1 )
+							jQuery('#$input').val('');
+
+						$focus_Class
+					});
+
+					jQuery('#$input').blur(function(){
+						if(jQuery('#$input').val() == ''){
+							jQuery('#$input').val('$placeholder');
+
+							$blur_Class
+						}
+					});";
+				}
 		 	}
 		 	?>
 
