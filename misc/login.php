@@ -149,7 +149,7 @@ function displayForm( $atts ) {
 
 
 	    if( function_exists( 'presscore_get_logo_image' ) && lct_get_lct_useful_settings( 'lct_show_login_logo' ) ) {
-			if( $bottom_logo = presscore_get_logo_image( presscore_get_footer_logos_meta() ) ) {
+			if( $bottom_logo = presscore_get_logo_image( presscore_get_header_logos_meta() ) ) {
 		    	echo "<p class='login_logo'>$bottom_logo</p>";
 		    }
 		}
