@@ -61,6 +61,9 @@ function lct_select_options_default( $hide, $type, $v ) {
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
 	foreach ($tax_children as $child) {
 		$term_meta = get_option( $tax . "_$child->term_id" );
+
+		if( $term_meta['lct_hide_in_dropdown'] ) continue;
+
 		$value = array( 'value' => $child->term_id );
 		$array = array(
 			'label'=>$child->name,
