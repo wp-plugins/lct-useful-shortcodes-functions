@@ -33,12 +33,12 @@ function lct_example_only() {
 if( LCT_DEV == 1 ) {
 	add_filter( 'option_siteurl', 'lct_clean_siteurl' );
 	function lct_clean_siteurl( $url ) {
-		return "http://" . $_SERVER[HTTP_HOST] . '/x';
+		return $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER[HTTP_HOST] . '/x';
 	}
 
 	add_filter( 'option_home', 'lct_clean_home' );
 	function lct_clean_home( $url ) {
-		return "http://" . $_SERVER[HTTP_HOST];
+		return $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER[HTTP_HOST];
 	}
 }
 
