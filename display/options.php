@@ -62,7 +62,7 @@ function lct_select_options_default( $hide, $type, $v ) {
 	foreach ($tax_children as $child) {
 		$term_meta = get_option( $tax . "_$child->term_id" );
 
-		if( $term_meta['lct_hide_in_dropdown'] ) continue;
+		if( $term_meta['lct_hide_in_dropdown'] && ! $v['override_lct_hide_in_dropdown'] ) continue;
 
 		$value = array( 'value' => $child->term_id );
 		$array = array(
