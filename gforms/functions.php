@@ -12,9 +12,12 @@
  * }
  */
 function lct_map_adminLabel_to_field_id( $fields, $lead = null ) {
-	$adminLabel_map = array();
+	$map = array();
 
 	foreach( $fields as $field ) {
+		if( $field['inputName'] )
+			$field['adminLabel'] = $field['inputName'];
+
 		$field['adminLabel'] ? $k = $field['adminLabel'] : $k = $field['id'];
 
 		if( $lead )
@@ -22,10 +25,10 @@ function lct_map_adminLabel_to_field_id( $fields, $lead = null ) {
 		else
 			$v = $field['id'];
 
-		$adminLabel_map[$k] = $v;
+		$map[$k] = $v;
 	}
 
-	return $adminLabel_map;
+	return $map;
 }
 
 
