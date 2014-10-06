@@ -119,3 +119,14 @@ function echo_br( $value, $label = '', $position = 'before' ){
 	if( $position == 'after' || $position == 'both')
 		echo '<br />';
 }
+
+
+function lca_debug_to_console( $data ) {
+    $bt = debug_backtrace();
+    $caller = array_shift( $bt );
+
+    if( is_array( $data ) )
+        error_log( '_editzz: ' . end( split( '/', $caller['file'] ) ) . ':' . $caller['line'] . ' => ' . implode( ',', $data ) );
+    else
+        error_log( '_editzz: ' . end( split( '/', $caller['file'] ) ) . ':' . $caller['line'] . ' => ' . $data );
+}
