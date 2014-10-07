@@ -15,9 +15,6 @@ function lct_map_adminLabel_to_field_id( $fields, $lead = null ) {
 	$map = array();
 
 	foreach( $fields as $field ) {
-		if( $field['inputName'] )
-			$field['adminLabel'] = $field['inputName'];
-
 		$field['adminLabel'] ? $k = $field['adminLabel'] : $k = $field['id'];
 
 		if( $lead )
