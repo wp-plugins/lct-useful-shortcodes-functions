@@ -33,12 +33,14 @@ function lct_example_only() {
 if( LCT_DEV == 1 ) {
 	add_filter( 'option_siteurl', 'lct_clean_siteurl' );
 	function lct_clean_siteurl( $url ) {
-		return $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER[HTTP_HOST] . '/x';
+	 	$WP_CONTENT_URL = str_replace( array( "/x/", "/lc-content", "/wp-content" ), array( "/", "", "" ), WP_CONTENT_URL );
+		return $_SERVER['REQUEST_SCHEME'] . ":" . $WP_CONTENT_URL . '/x';
 	}
 
 	add_filter( 'option_home', 'lct_clean_home' );
 	function lct_clean_home( $url ) {
-		return $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER[HTTP_HOST];
+		$WP_CONTENT_URL = str_replace( array( "/x/", "/lc-content", "/wp-content" ), array( "/", "", "" ), WP_CONTENT_URL );
+		return "http://" . $_SERVER[HTTP_HOST];
 	}
 }
 
