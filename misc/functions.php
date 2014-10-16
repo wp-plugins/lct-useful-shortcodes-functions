@@ -40,7 +40,7 @@ if( LCT_DEV == 1 ) {
 	add_filter( 'option_home', 'lct_clean_home' );
 	function lct_clean_home( $url ) {
 		$WP_CONTENT_URL = str_replace( array( "/x/", "/lc-content", "/wp-content" ), array( "/", "", "" ), WP_CONTENT_URL );
-		return "http://" . $_SERVER[HTTP_HOST];
+		return $_SERVER['REQUEST_SCHEME'] . ":" . $WP_CONTENT_URL;
 	}
 }
 
