@@ -98,7 +98,7 @@ function lct_get_user_agent_info( $print = null, $hide = null ) {
 			if( WP_CACHE ) {
 
 				$before = '<pre style="display: none !important;">';
-				$after = '<pre>';
+				$after = '</pre>';
 
 			} else {
 
@@ -109,7 +109,7 @@ function lct_get_user_agent_info( $print = null, $hide = null ) {
 		} else {
 
 			$before = '<pre>';
-			$after = '<pre>';
+			$after = '</pre>';
 		}
 
 		echo $before;
