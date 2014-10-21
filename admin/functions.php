@@ -91,16 +91,30 @@ function lct_get_user_agent_info( $print = null, $hide = null ) {
 
 	$getBrowser = $bc->getBrowser();
 
-	if( $print ){
-		if( $hide )
-			echo '<!--';
+	if( $print ) {
 
-		echo '<pre>';
+		if( $hide ) {
+
+			if( WP_CACHE ) {
+
+				$before = '<pre style="display: none !important;">';
+				$after = '<pre>';
+
+			} else {
+
+				$before = '<!--';
+				$after = '-->';
+			}
+
+		} else {
+
+			$before = '<pre>';
+			$after = '<pre>';
+		}
+
+		echo $before;
 			print_r( $getBrowser );
-		echo '</pre>';
-
-		if( $hide )
-			echo '-->';
+		echo $after;
 
 		return;
 	}
