@@ -41,6 +41,16 @@ function lct_useful_settings() {
 				array( "label" => "Default Taxonomy to Use for lct_select_options();", "label_override" => true, "lct_select_options" => "get_taxonomies", "options_default" => false )
 			);
 			?>
+
+			<?php
+			$v = "print_user_agent_in_footer";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"checkbox",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+			?>
 		</tbody></table>
 		<p>&nbsp;</p>
 

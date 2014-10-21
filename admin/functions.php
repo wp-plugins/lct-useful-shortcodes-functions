@@ -62,3 +62,48 @@ function lct_opengraph_site_name( $title ) {
 
 	return $title;
 }
+
+
+add_action( 'wp_footer', 'do_wp_footer_lct_get_user_agent_info', 99999 );
+function do_wp_footer_lct_get_user_agent_info() {
+	if( ! lct_get_lct_useful_settings( 'print_user_agent_in_footer' ) )
+		return;
+
+	do_action( 'lct_get_user_agent_info', true, true );
+}
+
+add_action( 'lct_get_user_agent_info', 'lct_get_user_agent_info', 10, 2 );
+function lct_get_user_agent_info( $print = null, $hide = null ) {
+	if( file_exists( '/home/_apps/browscap/Browscap.php' ) ) {
+		require '/home/_apps/browscap/Browscap.php';
+		$bc = new Browscap('/home/_apps/browscap/cache');
+		$ready = 1;
+	}
+
+	if( file_exists( 'C:/s/apps/browscap/Browscap.php' ) ) {
+		require 'C:/s/apps/browscap/Browscap.php';
+		$bc = new Browscap('C:/s/apps/browscap/cache');
+		$ready = 1;
+	}
+
+	if( ! $ready )
+		return;
+
+	$getBrowser = $bc->getBrowser();
+
+	if( $print ){
+		if( $hide )
+			echo '<!--';
+
+		echo '<pre>';
+			print_r( $getBrowser );
+		echo '</pre>';
+
+		if( $hide )
+			echo '-->';
+
+		return;
+	}
+
+	return $getBrowser;
+}
