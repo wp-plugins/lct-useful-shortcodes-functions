@@ -37,6 +37,8 @@ bottom: 32px;
 .sticky-header,
 #phantom,
 .admin-bar .wpadminSticky,
-.admin-bar .headerWrapper.wpadminSticky {
+.admin-bar .headerWrapper.wpadminSticky,
+.admin-bar .header.fixed,
+.admin-bar .header {
 	top: 0 !important
 }
