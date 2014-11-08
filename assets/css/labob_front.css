@@ -42,3 +42,7 @@ bottom: 32px;
 .admin-bar .header {
 	top: 0 !important
 }
+
+.adminbar-enable .sticky.fixed{
+	margin-top: 0 !important;
+}
