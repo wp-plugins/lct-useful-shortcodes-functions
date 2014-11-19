@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 1.4.25
+Stable tag: 1.4.26
 Requires at least: 3.3
 Tested up to: 4.0
 Tags: Functions, Shortcodes
@@ -54,6 +54,9 @@ none
 
 
 == Changelog ==
+= 1.4.26 =
+	- ADDED Shortcode: admin_onetime_script_run
+
 = 1.4.17 thru 1.4.25 =
 	- Minor tweaks
 
