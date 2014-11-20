@@ -76,6 +76,15 @@ if( ! function_exists( 'P_R' ) ) {
 	}
 }
 
+//For Objects - Used instead of print_r() function. It gives you a better understnading of how array's are laid out.
+if( ! function_exists( 'P_R_O' ) ) {
+	function P_R_O( $var ) {
+		echo '<pre>';
+		print_r( $var );
+		echo '</pre>';
+	}
+}
+
 
 //Creates the table styling for the P_R function
 if( ! function_exists( 'P_R_STYLE' ) ) {
