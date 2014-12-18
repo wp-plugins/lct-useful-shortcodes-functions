@@ -1,9 +1,9 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 1.4.28
-Requires at least: 3.3
-Tested up to: 4.0
+Stable tag: 4.1
+Requires at least: 3.0
+Tested up to: 4.1
 Tags: Functions, Shortcodes
 License: GPLv3 or later
 License URI: http://opensource.org/licenses/GPL-3.0
@@ -54,6 +54,10 @@ none
 
 
 == Changelog ==
+= 4.1 =
+	- WP 4.1 Ready
+	- jumped version to match WP
+
 = 1.4.28 =
 	- ADDED Shortcode: P_R_O
 
