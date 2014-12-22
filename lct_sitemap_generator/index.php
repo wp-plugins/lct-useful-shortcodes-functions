@@ -37,7 +37,7 @@ add_option('ddsg_xml_where', 'last');
  */
 $ddsg_lang_file = trim(get_option(ddsg_language));
 if ($ddsg_lang_file == '') {
-	$ddsg_lang_file = 'english';
+	$ddsg_lang_file = 'english-us';
 }
 include $g_lusf->plugin_dir_path . 'lct_sitemap_generator/lang/' . $ddsg_lang_file . '.php';
 

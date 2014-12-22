@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.1
+Stable tag: 4.1.1
 Requires at least: 3.0
 Tested up to: 4.1
 Tags: Functions, Shortcodes
@@ -54,6 +54,9 @@ none
 
 
 == Changelog ==
+= 4.1.1 =
+	- Fixed lct_sitemap_generator call to english-us.php
+
 = 4.1 =
 	- WP 4.1 Ready
 	- jumped version to match WP
