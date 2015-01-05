@@ -239,7 +239,7 @@ function lct_select_options_lct_standard_day( $hide , $type, $v ){
 
 function lct_select_options_lct_standard_year( $hide , $type, $v ) {
 	$time = current_time( 'timestamp', 1 );
-	isset( $v['date_start'] ) ? $start = $v['date_start'] : $start = date( "Y", $time );
+	isset( $v['date_start'] ) ? $start = $v['date_start'] : $start = date( "Y", $time ) - 1;
 	isset( $v['date_end'] ) ? $end = $v['date_end'] : $end = date( "Y", $time ) + 3;
 
 	$select_options = array();
