@@ -199,6 +199,30 @@ function lct_useful_settings() {
 				$term_meta[$v],
 				array( "label" => $v, "lct_select_options" => "get_pages", "options_default" => false, "options_hide" => false )
 			);
+
+			$v = "lct_show_login_footer";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"checkbox",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+
+			$v = "lct_login_footer";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"text",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+
+			$v = "lct_login_redirect";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"text",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
 			?>
 		</tbody></table>
 		<p>&nbsp;</p>

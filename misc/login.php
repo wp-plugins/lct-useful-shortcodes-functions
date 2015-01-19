@@ -186,12 +186,18 @@ function displayForm( $atts ) {
 						<?php } ?>
 					</p>
 				</div>
-				<?php if( function_exists( 'of_get_option' ) ) {
-					if( $credits = of_get_option('bottom_bar-copyrights', false) ) { ?>
-						<div style="margin-top: 30px;">
-							<p><?php echo $credits ?></p>
-						</div>
-					<?php }
+				<?php if( lct_get_lct_useful_settings( 'lct_show_login_footer' ) ) {
+					if( lct_get_lct_useful_settings( 'lct_login_footer' ) ) {
+						echo '<div style="margin-top: 30px;"><p>';
+							echo lct_get_lct_useful_settings( 'lct_login_footer' );
+						echo '</p></div>';
+					} else if( function_exists( 'of_get_option' ) ) {
+						if( $credits = of_get_option('bottom_bar-copyrights', false) ) { ?>
+							<div style="margin-top: 30px;">
+								<p><?php echo $credits ?></p>
+							</div>
+						<?php }
+					}
 				} ?>
 			</form><!-- form -->
 
@@ -216,6 +222,18 @@ function displayForm( $atts ) {
 
 
 	<?php } else if( is_user_logged_in() ) {
+
+		if( $redirect = lct_get_lct_useful_settings( 'lct_login_redirect' ) ) {
+			if( $_GET['redirect_to'] )
+				$redirect = $_GET['redirect_to'];
+
+			$script = '<script type="text/javascript">
+				window.location = "' . $redirect . '"
+		    </script>';
+
+			echo $script;
+			die();
+		}
 
 
 		$current_user=wp_get_current_user();

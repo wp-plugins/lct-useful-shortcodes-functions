@@ -90,9 +90,10 @@ function lct_use_placeholders_instead_of_labels( $form ) {
 
 					echo "var placeholder = '$placeholder';\n";
 
-					if( strpos( $placeholder, ";" ) === false )
-						echo "jQuery('#$input').val('$placeholder');\n";
-					else{
+					if( strpos( $placeholder, ";" ) === false ) {
+						echo "if( ! jQuery('#$input').val() )\n";
+							echo "jQuery('#$input').val('$placeholder');\n";
+					} else {
 						$tmp = explode( ";", $placeholder );
 						$placeholder = trim( $tmp[1] );
 					}
