@@ -129,10 +129,10 @@ function lct_html_widget_title( $title ) {
 //Set the timezone to the logged in users default Timezone
 add_action( 'init', 'set_user_timezone' );
 function set_user_timezone( $user_ID = null ) {
-	if( ! $user_ID )
+ 	if( ! $user_ID )
 		$user_ID = get_current_user_id();
 
-	if( ! $user_ID ){
+	if( ! $user_ID ) {
 		date_default_timezone_set( get_option( 'timezone_string' ) );
 		return get_option( 'timezone_string' );
 	}
@@ -142,6 +142,9 @@ function set_user_timezone( $user_ID = null ) {
 		date_default_timezone_set( $npl_user_timezone );
 		return $npl_user_timezone;
 	}
+
+	date_default_timezone_set( get_option( 'timezone_string' ) );
+	return get_option( 'timezone_string' );
 }
 
 
