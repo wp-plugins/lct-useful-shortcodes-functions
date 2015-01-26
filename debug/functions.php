@@ -130,7 +130,11 @@ function echo_br( $value, $label = '', $position = 'before' ){
 }
 
 
-function lca_debug_to_console( $data ) {
+function lct_debug( $data, $extra = '' ) {
+    update_option( "lct_debug" . $extra, $data );
+}
+
+function lca_debug_to_error_log( $data ) {
     $bt = debug_backtrace();
     $caller = array_shift( $bt );
 
@@ -138,4 +142,20 @@ function lca_debug_to_console( $data ) {
         error_log( '_editzz: ' . end( split( '/', $caller['file'] ) ) . ':' . $caller['line'] . ' => ' . implode( ',', $data ) );
     else
         error_log( '_editzz: ' . end( split( '/', $caller['file'] ) ) . ':' . $caller['line'] . ' => ' . $data );
+}
+
+
+function lca_send_to_console( $data ) {
+    if( is_array( $data ) )
+        $console = '_editzz: ' . implode( ',', $data );
+    else
+        $console = '_editzz: ' . $data;
+
+    $script = '<script>';
+    	$script .= 'console.log(\'' . $console . '\')';
+    $script .= '</script>';
+
+    echo $script;
+
+    return;
 }
