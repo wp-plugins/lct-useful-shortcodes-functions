@@ -130,8 +130,43 @@ function lct_select_options_gravity_forms_form_fields( $hide, $type, $v ) {
 
 	if( ! $hide )
 		$select_options[] = array( 'label' => '---', 'value' => '' );
-	foreach( $form['fields'] as $fields )
-		$select_options[] = array( 'label' => $fields['label'], 'value' => $fields['id'] );
+	foreach( $form['fields'] as $fields ) {
+		$exclude_type = array(
+			'section',
+			'html',
+		);
+
+		/*
+		echo_br( $fields['label'] );
+		echo_br( $fields['type'] );
+
+		if( $fields['type'] == 'checkbox' ) {
+			P_R( $fields );
+		}
+		echo_br( " " );
+		*/
+
+		if( in_array( $fields['type'], $exclude_type ) )
+			continue;
+
+		switch( $fields['type'] ){
+			case 'address':
+				foreach( $fields['inputs'] as $tmp ) {
+					$select_options[] = array( 'label' => $tmp['label'], 'value' => $tmp['id'] );
+				}
+			break;
+
+			case 'checkbox':
+				foreach( $fields['inputs'] as $tmp ) {
+					$select_options[] = array( 'label' => $fields['label'] . ': ' . $tmp['label'], 'value' => $tmp['id'] );
+				}
+			break;
+
+			default:
+				$select_options[] = array( 'label' => $fields['label'], 'value' => $fields['id'] );
+			break;
+		}
+	}
 
 	return $select_options;
 }
