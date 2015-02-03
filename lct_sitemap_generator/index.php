@@ -58,6 +58,7 @@ function ddsg_add_option_pages() {
 function ddsg_options_page() {
 
 	global $ddsg_ver;
+	global $g_lusf;
 
 	if (isset($_POST['set_defaults'])) {
 		echo '<div id="message" class="updated fade"><p><strong>';
@@ -122,7 +123,7 @@ function ddsg_options_page() {
 
 	<div class="wrap">
 
-	<h2>Dagon Design Sitemap Generator v<?php echo $ddsg_ver; ?></h2>
+	<h2>Dagon Design Sitemap Generator v<?php echo $ddsg_ver; ?> Shortcode is: &lt;!-- ddsitemapgen --&gt;</h2>
 
 	<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
 	<input type="hidden" name="info_update" id="info_update" value="true" />

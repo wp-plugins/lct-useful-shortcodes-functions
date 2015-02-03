@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-/* 
+/*
 Dagon Design Sitemap Generator v3.x
 http://www.dagondesign.com/articles/sitemap-generator-plugin-for-wordpress/
 
@@ -8,7 +8,7 @@ English Language File
 */
 
 
-// Text shown on sitemap page 
+// Text shown on sitemap page
 
 define('DDSG_PAGE_HEADER', '<h2>Pages</h2>');
 define('DDSG_POST_HEADER', '<h2>Posts</h2>');
@@ -33,8 +33,8 @@ define('DDSG_CONTINUED', '(continued)');
 define('DDSG_NAV2_PAGE', 'Pages:');
 
 
-// Text shown in options page 
- 
+// Text shown in options page
+
 define('DDSG_DEFAULTS_LOADED', 'Default Options Loaded!');
 define('DDSG_CONFIG_UPDATED', 'Configuration Updated!');
 
@@ -42,7 +42,7 @@ define('DDSG_FOR_INFO', 'For information and updates, please visit:');
 define('DDSG_DEFAULT_NOTICE', '<strong>Upgrading?</strong> If you are upgrading from a previous version, click the <strong>Load Default Options</strong> button below. Some settings may have changed.');
 
 define('DDSG_LANGUAGE', 'Language');
-define('DDSG_LANGUAGE_DESC', 'Language files are located in <strong>/wp-content/plugins/sitemap-generator/lang/</strong>');
+define('DDSG_LANGUAGE_DESC', '');
 define('DDSG_GENERAL_OPTIONS', 'General Options');
 define('DDSG_ITEMS_PER_PAGE', 'Items per page:');
 define('DDSG_ITEMS_PER_PAGE_INFO', 'Set to 0 for unlimited');

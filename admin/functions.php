@@ -1,5 +1,5 @@
 <?php
-function use_placeholders_instead_of_labels_array() {
+function lct_use_placeholders_instead_of_labels_array() {
 	$return = lct_get_lct_useful_settings( 'use_placeholders_instead_of_labels' );
 
 	if( ! $return )
@@ -9,7 +9,7 @@ function use_placeholders_instead_of_labels_array() {
 }
 
 
-function store_gforms_array() {
+function lct_store_gforms_array() {
 	$return = lct_get_lct_useful_settings( 'store_gforms' );
 
 	if( ! $return )
@@ -43,12 +43,12 @@ function lct_custom_redirect_wrapper( $force_exit = true, $headers_sent_already 
 }
 
 
-add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
-add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
-function _remove_script_version( $src ){
+add_filter( 'script_loader_src', 'lct_remove_script_version', 15, 1 );
+add_filter( 'style_loader_src', 'lct_remove_script_version', 15, 1 );
+function lct_remove_script_version( $src ) {
 	$parts = explode( '?', $src );
 
-	if( strpos( $src, 'fonts.googleapis.com/css?' ) !== false )
+	if( strpos( $src, 'fonts.googleapis.com/css?' ) !== false || strpos( $src, '/?' ) !== false )
 		return $src;
 
 	return $parts[0];
@@ -64,8 +64,8 @@ function lct_opengraph_site_name( $title ) {
 }
 
 
-add_action( 'wp_footer', 'do_wp_footer_lct_get_user_agent_info', 99999 );
-function do_wp_footer_lct_get_user_agent_info() {
+add_action( 'wp_footer', 'lct_wp_footer_lct_get_user_agent_info', 99999 );
+function lct_wp_footer_lct_get_user_agent_info() {
 	if( ! lct_get_lct_useful_settings( 'print_user_agent_in_footer' ) )
 		return;
 

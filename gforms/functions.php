@@ -42,7 +42,7 @@ function lct_map_adminLabel_to_field_id( $fields, $lead = null ) {
  */
 add_filter( 'gform_pre_render', 'lct_use_placeholders_instead_of_labels', 1 );
 function lct_use_placeholders_instead_of_labels( $form ) {
-	$is_placeholder = in_array( $form['id'], use_placeholders_instead_of_labels_array() );
+	$is_placeholder = in_array( $form['id'], lct_use_placeholders_instead_of_labels_array() );
 	$valid_types = array( 'text', 'textarea', 'phone', 'email', 'name' );
 	$f_id = $form['id'];
 	$jQuery_submit = '';
@@ -131,7 +131,7 @@ function lct_use_placeholders_instead_of_labels( $form ) {
 
 
 	<style>
-	<?php if( $is_placeholder ){ ?>
+	<?php if( $is_placeholder ) { ?>
 		.bad_red,
 		.gform_wrapper .gfield input.bad_red,
 		.gform_wrapper .gfield textarea.bad_red{
@@ -190,7 +190,7 @@ function lct_gform_submit_button( $button, $form ) {
  */
 add_action( 'gform_after_submission', 'lct_remove_form_entry', 13, 2 );
 function lct_remove_form_entry( $entry, $form ) {
-	$is_in_array = in_array( $form['id'], store_gforms_array() );
+	$is_in_array = in_array( $form['id'], lct_store_gforms_array() );
 
 	if( lct_get_lct_useful_settings( 'store_hide_selected_gforms' ) ) {
     	if( $is_in_array )
