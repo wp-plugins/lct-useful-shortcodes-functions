@@ -37,7 +37,9 @@ function lct_f( $item = null, $type = null, $selected = '', $v ) {
 	if( isset( $v['not_set_selected'] ) && $selected === '' )
 		$selected = $v['not_set_selected'];
 
-	if( $v['label'] && ! $v['label_override'] ) {
+	isset( $v['label_override'] ) ? $label_override = $v['label_override'] : $label_override = '';
+
+	if( $v['label'] && ! $label_override ) {
 		$f_r = array(
 			'lca_' => '',
 			'lct_' => '',

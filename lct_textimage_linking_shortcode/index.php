@@ -226,8 +226,13 @@ if ( ! function_exists( 'shortcode_textimage' ) ) {
 	}
 
 
-	if(is_admin()){
-		wp_enqueue_script('wptisc_admin_js', trailingslashit(get_bloginfo('url')).'?tisc_action=wptisc_admin_js', array('jquery'));
+	if( is_admin() ) {
+		add_action( 'wp_enqueue_scripts', 'wptisc_admin_js_call' );
+	}
+
+
+	function wptisc_admin_js_call() {
+		wp_enqueue_script( 'wptisc_admin_js', trailingslashit( get_bloginfo( 'url' ) ) . '?tisc_action=wptisc_admin_js', array( 'jquery' ) );
 	}
 
 

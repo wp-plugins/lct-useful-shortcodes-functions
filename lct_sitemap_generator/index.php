@@ -35,7 +35,7 @@ add_option('ddsg_xml_where', 'last');
 /*
  * Load language file
  */
-$ddsg_lang_file = trim(get_option(ddsg_language));
+$ddsg_lang_file = trim(get_option('ddsg_language'));
 if ($ddsg_lang_file == '') {
 	$ddsg_lang_file = 'english-us';
 }
@@ -46,8 +46,8 @@ include $g_lusf->plugin_dir_path . 'lct_sitemap_generator/lang/' . $ddsg_lang_fi
  * Add options page
  */
 function ddsg_add_option_pages() {
-	if (function_exists('add_options_page')) {
-		add_options_page('Dagon Design Sitemap Generator', 'DDSitemapGen', 8, __FILE__, 'ddsg_options_page');
+	if( function_exists( 'add_options_page' ) ) {
+		add_options_page( 'Dagon Design Sitemap Generator', 'DDSitemapGen', 'administrator', __FILE__, 'ddsg_options_page' );
 	}
 }
 
