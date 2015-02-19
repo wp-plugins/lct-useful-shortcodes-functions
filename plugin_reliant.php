@@ -8,5 +8,8 @@ function lct_get_lct_useful_settings( $value = null ) {
 	if( $value )
 		return $lct_useful_settings[$value];
 
+  	if( ! $lct_useful_settings )
+  		$lct_useful_settings = array();
+
 	return $lct_useful_settings;
 }

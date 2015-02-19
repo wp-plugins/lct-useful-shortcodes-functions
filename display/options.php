@@ -113,7 +113,14 @@ function lct_select_options_all_tax( $hide, $type, $v ) {
 //Get a list of ALL gravity forms
 function lct_select_options_gravity_forms( $hide , $type, $v ) {
 	$select_options = array();
+
+	if( ! class_exists( 'RGFormsModel' ) )
+		return $select_options;
+
 	$forms = RGFormsModel::get_forms( null, 'title' );
+
+	if( empty( $forms ) )
+		return $select_options;
 
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
 	foreach( $forms as $form )
@@ -126,6 +133,10 @@ function lct_select_options_gravity_forms( $hide , $type, $v ) {
 //Get a list of ALL fields for a single gravity form
 function lct_select_options_gravity_forms_form_fields( $hide, $type, $v ) {
 	$select_options = array();
+
+	if( ! class_exists( 'RGFormsModel' ) )
+		return $select_options;
+
 	$form = RGFormsModel::get_form_meta( $v['gform_id'] );
 
 	if( ! $hide )
@@ -135,16 +146,6 @@ function lct_select_options_gravity_forms_form_fields( $hide, $type, $v ) {
 			'section',
 			'html',
 		);
-
-		/*
-		echo_br( $fields['label'] );
-		echo_br( $fields['type'] );
-
-		if( $fields['type'] == 'checkbox' ) {
-			P_R( $fields );
-		}
-		echo_br( " " );
-		*/
 
 		if( in_array( $fields['type'], $exclude_type ) )
 			continue;
@@ -192,9 +193,9 @@ function lct_select_options_get_taxonomies( $hide, $type, $v ) {
 	$taxonomies = get_taxonomies( $args );
 
 	if( ! $hide )
-		$select_options[] = array( 'label' => '---', 'value' => '' );
+		$select_options[] = array( 'label'=>'---', 'value'=>'' );
 	foreach( $taxonomies as $taxonomy )
-		$select_options[] = array( 'label' => $taxonomy, 'value' => $taxonomy );
+		$select_options[] = array( 'label'=>$taxonomy, 'value'=>$taxonomy );
 
 	return $select_options;
 }
@@ -206,10 +207,27 @@ function lct_select_options_meta_key( $hide , $type, $v ) {
 	$meta_keys = explode( ",", ltm_get_ltm_settings( 'meta_keys_' . $v['options_tax'] ) );
 
 	$select_options = array();
-	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
+	if( ! $hide ) $select_options[] = array( 'label'=>'---', 'value'=>'' );
 	foreach( $meta_keys as $meta_key ) {
-		$select_options[] = array( 'label'=>trim( $meta_key ) , 'value'=>trim( $meta_key ) );
+		$select_options[] = array( 'label'=>trim( $meta_key ), 'value'=>trim( $meta_key ) );
 	}
+
+	return $select_options;
+}
+
+
+//Get a list of ALL Wordpress taxonomies
+function lct_select_options_get_raw_prefs( $hide, $type, $v ) {
+	$prefs = array();
+	$prefs[] = array( 'v' => 'wpautop', 'l' => 'Use the default Wordpress wpautop' );
+	$prefs[] = array( 'v' => 'off', 'l' => 'Off: turn wpautop off sitewide.' );
+	$prefs[] = array( 'v' => 'old', 'l' => 'Old: [raw] tag only works once.' );
+	$prefs[] = array( 'v' => 'new', 'l' => '[raw] tags work multi time and only on content contained in tags.' );
+
+	if( ! $hide )
+		$select_options[] = array( 'label'=>'---', 'value'=>'' );
+	foreach( $prefs as $pref )
+		$select_options[] = array( 'label'=>$pref['l'], 'value'=>$pref['v'] );
 
 	return $select_options;
 }

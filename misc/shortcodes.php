@@ -1,4 +1,55 @@
 <?php
+add_action('init', 'lct_misc_shortcodes_init');
+function lct_misc_shortcodes_init() {
+
+	//choose which function to use lct_wpautop_disable() OR lct_wpautop_disable_new()
+	switch( lct_get_lct_useful_settings( 'choose_a_raw_tag_option' ) ) {
+		case 'wpautop':
+		break;
+
+		case 'off':
+			remove_filter( 'the_content', 'wpautop' );
+			remove_filter( 'the_content', 'wptexturize' );
+		break;
+
+		case 'old':
+			remove_filter( 'the_content', 'wpautop' );
+			remove_filter( 'the_content', 'wptexturize' );
+			add_filter( 'the_content', 'lct_wpautop_disable', 99 );
+		break;
+
+		case 'new':
+			remove_filter( 'the_content', 'wpautop' );
+			remove_filter( 'the_content', 'wptexturize' );
+			add_filter( 'the_content', 'lct_wpautop_disable_new', 99 );
+		break;
+
+		default:
+		break;
+	}
+}
+
+//[raw]Content to disable wpautop[/raw]
+function lct_wpautop_disable_new( $content ) {
+	$new_content = '';
+	$pattern_full = '{(\[raw\].*?\[/raw\])}is';
+	$pattern_contents = '{\[raw\](.*?)\[/raw\]}is';
+	$pieces = preg_split( $pattern_full, $content, -1, PREG_SPLIT_DELIM_CAPTURE );
+
+	foreach( $pieces as $piece ) {
+		if( preg_match( $pattern_contents, $piece, $matches ) ) {
+			$new_content .= $matches[1];
+		} else {
+			$new_content .= wptexturize( wpautop( $piece ) );
+		}
+	}
+
+	$new_content = str_replace(array("[raw]", "[/raw]"), "", $new_content);
+
+	return $new_content;
+}
+
+
 //Make sure the shortcodes get processed
 add_filter( 'the_content', 'do_shortcode' );
 add_filter( 'widget_text', 'do_shortcode' );
@@ -277,9 +328,6 @@ function lct_wpautop_disable( $content ) {
 
 	return $new_content;
 }
-remove_filter( 'the_content', 'wpautop' );
-remove_filter( 'the_content', 'wptexturize' );
-add_filter( 'the_content', 'lct_wpautop_disable', 99 );
 
 
 //[lct_auto_logout]
