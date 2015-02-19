@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.1.9
+Stable tag: 4.1.10
 Requires at least: 3.0
 Tested up to: 4.1
 Tags: Functions, Shortcodes
@@ -54,7 +54,7 @@ none
 
 
 == Changelog ==
-= 4.1.9 =
+= 4.1.9 - 4.1.10 =
 	- changes to wpauto selection
 	- lct_useful_settings default settings and checker
 

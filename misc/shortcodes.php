@@ -21,32 +21,12 @@ function lct_misc_shortcodes_init() {
 		case 'new':
 			remove_filter( 'the_content', 'wpautop' );
 			remove_filter( 'the_content', 'wptexturize' );
-			add_filter( 'the_content', 'lct_wpautop_disable_new', 99 );
+			add_filter( 'the_content', 'lct_wpautop_disable_new', 1 );
 		break;
 
 		default:
 		break;
 	}
-}
-
-//[raw]Content to disable wpautop[/raw]
-function lct_wpautop_disable_new( $content ) {
-	$new_content = '';
-	$pattern_full = '{(\[raw\].*?\[/raw\])}is';
-	$pattern_contents = '{\[raw\](.*?)\[/raw\]}is';
-	$pieces = preg_split( $pattern_full, $content, -1, PREG_SPLIT_DELIM_CAPTURE );
-
-	foreach( $pieces as $piece ) {
-		if( preg_match( $pattern_contents, $piece, $matches ) ) {
-			$new_content .= $matches[1];
-		} else {
-			$new_content .= wptexturize( wpautop( $piece ) );
-		}
-	}
-
-	$new_content = str_replace(array("[raw]", "[/raw]"), "", $new_content);
-
-	return $new_content;
 }
 
 
@@ -325,6 +305,29 @@ function lct_wpautop_disable( $content ) {
 	}
 
 	$new_content = str_replace(array("[raw]", "[/raw]"), "", $new_content);
+
+	return $new_content;
+}
+
+
+//[raw]Content to disable wpautop[/raw]
+function lct_wpautop_disable_new( $content ) {
+	if( strpos( $content, '[raw]' ) === false )
+		return wptexturize( wpautop( $content ) );
+
+	$new_content = '';
+	$pattern_full = '{(\[raw\].*?\[/raw\])}is';
+	$pattern_contents = '{\[raw\](.*?)\[/raw\]}is';
+	$pieces = preg_split( $pattern_full, $content, -1, PREG_SPLIT_DELIM_CAPTURE );
+
+	foreach( $pieces as $piece ) {
+		if( preg_match( $pattern_contents, $piece, $matches ) )
+			$new_content .= $matches[1];
+		else
+			$new_content .= wptexturize( wpautop( $piece ) );
+	}
+
+	$new_content = str_replace( array( "[raw]", "[/raw]" ), "", $new_content );
 
 	return $new_content;
 }
