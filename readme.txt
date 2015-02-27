@@ -1,9 +1,9 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.1.10
+Stable tag: 4.1.11
 Requires at least: 3.0
-Tested up to: 4.1
+Tested up to: 4.1.1
 Tags: Functions, Shortcodes
 License: GPLv3 or later
 License URI: http://opensource.org/licenses/GPL-3.0
@@ -54,6 +54,11 @@ none
 
 
 == Changelog ==
+= 4.1.11 =
+	- WP 4.1.1 Ready
+	- Fixed lct_get_user_agent_info
+	- Fixed Browscap.php
+
 = 4.1.9 - 4.1.10 =
 	- changes to wpauto selection
 	- lct_useful_settings default settings and checker

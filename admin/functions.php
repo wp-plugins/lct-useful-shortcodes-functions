@@ -80,9 +80,15 @@ function lct_get_user_agent_info( $print = null, $hide = null ) {
 		$ready = 1;
 	}
 
-	if( file_exists( 'C:/s/apps/browscap/Browscap.php' ) ) {
+	if( ! $ready && file_exists( 'C:/s/apps/browscap/Browscap.php' ) ) {
 		require 'C:/s/apps/browscap/Browscap.php';
 		$bc = new Browscap('C:/s/apps/browscap/cache');
+		$ready = 1;
+	}
+
+	if( ! $ready && file_exists( '/home8/visartsa/_apps/browscap/Browscap.php' ) ) {
+		require '/home8/visartsa/_apps/browscap/Browscap.php';
+		$bc = new Browscap('/home8/visartsa/_apps/browscap/cache');
 		$ready = 1;
 	}
 
