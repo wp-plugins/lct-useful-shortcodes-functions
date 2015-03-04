@@ -359,3 +359,63 @@ function lct_jquery_mask(){
 
 	wp_enqueue_script( 'lct_jquery_mask', $g_lusf->plugin_dir_url .'assets/js/jquery_mask.js', array('jquery') );
 }
+
+
+//[lct_preload]
+//preload an image or set of images
+add_shortcode( 'lct_preload', 'lct_preload' );
+function lct_preload( $a ) {
+	extract(
+		shortcode_atts(
+			array(
+				'css' => '',
+				'js' => '',
+				'images' => '',
+			),
+			$a
+		)
+	);
+
+	$time = current_time( 'timestamp', 1 );
+
+	$html = '';
+	$html .= '<div id="lct_preload" style="position: fixed;top: 0px;left: 0px;height: 1px;width: 100px;z-index:9999;opacity: 0.1;"></div>';
+	$html .= '<script>';
+	$html .= 'jQuery(window).load( function() {';
+		$html .= 'setTimeout(function() {';
+			if( $css ) {
+				$tmp = explode( ',', $css );
+				foreach( $tmp as $t ) {
+					$html .= 'xhr = new XMLHttpRequest();';
+					$html .= 'xhr.open(\'GET\', ' . $t . ');';
+					$html .= 'xhr.send(\'\');';
+				}
+			}
+
+			if( $js ) {
+				$tmp = explode( ',', $css );
+				foreach( $tmp as $t ) {
+					$html .= 'xhr = new XMLHttpRequest();';
+					$html .= 'xhr.open(\'GET\', ' . $t . ');';
+					$html .= 'xhr.send(\'\');';
+				}
+			}
+
+			if( $images ) {
+				$tmp = explode( ',', $images );
+				$i = 1;
+				foreach( $tmp as $t ) {
+					$html .= 'jQuery("#lct_preload").append(\'<img id="image_' . $time . '_' . $i . '" src="' . $t . '" style="height: 1px;width: 1px;"></div>\');';
+					$i++;
+				}
+			}
+		$html .= '}, 1000 );';
+
+		$html .= 'setTimeout(function() {';
+			$html .= 'jQuery("#lct_preload").hide();';
+		$html .= '}, 1200 );';
+	$html .= '});';
+	$html .= '</script>';
+
+	return $html;
+}

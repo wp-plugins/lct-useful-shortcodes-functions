@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.1.11
+Stable tag: 4.1.12
 Requires at least: 3.0
 Tested up to: 4.1.1
 Tags: Functions, Shortcodes
@@ -54,6 +54,9 @@ none
 
 
 == Changelog ==
+= 4.1.12 =
+	- ADDED lct_preload
+
 = 4.1.11 =
 	- WP 4.1.1 Ready
 	- Fixed lct_get_user_agent_info
