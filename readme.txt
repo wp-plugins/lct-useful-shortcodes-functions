@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.1.12
+Stable tag: 4.1.13
 Requires at least: 3.0
 Tested up to: 4.1.1
 Tags: Functions, Shortcodes
@@ -54,6 +54,9 @@ none
 
 
 == Changelog ==
+= 4.1.13 =
+	- added includes: iframe_resizer
+
 = 4.1.12 =
 	- ADDED lct_preload
 
