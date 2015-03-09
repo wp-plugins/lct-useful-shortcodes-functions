@@ -32,6 +32,32 @@ function lct_map_adminLabel_to_field_id( $fields, $lead = null ) {
 }
 
 
+function lct_map_label_to_field_id( $fields, $lead = null ) {
+	$map = array();
+
+	foreach( $fields as $field ) {
+		$field['label'] ? $k = sanitize_title( $field['label'] ) : $k = $field['id'];
+
+		if( $lead ) {
+			if( $field['inputs'] ) {
+				$tmp_v = array();
+				foreach( $field['inputs'] as $tmp ) {
+					$tmp_v[] = $lead[ $tmp['id'] ];
+				}
+
+				$v = implode( '~~~', $tmp_v );
+			} else
+				$v = $lead[ $field['id'] ];
+		} else
+			$v = $field['id'];
+
+		$map[$k] = $v;
+	}
+
+	return $map;
+}
+
+
 /**
  * lct_use_placeholders_instead_of_labels
  *
@@ -245,4 +271,68 @@ function lct_remove_form_entry( $entry, $form ) {
 		$lead_id
 	);
 	$wpdb->query($sql);
+}
+
+
+add_action( 'gform_notification', 'lct_cj_check', 9999, 3 );
+function lct_cj_check( $notification, $form, $entry ) {
+	if( ! lct_get_lct_useful_settings( 'enable_cj_spam_check' ) )
+		return $notification;
+
+	$failed_cj_checks = 0;
+
+	$cj_checks = array();
+	$cj_checks[] = '';
+
+	$cj_checks_name = array();
+	$cj_checks_name[] = 'c~~~';
+	$cj_checks_name[] = 'c ~~~';
+	$cj_checks_name[] = 'c~~~j';
+	$cj_checks_name[] = 'c ~~~j';
+
+	$cj_checks_phone = array();
+	$cj_checks_phone[] = '6192025400';
+
+	$cj_checks_email = array();
+	$cj_checks_email[] = 'resultsfirst';
+
+	$fields = lct_map_label_to_field_id( $form['fields'], $entry );
+
+	foreach( $fields as $k => $v ) {
+		if( strpos( $k, 'name' ) !== false ) {
+			foreach( $cj_checks_name as $name ) {
+				if( strpos( strtolower( $v ), $name ) !== false ) {
+					$failed_cj_checks++;
+				}
+			}
+		}
+
+		if( strpos( $k, 'phone' ) !== false ) {
+			$phone = preg_replace( '/\D/', '', $v );
+			if( in_array( $phone, $cj_checks_phone ) )
+				$failed_cj_checks++;
+		}
+
+		if( strpos( $k, 'email' ) !== false ) {
+			foreach( $cj_checks_email as $email ) {
+				if( strpos( $v, $email ) !== false ) {
+					$failed_cj_checks++;
+				}
+			}
+		}
+	 	$tmp[] = $k . '...' . $v;
+	}
+
+	if( $failed_cj_checks ) {
+		$notification['subject'] = '{{CAUGHT BY CJ SPAM CHECK}} :: ' . $notification['subject'];
+
+		$emails = array();
+		$emails[] = lct_get_lct_useful_settings( 'enable_cj_spam_check_email' );
+
+		$notification['toType'] = "email";
+		$notification['to'] = implode( ",", $emails );
+		$notification['bcc'] = '';
+	}
+
+	return $notification;
 }

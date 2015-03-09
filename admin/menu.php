@@ -88,6 +88,22 @@ function lct_useful_settings() {
 				array( "label" => $v )
 			);
 
+			$v = "enable_cj_spam_check";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"checkbox",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+
+			$v = "enable_cj_spam_check_email";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"text",
+				$term_meta[$v],
+				array( "label" => $v )
+			);
+
 			$v = "gforms_css_tweaks_gform_footer_margin";
 			echo lct_f(
 				"lct_useful_settings[$v]",
@@ -268,6 +284,8 @@ function lct_term_meta_defaults( $v = null, $unset = true ) {
 	$defaults['choose_a_raw_tag_option']					= 'old';
 	$defaults['use_placeholders_instead_of_labels']			= 'ignore'; //checkbox
 	$defaults['use_gforms_css_tweaks']						= 1;		//checkbox
+	$defaults['enable_cj_spam_check']						= '';
+	$defaults['enable_cj_spam_check_email']					= '';
 	$defaults['gforms_css_tweaks_gform_footer_margin']		= '0';
 	$defaults['gforms_css_tweaks_gform_footer_padding']		= '0';
 	$defaults['gform_button_custom_class']					= 'ignore';
