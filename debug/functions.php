@@ -7,6 +7,7 @@ if( ! function_exists( 'P_R' ) ) {
 		$skip = array( 'HTTP_COOKIE' );
 
 		$c = 'odd';
+		$c2 = 'even';
 
 		$h = '';
 		$h .= '<table class="P_R" style="max-width: 1000px;width: 100%;margin: 0 auto;">';

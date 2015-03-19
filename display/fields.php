@@ -32,14 +32,15 @@
  * @v['not_set_selected'] mixed default value if the value has never been set before.
 */
 function lct_f( $item = null, $type = null, $selected = '', $v ) {
-	if( ! $item ) return;
+	if( ! $item )
+		return;
 
-	if( isset( $v['not_set_selected'] ) && $selected === '' )
+	$v = lct_initialize_v( $v );
+
+	if( $v['not_set_selected'] && $selected === '' )
 		$selected = $v['not_set_selected'];
 
-	isset( $v['label_override'] ) ? $label_override = $v['label_override'] : $label_override = '';
-
-	if( $v['label'] && ! $label_override ) {
+	if( $v['label'] && ! $v['label_override'] ) {
 		$f_r = array(
 			'lca_' => '',
 			'lct_' => '',
@@ -49,8 +50,9 @@ function lct_f( $item = null, $type = null, $selected = '', $v ) {
 			'_' => ' ',
 		);
 
-		$f = array(); $r = array();
-		foreach( $f_r as $k=>$tmp ){
+		$f = array();
+		$r = array();
+		foreach( $f_r as $k => $tmp ) {
 			$f[] = $k;
 			$r[] = $tmp;
 		}
@@ -67,8 +69,8 @@ function lct_f( $item = null, $type = null, $selected = '', $v ) {
 	$pre_input			= $v['pre_input'];
 	$post_input			= $v['post_input'];
 
-	if( $type ){
-		switch( $type ){
+	if( $type ) {
+		switch( $type ) {
 			//text items
 			case 'text':
 				$pre_field_class	= "form-field $pre_field_class";
@@ -164,19 +166,18 @@ function lct_f( $item = null, $type = null, $selected = '', $v ) {
 				break;
 		}
 
-		if( ! isset( $v['pre_field_class'] ) )		$v['pre_field_class']		= $pre_field_class;
-		if( ! isset( $v['input_class'] ) )			$v['input_class']			= $input_class;
-		if( ! isset( $v['pre_field'] ) )			$v['pre_field']				= $pre_field;
-		if( ! isset( $v['post_field'] ) )			$v['post_field']			= $post_field;
-		if( ! isset( $v['pre_label'] ) )			$v['pre_label']				= $pre_label;
-		if( ! isset( $v['post_label'] ) )			$v['post_label']			= $post_label;
-		if( ! isset( $v['pre_input'] ) )			$v['pre_input']				= $pre_input;
-		if( ! isset( $v['post_input'] ) )			$v['post_input']			= $post_input;
+		if( $pre_field_class )				$v['pre_field_class']		= $pre_field_class;
+		if( $input_class )					$v['input_class']			= $input_class;
+		if( $pre_field )					$v['pre_field']				= $pre_field;
+		if( $post_field )					$v['post_field']			= $post_field;
+		if( $pre_label )					$v['pre_label']				= $pre_label;
+		if( $post_label )					$v['post_label']			= $post_label;
+		if( $pre_input )					$v['pre_input']				= $pre_input;
+		if( $post_input )					$v['post_input']			= $post_input;
 
-		if( ! isset( $v['options_tax'] ) )			$v['options_tax'] = lct_get_lct_useful_settings( 'Default_Taxonomy' );
-
-		if( ! isset( $v['lct_select_options'] ) )	$v['lct_select_options']			= $item;
-		if( ! isset( $v['options_default'] ) )		$v['options_default']	= 1;
+		if( ! $v['options_tax'] )			$v['options_tax'] = lct_get_lct_useful_settings( 'Default_Taxonomy' );
+		if( ! $v['lct_select_options'] )	$v['lct_select_options']	= $item;
+		if( ! $v['options_default'] )		$v['options_default']		= 1;
 
 		if( strpos( $type, "_" ) !== false ) {
 			$t = explode("_", $type);
@@ -188,6 +189,39 @@ function lct_f( $item = null, $type = null, $selected = '', $v ) {
 
 	//NOT currently in use
 	return; //call_user_func( 'lct_f_' . $item, $item, $selected, $v );
+}
+
+
+function lct_initialize_v( $v ) {
+	if( ! isset( $v['label'] ) )					$v['label'] = '';
+	if( ! isset( $v['label_override'] ) )			$v['label_override'] = '';
+	if( ! isset( $v['description'] ) )				$v['description'] = '';
+	if( ! isset( $v['pre_field_class'] ) )			$v['pre_field_class'] = '';
+	if( ! isset( $v['input_class'] ) )				$v['input_class'] = '';
+	if( ! isset( $v['pre_field'] ) )				$v['pre_field'] = '';
+	if( ! isset( $v['post_field'] ) )				$v['post_field'] = '';
+	if( ! isset( $v['pre_label'] ) )				$v['pre_label'] = '';
+	if( ! isset( $v['post_label'] ) )				$v['post_label'] = '';
+	if( ! isset( $v['pre_input'] ) )				$v['pre_input'] = '';
+	if( ! isset( $v['post_input'] ) )				$v['post_input'] = '';
+	if( ! isset( $v['options_tax'] ) )				$v['options_tax'] = '';
+	if( ! isset( $v['lct_select_options'] ) )		$v['lct_select_options'] = '';
+	if( ! isset( $v['options_default'] ) )			$v['options_default'] = '';
+	if( ! isset( $v['options_hide'] ) )				$v['options_hide'] = '';
+	if( ! isset( $v['npl_organization'] ) )			$v['npl_organization'] = '';
+	if( ! isset( $v['skip_npl_organization'] ) )	$v['skip_npl_organization'] = '';
+	if( ! isset( $v['number_start'] ) )				$v['number_start'] = '';
+	if( ! isset( $v['number_end'] ) )				$v['number_end'] = '';
+	if( ! isset( $v['number_leading_zero'] ) )		$v['number_leading_zero'] = '';
+	if( ! isset( $v['number_increment'] ) )			$v['number_increment'] = '';
+	if( ! isset( $v['date_start'] ) )				$v['date_start'] = '';
+	if( ! isset( $v['date_end'] ) )					$v['date_end'] = '';
+	if( ! isset( $v['other_variables'] ) )			$v['other_variables'] = '';
+	if( ! isset( $v['not_set_selected'] ) )			$v['not_set_selected'] = '';
+
+	$v = apply_filters( 'lct_initialize_v_customs', $v );
+
+	return $v;
 }
 
 

@@ -74,6 +74,8 @@ function lct_wp_footer_lct_get_user_agent_info() {
 
 add_action( 'lct_get_user_agent_info', 'lct_get_user_agent_info', 10, 2 );
 function lct_get_user_agent_info( $print = null, $hide = null ) {
+	$ready = 0;
+
 	if( file_exists( '/home/_apps/browscap/Browscap.php' ) ) {
 		require '/home/_apps/browscap/Browscap.php';
 		$bc = new Browscap('/home/_apps/browscap/cache');

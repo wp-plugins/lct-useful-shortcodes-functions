@@ -13,14 +13,18 @@
  * }
 */
 function lct_select_options( $type, $default = 1, $hide = null, $v = array() ) {
-	if( ! $type ) return;
+	if( ! $type )
+		return;
+
+	$v = lct_initialize_v( $v );
 
 	//Clean up $type
 	$f = array( "term_meta[", "lct_useful_settings[", "]" );
 	$r = array( "", "", "" );
 	$type = str_replace( $f, $r, $type );
 
-	if( ! isset( $v['options_tax'] ) ) $v['options_tax'] = lct_get_lct_useful_settings( 'Default_Taxonomy' );
+	if( ! $v['options_tax'] )
+		$v['options_tax'] = lct_get_lct_useful_settings( 'Default_Taxonomy' );
 
 	if( $default )
 		return call_user_func( 'lct_select_options_default', $hide , $type, $v );
@@ -292,8 +296,8 @@ function lct_select_options_lct_standard_day( $hide , $type, $v ){
 
 function lct_select_options_lct_standard_year( $hide , $type, $v ) {
 	$time = current_time( 'timestamp', 1 );
-	isset( $v['date_start'] ) ? $start = $v['date_start'] : $start = date( "Y", $time ) - 1;
-	isset( $v['date_end'] ) ? $end = $v['date_end'] : $end = date( "Y", $time ) + 3;
+	$v['date_start'] ? $start = $v['date_start'] : $start = date( "Y", $time ) - 1;
+	$v['date_end'] ? $end = $v['date_end'] : $end = date( "Y", $time ) + 3;
 
 	$select_options = array();
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
@@ -379,9 +383,9 @@ function lct_select_options_store_hide_selected_gforms( $hide , $type, $v ) {
 
 function lct_select_options_number( $hide , $type, $v ) {
 	$select_options = array();
-	isset( $v['number_start'] ) ? $start = $v['number_start'] : $start = 1;
-	isset( $v['number_end'] ) ? $end = $v['number_end'] : $end = 1;
-	isset( $v['number_increment'] ) ? $increment = $v['number_increment'] : $increment = 1;
+	$v['number_start'] ? $start = $v['number_start'] : $start = 1;
+	$v['number_end'] ? $end = $v['number_end'] : $end = 1;
+	$v['number_increment'] ? $increment = $v['number_increment'] : $increment = 1;
 
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
 	for( $i = $start; $i <= $end; $i = $i + $increment ) {
