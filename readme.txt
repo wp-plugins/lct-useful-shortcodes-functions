@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.1.15
+Stable tag: 4.1.16
 Requires at least: 3.0
 Tested up to: 4.1.1
 Tags: Functions, Shortcodes
@@ -54,8 +54,8 @@ none
 
 
 == Changelog ==
-= 4.1.15 =
-	- Code CLeanup
+= 4.1.15 - 4.1.16 =
+	- Code Cleanup
 
 = 4.1.14 =
 	- CJ Spam Filter

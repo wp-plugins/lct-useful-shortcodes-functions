@@ -44,10 +44,14 @@ function lct_select_options_default( $hide, $type, $v ) {
 		else
 			$npl_organization = get_term_by( 'id', get_user_meta( get_current_user_id(), 'npl_organization', true ), 'npl_organization' );
 
+		if( ! $npl_organization )
+			return array();
+
 		$parent_term = get_term_by( 'slug', $npl_organization->slug . '__' . $type, $tax );
 	}
 
-	if( ! $parent_term ) return;
+	if( ! $parent_term )
+		return array();
 
 	$args = array(
 		'type'                     => 'wp-lead',

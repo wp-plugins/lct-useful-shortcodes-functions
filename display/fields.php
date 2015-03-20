@@ -166,18 +166,18 @@ function lct_f( $item = null, $type = null, $selected = '', $v ) {
 				break;
 		}
 
-		if( $pre_field_class )				$v['pre_field_class']		= $pre_field_class;
-		if( $input_class )					$v['input_class']			= $input_class;
-		if( $pre_field )					$v['pre_field']				= $pre_field;
-		if( $post_field )					$v['post_field']			= $post_field;
-		if( $pre_label )					$v['pre_label']				= $pre_label;
-		if( $post_label )					$v['post_label']			= $post_label;
-		if( $pre_input )					$v['pre_input']				= $pre_input;
-		if( $post_input )					$v['post_input']			= $post_input;
+		if( $pre_field_class )					$v['pre_field_class']		= $pre_field_class;
+		if( $input_class )						$v['input_class']			= $input_class;
+		if( $pre_field )						$v['pre_field']				= $pre_field;
+		if( $post_field )						$v['post_field']			= $post_field;
+		if( $pre_label )						$v['pre_label']				= $pre_label;
+		if( $post_label )						$v['post_label']			= $post_label;
+		if( $pre_input )						$v['pre_input']				= $pre_input;
+		if( $post_input )						$v['post_input']			= $post_input;
 
-		if( ! $v['options_tax'] )			$v['options_tax'] = lct_get_lct_useful_settings( 'Default_Taxonomy' );
-		if( ! $v['lct_select_options'] )	$v['lct_select_options']	= $item;
-		if( ! $v['options_default'] )		$v['options_default']		= 1;
+		if( ! $v['options_tax'] )				$v['options_tax'] = lct_get_lct_useful_settings( 'Default_Taxonomy' );
+		if( ! $v['lct_select_options'] )		$v['lct_select_options']	= $item;
+		if( $v['options_default'] !== false )	$v['options_default']		= 1;
 
 		if( strpos( $type, "_" ) !== false ) {
 			$t = explode("_", $type);
@@ -278,7 +278,12 @@ function lct_f_processor_checkboxgroup( $item, $selected, $v ) {
 	$options = '';
 	foreach( lct_select_options( $v['lct_select_options'], $v['options_default'], $v['options_hide'], $v ) as $fe_s ){
 		$value = $fe_s['value'];
-	 	in_array($value, $selected) ? $checked = 'checked="checked"' : $checked = '';
+
+	 	if( is_array( $selected ) )
+			in_array( $value, $selected ) ? $checked = 'checked="checked"' : $checked = '';
+		else
+			$checked = '';
+
 		$options .= "<input type='checkbox' id='$item' name='".$item."[]' class='$input_class' value='$value' $checked /> <label>" . $fe_s['label'] . "</label><br />";
 	}
 
@@ -312,7 +317,10 @@ function lct_f_processor_checkboxgroupinput( $item, $selected, $v ) {
 		$term_meta = get_option( "npl_organization_$org_t_id" );
 		$term_meta_key = str_replace( array( "term_meta[", "]" ), "",$text_item );
 
-		 in_array( $value, $selected ) ? $checked = 'checked="checked"' : $checked = '';
+		if( is_array( $selected ) )
+			in_array( $value, $selected ) ? $checked = 'checked="checked"' : $checked = '';
+		else
+			$checked = '';
 
 		$options .= "<input type='text' id='$text_item' name='$text_item' style='width: 30px;' value='" . $term_meta[$term_meta_key] . "' />";
 		$options .= "<input type='checkbox' id='$item' name='".$item."[]' class='$input_class' value='$value' $checked /> <label>" . $fe_s['label'] . "</label><br />";

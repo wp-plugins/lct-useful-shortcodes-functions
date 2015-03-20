@@ -37,7 +37,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"checkbox",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => "Enable front.css" )
 			);
 
@@ -45,15 +45,20 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"select",
-				$term_meta[$v],
-				array( "label" => "Default Taxonomy to Use for lct_select_options();", "label_override" => true, "lct_select_options" => "get_taxonomies", "options_default" => false )
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
+				array(
+					"label" => "Default Taxonomy to Use for lct_select_options();",
+					"label_override" => true,
+					"lct_select_options" => "get_taxonomies",
+					"options_default" => false
+				)
 			);
 
 			$v = "print_user_agent_in_footer";
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"checkbox",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -61,8 +66,13 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"select",
-				$term_meta[$v],
-				array( "label" => $v, "lct_select_options" => "get_raw_prefs", "options_default" => false, "options_hide" => true )
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
+				array(
+					"label" => $v,
+					"lct_select_options" => "get_raw_prefs",
+					"options_default" => false,
+					"options_hide" => true
+				)
 			);
 			?>
 		</tbody></table>
@@ -76,7 +86,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"checkboxgroup",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v, "lct_select_options" => "gravity_forms", "options_default" => false, "options_hide" => true )
 			);
 
@@ -84,7 +94,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"checkbox",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -92,7 +102,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"checkbox",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -100,7 +110,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"text",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -108,7 +118,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"text",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => "gform_footer Margin", "label_override" => true )
 			);
 
@@ -116,7 +126,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"text",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => "gform_footer Padding", "label_override" => true )
 			);
 
@@ -124,7 +134,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"text",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -132,7 +142,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"text",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -140,7 +150,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"text",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -148,7 +158,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"radiogroup",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => "Store Form Data", "not_set_selected" => "0", "options_default" => false, "options_hide" => true )
 			);
 
@@ -156,7 +166,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"checkboxgroup",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => "Select Forms", "lct_select_options" => "gravity_forms", "options_default" => false, "options_hide" => true )
 			);
 			?>
@@ -171,7 +181,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"checkbox",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => 'Hide OG site_name', 'label_override' => true )
 			);
 			?>
@@ -186,7 +196,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"checkbox",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -194,7 +204,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"text",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -202,7 +212,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"checkbox",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -210,7 +220,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"text",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -218,7 +228,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"checkbox",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -226,7 +236,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"select",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v, "lct_select_options" => "get_pages", "options_default" => false, "options_hide" => false )
 			);
 
@@ -234,7 +244,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"checkbox",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -242,7 +252,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"text",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 
@@ -250,7 +260,7 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"text",
-				$term_meta[$v],
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
 			?>
