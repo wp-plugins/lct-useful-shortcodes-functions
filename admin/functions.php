@@ -105,12 +105,12 @@ function lct_get_user_agent_info( $print = null, $hide = null ) {
 
 			if( WP_CACHE ) {
 
-				$before = '<pre style="display: none !important;">';
+				$before = '<pre id="browscap" style="display: none !important;">';
 				$after = '</pre>';
 
 			} else {
 
-				$before = '<!--';
+				$before = '<!-- ## id="browscap" ';
 				$after = '-->';
 			}
 
