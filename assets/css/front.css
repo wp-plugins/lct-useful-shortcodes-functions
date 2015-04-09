@@ -75,6 +75,15 @@ textarea{
 
 
 /* Gravity Forms */
-.hide_label label.gfield_label{
+.hide_label label.gfield_label,
+.hide_label .ginput_complex label{
 	display: none !important;
+}
+
+.hide_label .ginput_complex span{
+	min-height: 1px !important;
+}
+
+.hide_label .ginput_container{
+	margin-top: 0 !important;
 }
