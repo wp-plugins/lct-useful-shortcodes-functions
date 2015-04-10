@@ -41,6 +41,14 @@ function lct_useful_settings() {
 				array( "label" => "Enable front.css" )
 			);
 
+			$v = "disable_avada_css";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"checkbox",
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
+				array( "label" => "Disable avada.css" )
+			);
+
 			$v = "Default_Taxonomy";
 			echo lct_f(
 				"lct_useful_settings[$v]",
@@ -289,6 +297,7 @@ function lct_term_meta_default_check( $term_meta = null ) {
 function lct_term_meta_defaults( $v = null, $unset = true ) {
 	$defaults = array();
 	$defaults['Enable_Front_css']							= 1;		//checkbox
+	$defaults['disable_avada_css']							= 'ignore';	//checkbox
 	$defaults['Default_Taxonomy']							= 'ignore';
 	$defaults['print_user_agent_in_footer']					= 'ignore'; //checkbox
 	$defaults['choose_a_raw_tag_option']					= 'old';

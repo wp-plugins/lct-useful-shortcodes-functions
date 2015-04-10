@@ -1,0 +1,72 @@
+.fusion-title{
+	letter-spacing: 1px;
+}
+
+.fusion-title.center{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.center .title-heading-left,
+.center .title-heading-right{
+	padding: 0;
+}
+
+.no-sep .title-sep-container{
+	display: none!important;
+}
+
+.fa-map-marker{
+	color: #c72926;
+	text-shadow: 1px 1px 2px #333;
+}
+
+
+/* Gravity Forms */
+#content .gform_wrapper{
+	margin: 0;
+	max-width: 100%;
+}
+
+#sidebar .gform_wrapper{
+	margin: 0;
+	max-width: 100%;
+}
+
+.gform_wrapper .top_label input.large,
+.gform_wrapper .top_label select.large,
+.gform_wrapper .top_label textarea.textarea{
+	width: 97.5%;
+}
+
+.gform_wrapper .top_label .gfield_label{
+	margin-bottom: 0;
+}
+
+.gform_wrapper .top_label .gfield_description{
+	padding: 0;
+}
+
+.gform_wrapper li.field_description_above .gfield_description{
+	margin-bottom: 0;
+}
+
+
+
+
+@media (max-width:800px){
+/* STARTzz */
+	.fusion-title h1,
+	.fusion-title h2,
+	.fusion-title h3,
+	.fusion-title h4,
+	.fusion-title h5,
+	.fusion-title h6{
+		white-space: normal;
+	}
+
+	.fusion-title .title-sep-container{
+		display: none !important;
+	}
+/* ENDzz */
+}
