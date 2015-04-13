@@ -54,6 +54,19 @@
 
 
 
+@media (max-width:1200px){
+/* STARTzz */
+	.full-width-overflow-container{
+		margin: 0 -30px;
+	}
+
+	.full-width-overflow-container .avada-row{
+		margin: 0 15px;
+	}
+/* ENDzz */
+}
+
+
 @media (max-width:800px){
 /* STARTzz */
 	.fusion-title h1,
@@ -67,6 +80,26 @@
 
 	.fusion-title .title-sep-container{
 		display: none !important;
+	}
+/* ENDzz */
+}
+
+
+
+
+@media (min-width:1201px){
+/* STARTzz */
+	.full-width-overflow-container{
+		margin: 0px -405px;
+	}
+/* ENDzz */
+}
+
+
+@media (min-width:1921px){
+/* STARTzz */
+	.full-width-overflow-container{
+		margin: 0px -905px;
 	}
 /* ENDzz */
 }

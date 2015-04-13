@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.1.19
+Stable tag: 4.1.20
 Requires at least: 3.0
 Tested up to: 4.1.1
 Tags: Functions, Shortcodes
@@ -54,7 +54,7 @@ none
 
 
 == Changelog ==
-= 4.1.15 - 4.1.19 =
+= 4.1.15 - 4.1.20 =
 	- Added Avada Theme Support
 	- gform css tweaks
 	- Code Cleanup
