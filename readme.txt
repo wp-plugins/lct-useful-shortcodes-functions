@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.1.22
+Stable tag: 4.1.23
 Requires at least: 3.0
 Tested up to: 4.1.1
 Tags: Functions, Shortcodes
@@ -54,7 +54,8 @@ none
 
 
 == Changelog ==
-= 4.1.22 =
+= 4.1.22 - 4.1.23 =
+	- BAW test
 	- ADDED lct_baw_force_plugin_updates
 
 = 4.1.15 - 4.1.21 =
