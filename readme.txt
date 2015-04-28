@@ -1,9 +1,9 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.1.26
+Stable tag: 4.2.1
 Requires at least: 3.0
-Tested up to: 4.2
+Tested up to: 4.2.1
 Tags: Functions, Shortcodes
 License: GPLv3 or later
 License URI: http://opensource.org/licenses/GPL-3.0
@@ -54,6 +54,9 @@ none
 
 
 == Changelog ==
+= 4.2.1 =
+	- WP 4.2.1 Ready
+
 = 4.1.26 =
 	- Removed labob
 	- WP v4.2 Ready
