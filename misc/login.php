@@ -115,7 +115,7 @@ function displayForm( $atts ) {
 			$user = wp_signon( $creds, false );
 			if ( is_wp_error($user) )
 			   $jerror = '<div class="jerror">'.$user->get_error_message().'</div>';
-		}else{
+		} else {
 			$jerror = '<div class="jerror">Enter Username and password.</div>';
 		}
 	}
@@ -166,7 +166,7 @@ function displayForm( $atts ) {
 			    	echo "<h1>" . lct_get_lct_useful_settings( 'lct_tag_line' ) . "</h1>";
 			    }elseif( get_bloginfo( 'description' ) && lct_get_lct_useful_settings( 'lct_show_tag_line' ) ) {
 			    	echo "<h1>" . get_bloginfo( 'description' ) . "</h1>";
-			    }else{
+			    } else {
 			    	echo "<h1></h1>";
 			    } ?>
 
@@ -205,13 +205,13 @@ function displayForm( $atts ) {
 
 		<script>
 		var $login = jQuery.noConflict();
-		$login(window).load(function(){
+		$login(window).load(function() {
 			if($login('#username').val() != 'USER' && $login('#username').val() != '')
 				$login('#submit').show();
 			else
 				$login('#submit').hide();
 
-			$login('#username').keyup(function(){
+			$login('#username').keyup(function() {
 				if($login('#username').val() != 'USER' && $login('#username').val() != '')
 					$login('#submit').show();
 				else

@@ -4,8 +4,8 @@ if ( ! function_exists( 'shortcode_textimage' ) ) {
 	define('SHORTCODE_TEXTIMAGE', 'link');
 
 
-	function shortcode_textimage($t){
-		foreach( $t as $k=>$v ){
+	function shortcode_textimage($t) {
+		foreach( $t as $k=>$v ) {
 			$t[$k] = do_shortcode( str_replace( array( "{", "}" ), array( "[", "]" ), $v ) );
 		}
 		extract(shortcode_atts(array(
@@ -48,7 +48,7 @@ if ( ! function_exists( 'shortcode_textimage' ) ) {
 		if(empty($text))
 			$text = get_the_title($id);
 
-		if($esc_html=='true'){
+		if($esc_html=='true') {
 			$src = esc_html($src);
 			$text = esc_html($text);
 		}
@@ -56,8 +56,8 @@ if ( ! function_exists( 'shortcode_textimage' ) ) {
 		if(!$alt)
 			$alt = $text;
 
-		if($src){
-			if($imagetext || $textimage){
+		if($src) {
+			if($imagetext || $textimage) {
 				if($imagetext)
 					return '<a href="'. $url .'"'. $class . $rel . $title .'><img src="'. $src .'"'. $style .' alt="'. $alt .'" />'. $text .'</a>';
 				else
@@ -71,9 +71,9 @@ if ( ! function_exists( 'shortcode_textimage' ) ) {
 
 
 	add_action('init', 'wptisc_request_handler');
-	function wptisc_request_handler(){
-		if(!empty($_GET['tisc_action'])){
-			switch ($_GET['tisc_action']){
+	function wptisc_request_handler() {
+		if(!empty($_GET['tisc_action'] )) {
+			switch ($_GET['tisc_action'] ) {
 				case 'wptisc_id_lookup':
 					wptisc_id_lookup();
 					break;
@@ -89,9 +89,9 @@ if ( ! function_exists( 'shortcode_textimage' ) ) {
 	}
 
 
-	function wptisc_id_lookup(){
+	function wptisc_id_lookup() {
 		global $wpdb;
-		$title = stripslashes($_GET['post_title']);
+		$title = stripslashes($_GET['post_title'] );
 		$wild = '%'. $wpdb->escape($title) .'%';
 		$posts = $wpdb->get_results("
 			SELECT *
@@ -106,7 +106,7 @@ if ( ! function_exists( 'shortcode_textimage' ) ) {
 		");
 		if (count($posts)) {
 			$output = '<ul>';
-			foreach ($posts as $post){
+			foreach ($posts as $post) {
 				if($post->post_type != 'page')
 					$post_type = ' - <strong>('. esc_html($post->post_type) .')</strong>';
 				else
@@ -123,7 +123,7 @@ if ( ! function_exists( 'shortcode_textimage' ) ) {
 	}
 
 
-	function wptisc_admin_js(){
+	function wptisc_admin_js() {
 		header('Content-type: text/javascript');
 	?>
 	wptisc_show_shortcode = function($elem) {
@@ -236,7 +236,7 @@ if ( ! function_exists( 'shortcode_textimage' ) ) {
 	}
 
 
-	function wptisc_admin_css(){
+	function wptisc_admin_css() {
 		header('Content-type: text/css');
 	?>
 	#wptisc_meta_box fieldset a.wptisc_help {
@@ -298,12 +298,12 @@ if ( ! function_exists( 'shortcode_textimage' ) ) {
 
 
 	add_action('admin_print_styles', 'wptisc_admin_head');
-	function wptisc_admin_head(){
+	function wptisc_admin_head() {
 		echo '<link rel="stylesheet" type="text/css" href="'.trailingslashit(get_bloginfo('url')).'?tisc_action=wptisc_admin_css" />';
 	}
 
 
-	function wptisc_meta_box(){
+	function wptisc_meta_box() {
 	?>
 	<fieldset>
 		<a href="#" class="wptisc_help"><?php _e('?', 'textimage-shortcode'); ?></a>

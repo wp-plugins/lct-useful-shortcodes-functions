@@ -1,7 +1,7 @@
 <?php /*
 Plugin Name: iFrame Resizer
 Plugin URI: https://github.com/davidjbradshaw/iframe-resizer
-Version: 2.5.1
+Version: 2.8.6
 Author:
 Author URI:
 License: GPL
@@ -10,6 +10,12 @@ Description:
 
 
 == Log ==
+== 2015-04-23 ==
+	updated to v2.8.6
+	Updated Files:
+		js/iFrameResize.js
+		js/npl.js
+
 == 2014-07-23 ==
 	Added to: /npl_functions/includes/
 

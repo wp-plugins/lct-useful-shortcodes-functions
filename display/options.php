@@ -32,13 +32,14 @@ function lct_select_options( $type, $default = 1, $hide = null, $v = array() ) {
 	return call_user_func( 'lct_select_options_' . $type, $hide , $type, $v );
 }
 
+
 //Uses Taxonomy
 function lct_select_options_default( $hide, $type, $v ) {
 	$tax = $v['options_tax'];
 
-	if( $v['skip_npl_organization']){
+	if( $v['skip_npl_organization'] ) {
 		$parent_term = get_term_by( 'slug', $type, $tax );
-	}else{
+	} else {
 		if( $v['npl_organization'] )
 			$npl_organization = get_term_by( 'id', $v['npl_organization'], 'npl_organization' );
 		else
@@ -158,7 +159,7 @@ function lct_select_options_gravity_forms_form_fields( $hide, $type, $v ) {
 		if( in_array( $fields['type'], $exclude_type ) )
 			continue;
 
-		switch( $fields['type'] ){
+		switch( $fields['type'] ) {
 			case 'address':
 				foreach( $fields['inputs'] as $tmp ) {
 					$select_options[] = array( 'label' => $tmp['label'], 'value' => $tmp['id'] );
@@ -247,7 +248,7 @@ function lct_select_options_get_raw_prefs( $hide, $type, $v ) {
 //Constants --- Constants --- Constants --- Constants --- Constants --- Constants --- Constants --- Constants
 //Constants --- Constants --- Constants --- Constants --- Constants --- Constants --- Constants --- Constants
 //Constants --- Constants --- Constants --- Constants --- Constants --- Constants --- Constants --- Constants
-function lct_select_options_lct_user_timezone( $hide , $type, $v ){
+function lct_select_options_lct_user_timezone( $hide , $type, $v ) {
 	$select_options = array();
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
 	$select_options[] = array( 'label'=>'Pacific' , 'value'=>'America/Los_Angeles' );
@@ -262,7 +263,7 @@ function lct_select_options_lct_user_timezone( $hide , $type, $v ){
 }
 
 
-function lct_select_options_lct_standard_month( $hide , $type, $v ){
+function lct_select_options_lct_standard_month( $hide , $type, $v ) {
 	$select_options = array();
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
 	$select_options[] = array( 'label'=>'January' , 'value'=>'01' );
@@ -281,11 +282,11 @@ function lct_select_options_lct_standard_month( $hide , $type, $v ){
 }
 
 
-function lct_select_options_lct_standard_day( $hide , $type, $v ){
+function lct_select_options_lct_standard_day( $hide , $type, $v ) {
 	$select_options = array();
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
 
-	for ($i = 1; $i <= 31; $i++){
+	for ($i = 1; $i <= 31; $i++) {
 		if($i<10)
 			$value = '0'.$i;
 		else
@@ -315,11 +316,11 @@ function lct_select_options_lct_standard_year( $hide , $type, $v ) {
 }
 
 
-function lct_select_options_lct_standard_hour( $hide , $type, $v ){
+function lct_select_options_lct_standard_hour( $hide , $type, $v ) {
 	$select_options = array();
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
 
-	for ($i = 1; $i <= 12; $i++){
+	for ($i = 1; $i <= 12; $i++) {
 		if($i<10)
 			$value = '0'.$i;
 		else
@@ -332,15 +333,15 @@ function lct_select_options_lct_standard_hour( $hide , $type, $v ){
 }
 
 
-function lct_select_options_lct_standard_minute( $hide , $type, $v ){
+function lct_select_options_lct_standard_minute( $hide , $type, $v ) {
 	$select_options = array();
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
 
-	for ($i = 0; $i <= 55; $i=$i+5){
-		if($i<10){
+	for ($i = 0; $i <= 55; $i=$i+5) {
+		if($i<10) {
 			$value = '0'.$i;
 			$label = '0'.$i;
-		}else{
+		} else {
 			$value = $i;
 			$label = $i;
 		}
@@ -351,7 +352,7 @@ function lct_select_options_lct_standard_minute( $hide , $type, $v ){
 }
 
 
-function lct_select_options_lct_standard_ampm( $hide , $type, $v ){
+function lct_select_options_lct_standard_ampm( $hide , $type, $v ) {
 	$select_options = array();
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
 	$select_options[] = array( 'label'=>'AM' , 'value'=>'AM' );
@@ -360,7 +361,7 @@ function lct_select_options_lct_standard_ampm( $hide , $type, $v ){
 }
 
 
-function lct_select_options_states( $hide , $type, $v ){
+function lct_select_options_states( $hide , $type, $v ) {
 	$select_options = array();
 	if( ! $hide ) $select_options[] = array( 'label'=>'---' , 'value'=>'' );
 	$select_options[] = array( 'label'=>'Maryland' , 'value'=>'MD' );

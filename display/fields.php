@@ -276,7 +276,7 @@ function lct_f_processor_checkboxgroup( $item, $selected, $v ) {
 	$v['description'] ? $description = "<p class=\"description\">" . $v['description'] . "</p>" : $description = "";
 
 	$options = '';
-	foreach( lct_select_options( $v['lct_select_options'], $v['options_default'], $v['options_hide'], $v ) as $fe_s ){
+	foreach( lct_select_options( $v['lct_select_options'], $v['options_default'], $v['options_hide'], $v ) as $fe_s ) {
 		$value = $fe_s['value'];
 
 	 	if( is_array( $selected ) )
@@ -310,7 +310,7 @@ function lct_f_processor_checkboxgroupinput( $item, $selected, $v ) {
 	$v['description'] ? $description = "<p class=\"description\">" . $v['description'] . "</p>" : $description = "";
 
 	$options = '';
-	foreach( lct_select_options( $v['lct_select_options'], $v['options_default'], $v['options_hide'], $v ) as $fe_s ){
+	foreach( lct_select_options( $v['lct_select_options'], $v['options_default'], $v['options_hide'], $v ) as $fe_s ) {
 		$value = $fe_s['value'];
 		$text_item = str_replace( "]", "_order_".$value."]", $item );
 		$org_t_id = $v['npl_organization'];
@@ -349,7 +349,7 @@ function lct_f_processor_radiogroup( $item, $selected, $v ) {
 	$v['description'] ? $description = "<p class=\"description\">" . $v['description'] . "</p>" : $description = "";
 
 	$options = '';
-	foreach( lct_select_options( $v['lct_select_options'], $v['options_default'], $v['options_hide'], $v ) as $fe_s ){
+	foreach( lct_select_options( $v['lct_select_options'], $v['options_default'], $v['options_hide'], $v ) as $fe_s ) {
 		$value = $fe_s['value'];
 	 	$value == $selected ? $checked = 'checked="checked"' : $checked = '';
 		$options .= "<input type='radio' id='$item' name='$item' class='$input_class' value='$value' $checked /> <label>" . $fe_s['label'] . "</label><br />";

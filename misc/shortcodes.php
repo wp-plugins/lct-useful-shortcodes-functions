@@ -137,7 +137,7 @@ function lct_get_test( $a ) {
 
 	$file = $page . '.php';
 
-	if( file_exists( $plugin_dir_path . $file ) ){
+	if( file_exists( $plugin_dir_path . $file ) ) {
 		$r = '[raw]' . file_get_contents( $plugin_dir_path . $file ) . '[/raw]';
 		$r = str_replace("[self]", $plugin_dir_path . $file, $r );
 		return $r;
@@ -292,7 +292,7 @@ function lct_copyyear() {
 //[raw]Content to disable wpautop[/raw]
 function lct_wpautop_disable( $content ) {
 	$new_content = '';
-	$pattern_full = '{(\[raw\].*?\[/raw\])}is';
+	$pattern_full = '{(\[raw\].*?\[/raw\] )}is';
 	$pattern_contents = '{\[raw\](.*?)\[/raw\]}is';
 	$pieces = preg_split( $pattern_full, $content, -1, PREG_SPLIT_DELIM_CAPTURE );
 
@@ -316,7 +316,7 @@ function lct_wpautop_disable_new( $content ) {
 		return wptexturize( wpautop( $content ) );
 
 	$new_content = '';
-	$pattern_full = '{(\[raw\].*?\[/raw\])}is';
+	$pattern_full = '{(\[raw\].*?\[/raw\] )}is';
 	$pattern_contents = '{\[raw\](.*?)\[/raw\]}is';
 	$pieces = preg_split( $pattern_full, $content, -1, PREG_SPLIT_DELIM_CAPTURE );
 
@@ -354,7 +354,7 @@ function lct_auto_logout() {
 //[lct_jquery_mask]
 //Add digit mask
 add_shortcode( 'lct_jquery_mask', 'lct_jquery_mask' );
-function lct_jquery_mask(){
+function lct_jquery_mask() {
 	$g_lusf = new g_lusf;
 
 	wp_enqueue_script( 'lct_jquery_mask', $g_lusf->plugin_dir_url .'assets/js/jquery_mask.js', array('jquery') );

@@ -84,13 +84,13 @@ function lct_use_placeholders_instead_of_labels( $form ) {
 	jQuery(document).bind( 'gform_post_render', function() {
 		jQuery('textarea').autosize();
 
-		<?php if( $is_placeholder ){
-			foreach( $form['fields'] as &$field ){
+		<?php if( $is_placeholder ) {
+			foreach( $form['fields'] as &$field ) {
 				if( ! in_array( $field['type'], $valid_types ) || strpos( $field['cssClass'], 'no-placeholder' ) !== false ) continue;
 
 				$inputs = array();
 				$name_placeholders = array();
-				if( $field['type'] == 'name' ){
+				if( $field['type'] == 'name' ) {
 					$inputs[] = "input_" . $f_id . "_" . $field['id'] . "_" . "3";
 					$inputs[] = "input_" . $f_id . "_" . $field['id'] . "_" . "6";
 					$name_placeholders["input_" . $f_id . "_" . $field['id'] . "_" . "3"] = "First";
@@ -98,18 +98,18 @@ function lct_use_placeholders_instead_of_labels( $form ) {
 				}else
 					$inputs[] = "input_" . $f_id . "_" . $field['id'];
 
-				foreach( $inputs as $input ){
+				foreach( $inputs as $input ) {
 					$field['defaultValue'] ? $placeholder = $field['defaultValue'] : $placeholder = $field['label'];
 					if( $name_placeholders )
 						$placeholder = $name_placeholders[$input] . ' ' . $placeholder;
 
-					if( $field['isRequired'] ){
+					if( $field['isRequired'] ) {
 						$placeholder .= ' *';
 						$focus_Class = "jQuery('#$input').addClass('good_black');\n";
 						$focus_Class .= "jQuery('#$input').removeClass('bad_red');\n";
 						$blur_Class = "jQuery('#$input').removeClass('good_black');\n";
 						$blur_Class .= "jQuery('#$input').addClass('bad_red');\n";
-					}else{
+					} else {
 						$focus_Class = "";
 						$blur_Class = "";
 					}
@@ -129,15 +129,15 @@ function lct_use_placeholders_instead_of_labels( $form ) {
 
 					echo "jQuery('label[for=$input]').hide();\n";
 
-					echo "jQuery('#$input').focus(function(){
+					echo "jQuery('#$input').focus(function() {
 						if(jQuery('#$input').val() == '$placeholder' || placeholder.indexOf(';') != -1 )
 							jQuery('#$input').val('');
 
 						$focus_Class
 					});
 
-					jQuery('#$input').blur(function(){
-						if(jQuery('#$input').val() == ''){
+					jQuery('#$input').blur(function() {
+						if(jQuery('#$input').val() == '') {
 							jQuery('#$input').val('$placeholder');
 
 							$blur_Class
@@ -221,7 +221,7 @@ function lct_remove_form_entry( $entry, $form ) {
 	if( lct_get_lct_useful_settings( 'store_hide_selected_gforms' ) ) {
     	if( $is_in_array )
     		return;
-	}else{
+	} else {
 		if( ! $is_in_array )
     		return;
 	}

@@ -99,7 +99,7 @@ function lct_remove_edit_post_link( $link ) {
 
 
 //Fix Multisite plugins_url issue
-if( ! function_exists('lct_domain_mapping_plugins_uri') && function_exists('domain_mapping_plugins_uri') ){
+if( ! function_exists('lct_domain_mapping_plugins_uri') && function_exists('domain_mapping_plugins_uri') ) {
 	remove_filter( 'plugins_url', 'domain_mapping_plugins_uri', 1 );
 	add_filter( 'plugins_url', 'lct_domain_mapping_plugins_uri', 1 );
 	function lct_domain_mapping_plugins_uri( $full_url, $path=NULL, $plugin=NULL ) {
@@ -204,7 +204,7 @@ function lct_get_parent_term_value( $term_id, $tax, $key = null, $output="OBJECT
 }
 
 
-function lct_get_parent_term_meta( $term_id = null, $tax = null, $key = null, $output="OBJECT", $filter="raw"  ){
+function lct_get_parent_term_meta( $term_id = null, $tax = null, $key = null, $output="OBJECT", $filter="raw"  ) {
 	if( ! $term_id || ! $tax ) return;
 
 	$term = get_term( $term_id, $tax, $output, $filter );

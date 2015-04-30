@@ -60,7 +60,7 @@ function ddsg_options_page() {
 	global $ddsg_ver;
 	global $g_lusf;
 
-	if (isset($_POST['set_defaults'])) {
+	if (isset($_POST['set_defaults'] )) {
 		echo '<div id="message" class="updated fade"><p><strong>';
 
 		update_option('ddsg_language', 'English');
@@ -89,32 +89,32 @@ function ddsg_options_page() {
 		echo DDSG_DEFAULTS_LOADED;
 		echo '</strong></p></div>';
 
-	} else if (isset($_POST['info_update'])) {
+	} else if (isset($_POST['info_update'] )) {
 
 		echo '<div id="message" class="updated fade"><p><strong>';
 
-		update_option('ddsg_language', (string) $_POST["ddsg_language"]);
-		update_option('ddsg_items_per_page', (int) $_POST["ddsg_items_per_page"]);
-		update_option('ddsg_sm_name', (string) $_POST["ddsg_sm_name"]);
-		update_option('ddsg_what_to_show', (string) $_POST["ddsg_what_to_show"]);
-		update_option('ddsg_which_first', (string) $_POST["ddsg_which_first"]);
-		update_option('ddsg_post_sort_order', (string) $_POST["ddsg_post_sort_order"]);
-		update_option('ddsg_page_sort_order', (string) $_POST["ddsg_page_sort_order"]);
-		update_option('ddsg_comments_on_posts', (bool) $_POST["ddsg_comments_on_posts"]);
-		update_option('ddsg_comments_on_pages', (bool) $_POST["ddsg_comments_on_pages"]);
-		update_option('ddsg_show_zero_comments', (bool) $_POST["ddsg_show_zero_comments"]);
-		update_option('ddsg_hide_future', (bool) $_POST["ddsg_hide_future"]);
-		update_option('ddsg_new_window', (bool) $_POST["ddsg_new_window"]);
-		update_option('ddsg_show_post_date', (bool) $_POST["ddsg_show_post_date"]);
-		update_option('ddsg_show_page_date', (bool) $_POST["ddsg_show_page_date"]);
-		update_option('ddsg_date_format', (string) $_POST["ddsg_date_format"]);
-		update_option('ddsg_hide_protected', (bool) $_POST["ddsg_hide_protected"]);
-		update_option('ddsg_excluded_cats', (string) $_POST["ddsg_excluded_cats"]);
-		update_option('ddsg_excluded_pages', (string) $_POST["ddsg_excluded_pages"]);
-		update_option('ddsg_page_nav', (string) $_POST["ddsg_page_nav"]);
-		update_option('ddsg_page_nav_where', (string) $_POST["ddsg_page_nav_where"]);
-		update_option('ddsg_xml_path', (string) $_POST["ddsg_xml_path"]);
-		update_option('ddsg_xml_where', (string) $_POST["ddsg_xml_where"]);
+		update_option('ddsg_language', (string) $_POST["ddsg_language"] );
+		update_option('ddsg_items_per_page', (int) $_POST["ddsg_items_per_page"] );
+		update_option('ddsg_sm_name', (string) $_POST["ddsg_sm_name"] );
+		update_option('ddsg_what_to_show', (string) $_POST["ddsg_what_to_show"] );
+		update_option('ddsg_which_first', (string) $_POST["ddsg_which_first"] );
+		update_option('ddsg_post_sort_order', (string) $_POST["ddsg_post_sort_order"] );
+		update_option('ddsg_page_sort_order', (string) $_POST["ddsg_page_sort_order"] );
+		update_option('ddsg_comments_on_posts', (bool) $_POST["ddsg_comments_on_posts"] );
+		update_option('ddsg_comments_on_pages', (bool) $_POST["ddsg_comments_on_pages"] );
+		update_option('ddsg_show_zero_comments', (bool) $_POST["ddsg_show_zero_comments"] );
+		update_option('ddsg_hide_future', (bool) $_POST["ddsg_hide_future"] );
+		update_option('ddsg_new_window', (bool) $_POST["ddsg_new_window"] );
+		update_option('ddsg_show_post_date', (bool) $_POST["ddsg_show_post_date"] );
+		update_option('ddsg_show_page_date', (bool) $_POST["ddsg_show_page_date"] );
+		update_option('ddsg_date_format', (string) $_POST["ddsg_date_format"] );
+		update_option('ddsg_hide_protected', (bool) $_POST["ddsg_hide_protected"] );
+		update_option('ddsg_excluded_cats', (string) $_POST["ddsg_excluded_cats"] );
+		update_option('ddsg_excluded_pages', (string) $_POST["ddsg_excluded_pages"] );
+		update_option('ddsg_page_nav', (string) $_POST["ddsg_page_nav"] );
+		update_option('ddsg_page_nav_where', (string) $_POST["ddsg_page_nav_where"] );
+		update_option('ddsg_xml_path', (string) $_POST["ddsg_xml_path"] );
+		update_option('ddsg_xml_where', (string) $_POST["ddsg_xml_where"] );
 
 		echo DDSG_CONFIG_UPDATED;
 	    echo '</strong></p></div>';
@@ -330,11 +330,11 @@ function ddsg_get_cats($cat_data, $cats, $num_cats, $cats_with_children, $exclud
 
 	$k = 0;
 
-	while (isset($cats[$k]) && ($cats[$k]->category_parent != $parent) && ($k < $num_cats)) {
+	while (isset($cats[$k] ) && ($cats[$k]->category_parent != $parent) && ($k < $num_cats)) {
 		$k++;
 	}
 
-	while (isset($cats[$k]) && ($cats[$k]->category_parent == $parent) && ($k < $num_cats)) {
+	while (isset($cats[$k] ) && ($cats[$k]->category_parent == $parent) && ($k < $num_cats)) {
 
 		if (in_array($cats[$k]->category_ID, $excluded_cats, FALSE) === FALSE) {
 			$cat_data[] = array(
@@ -368,10 +368,10 @@ function ddsg_get_cats($cat_data, $cats, $num_cats, $cats_with_children, $exclud
 function ddsg_get_pages($page_data, $pages, $num_pages, $pages_with_children, $excluded_pages, $comments_on_pages, $show_page_date, $parent = 0, $level = 0) {
 
 	$k = 0;
-	while (isset($pages[$k]) && ($pages[$k]->post_parent != $parent) && ($k < $num_pages)) {
+	while (isset($pages[$k] ) && ($pages[$k]->post_parent != $parent) && ($k < $num_pages)) {
 		$k++;
 	}
-	while (isset($pages[$k]) && ($pages[$k]->post_parent == $parent) && ($k < $num_pages)) {
+	while (isset($pages[$k] ) && ($pages[$k]->post_parent == $parent) && ($k < $num_pages)) {
 
 		if (in_array($pages[$k]->ID, $excluded_pages, FALSE) === FALSE) {
 
@@ -411,7 +411,7 @@ function ddsg_find_parent_page($page_data, $p, $k) {
 		$p--;
 	}
 
-	return '<a href="' . get_permalink($page_data[$p]['id']) . '" title="' . strip_tags($page_data[$p]['title']) . '">' . $page_data[$p]['title'] . '</a>' . "\n";
+	return '<a href="' . get_permalink($page_data[$p]['id'] ) . '" title="' . strip_tags($page_data[$p]['title'] ) . '">' . $page_data[$p]['title'] . '</a>' . "\n";
 
 }
 
@@ -457,12 +457,12 @@ function ddsg_display_pages($page_data, $num_pages, $page_start, $page_end, $com
 			}
 		}
 
-		$the_title = htmlspecialchars(trim($page_data[$p]['title']));
+		$the_title = htmlspecialchars(trim($page_data[$p]['title'] ));
 		if ($the_title == '') {
 			$the_title = DDSG_NO_TITLE;
 		}
 
-		$t_out .= '<li><a href="' . get_permalink($page_data[$p]['id']) . '"';
+		$t_out .= '<li><a href="' . get_permalink($page_data[$p]['id'] ) . '"';
 		$t_out .= ' title="' . strip_tags($the_title) . '"';
 		if ($new_window) {
 			$t_out .= ' target="_blank"';
@@ -470,8 +470,8 @@ function ddsg_display_pages($page_data, $num_pages, $page_start, $page_end, $com
 		$t_out .= '>' . $the_title . '</a>';
 
 		if ($show_page_date) {
-			// $t_out .= ' ' . date($date_format, strtotime($page_data[$p]['date']));
-			$t_out .= ' ' . date_i18n($date_format, strtotime($page_data[$p]['date']));
+			// $t_out .= ' ' . date($date_format, strtotime($page_data[$p]['date'] ));
+			$t_out .= ' ' . date_i18n($date_format, strtotime($page_data[$p]['date'] ));
 		}
 
 		if ($comments_on_pages) {
@@ -508,11 +508,11 @@ function ddsg_find_parent_post($post_data, $p, $k) {
 
 
 	$the_cat_link = '';
-	if (!is_array(get_category_link($post_data[$p]['id'])))
-		$the_cat_link = get_category_link($post_data[$p]['id']);
+	if (!is_array(get_category_link($post_data[$p]['id'] )))
+		$the_cat_link = get_category_link($post_data[$p]['id'] );
 
 	$the_title = '';
-	if (!is_array($post_data[$p]['title']))
+	if (!is_array($post_data[$p]['title'] ))
 		$the_title = $post_data[$p]['title'];
 
 	return DDSG_CAT_HEADER . ' <a href="' . $the_cat_link . '" title="' . strip_tags($the_title) . '">' . $the_title . '</a>';
@@ -561,8 +561,8 @@ function ddsg_display_posts($post_data, $num_posts, $post_start, $post_end, $com
 		if ($post_data[$p]['type'] == 'c') {
 
 			$t_out .= '<li>' . DDSG_CAT_HEADER . ' ';
-			$t_out .= '<a href="' . get_category_link($post_data[$p]['id']) . '"';
-			$t_out .= ' title="' . strip_tags($post_data[$p]['title']) . '"';
+			$t_out .= '<a href="' . get_category_link($post_data[$p]['id'] ) . '"';
+			$t_out .= ' title="' . strip_tags($post_data[$p]['title'] ) . '"';
 			if ($new_window) {
 				$t_out .= ' target="_blank"';
 			}
@@ -570,12 +570,12 @@ function ddsg_display_posts($post_data, $num_posts, $post_start, $post_end, $com
 
 		} else {
 
-			$the_title = htmlspecialchars(trim($post_data[$p]['title']));
+			$the_title = htmlspecialchars(trim($post_data[$p]['title'] ));
 			if ($the_title == '') {
 				$the_title = DDSG_NO_TITLE;
 			}
 
-			$t_out .= '<li><a href="' . get_permalink($post_data[$p]['id']) . '"';
+			$t_out .= '<li><a href="' . get_permalink($post_data[$p]['id'] ) . '"';
 			$t_out .= ' title="' . $the_title . '"';
 			if ($new_window) {
 				$t_out .= ' target="_blank"';
@@ -583,8 +583,8 @@ function ddsg_display_posts($post_data, $num_posts, $post_start, $post_end, $com
 			$t_out .= '>' . $the_title . '</a>';
 
 			if ($show_post_date) {
-//				$t_out .= ' ' . date($date_format, strtotime($post_data[$p]['date']));
-				$t_out .= ' ' . date_i18n($date_format, strtotime($post_data[$p]['date']));
+//				$t_out .= ' ' . date($date_format, strtotime($post_data[$p]['date'] ));
+				$t_out .= ' ' . date_i18n($date_format, strtotime($post_data[$p]['date'] ));
 
 			}
 
@@ -628,13 +628,13 @@ function ddsg_merge_cats_posts($post_data, $posts, $cat_data, $num_posts, $num_c
 		$post_data[] = $tmp_array;
 
 		$k = 0;
-		while (isset($posts[$k]) && ($posts[$k]->category_id != $cat_data[$c]['cat_id']) && ($k < $num_posts)) {
+		while (isset($posts[$k] ) && ($posts[$k]->category_id != $cat_data[$c]['cat_id'] ) && ($k < $num_posts)) {
 			$k++;
 		}
 
 		$any_posts = 0;
 
-		while (isset($posts[$k]) && ($posts[$k]->category_id == $cat_data[$c]['cat_id']) && ($k < $num_posts)) {
+		while (isset($posts[$k] ) && ($posts[$k]->category_id == $cat_data[$c]['cat_id'] ) && ($k < $num_posts)) {
 
 			$tmp_array = array();
 			$tmp_array['type'] = 'p';

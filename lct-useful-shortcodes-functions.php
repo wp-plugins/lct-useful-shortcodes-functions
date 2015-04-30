@@ -1,7 +1,7 @@
 <?php /*
 Plugin Name: LCT Useful Shortcodes & Functions
 Plugin URI: http://lookclassy.com/wordpress-plugins/useful-shortcodes-functions/
-Version: 4.2.1.1
+Version: 4.2.1.2
 Text Domain: lct-useful-shortcodes-functions
 Author: Look Classy Technologies
 Author URI: http://lookclassy.com/
@@ -43,38 +43,38 @@ class g_lusf {
 }
 
 
-include ( 'plugin_reliant.php' );
+include( 'plugin_reliant.php' );
 
-include ( 'deprecated.php' );
+include( 'deprecated.php' );
 
-include ( 'admin/functions.php' );
-include ( 'admin/shortcodes.php' );
-include ( 'admin/menu.php' );
+include( 'admin/functions.php' );
+include( 'admin/shortcodes.php' );
+include( 'admin/menu.php' );
 
-include ( 'debug/functions.php' );
-include ( 'debug/shortcodes.php' );
+include( 'debug/functions.php' );
+include( 'debug/shortcodes.php' );
 
-include ( 'display/fields.php' );
-include ( 'display/options.php' );
+include( 'display/fields.php' );
+include( 'display/options.php' );
 
-include ( 'front/functions.php' );
+include( 'front/functions.php' );
 
-include ( 'gforms/functions.php' );
+include( 'gforms/functions.php' );
 
-include ( 'helpers/helper.php' );
+include( 'helpers/helper.php' );
 
-include ( 'misc/functions.php' );
-include ( 'misc/login.php' );
-include ( 'misc/shortcodes.php' );
+include( 'misc/functions.php' );
+include( 'misc/login.php' );
+include( 'misc/shortcodes.php' );
 
 
-include ( 'lct_baw_force_plugin_updates/index.php' );
-include ( 'lct_sitemap_generator/index.php' );
-include ( 'lct_textimage_linking_shortcode/index.php' );
+include( 'lct_baw_force_plugin_updates/index.php' );
+include( 'lct_sitemap_generator/index.php' );
+include( 'lct_textimage_linking_shortcode/index.php' );
 
 
 //Activation, Deactivation & Uninstall
-include ( 'activate.php' );
+include( 'activate.php' );
 
 
 function hook_activate_lct_useful_shortcodes_functions() {
@@ -96,12 +96,13 @@ function hook_deactivate_lct_useful_shortcodes_functions() {
 
 function hook_uninstall_lct_useful_shortcodes_functions() {
 	global $g_lusf;
+	$wp_upload_dir = wp_upload_dir();
 
 	delete_option( $g_lusf->lct_us );
 
 	//Move /lct/* dir from the plugin dir, to the /uploads dir
-	$wp_upload_dir = wp_upload_dir();
 	rename( $g_lusf->plugin_dir_path . 'lct', $wp_upload_dir['basedir'] . '/lct' );
+
 	//rename /lct to /lct-old-time
 	rename( $wp_upload_dir['basedir'] . '/lct', $wp_upload_dir['basedir'] . '/lct-old-' . current_time( 'timestamp', 1 ) );
 }

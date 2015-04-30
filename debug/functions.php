@@ -120,7 +120,7 @@ if( ! function_exists( 'P_R_STYLE' ) ) {
 
 
 //A quick solution for echo when debuging.
-function echo_br( $value, $label = '', $position = 'before' ){
+function echo_br( $value, $label = '', $position = 'before' ) {
 	if( $position == 'before' || $position == 'both' )
 		echo '<br />';
 
