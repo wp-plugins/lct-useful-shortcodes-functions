@@ -292,7 +292,7 @@ function lct_copyyear() {
 //[raw]Content to disable wpautop[/raw]
 function lct_wpautop_disable( $content ) {
 	$new_content = '';
-	$pattern_full = '{(\[raw\].*?\[/raw\] )}is';
+	$pattern_full = '{(\[raw\].*?\[/raw\])}is';
 	$pattern_contents = '{\[raw\](.*?)\[/raw\]}is';
 	$pieces = preg_split( $pattern_full, $content, -1, PREG_SPLIT_DELIM_CAPTURE );
 
@@ -316,7 +316,7 @@ function lct_wpautop_disable_new( $content ) {
 		return wptexturize( wpautop( $content ) );
 
 	$new_content = '';
-	$pattern_full = '{(\[raw\].*?\[/raw\] )}is';
+	$pattern_full = '{(\[raw\].*?\[/raw\])}is';
 	$pattern_contents = '{\[raw\](.*?)\[/raw\]}is';
 	$pieces = preg_split( $pattern_full, $content, -1, PREG_SPLIT_DELIM_CAPTURE );
 
