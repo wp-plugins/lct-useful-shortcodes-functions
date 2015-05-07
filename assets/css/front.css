@@ -90,6 +90,10 @@ textarea{
 	transition: height 0.2s;
 }
 
+.fa span{
+	display: none !important;
+}
+
 
 /* Gravity Forms */
 .hide_label label.gfield_label,
