@@ -90,22 +90,6 @@ function lct_useful_settings() {
 		<h3>Gravity Forms</h3>
 		<table class="form-table"><tbody>
 			<?php
-			$v = "use_placeholders_instead_of_labels";
-			echo lct_f(
-				"lct_useful_settings[$v]",
-				"checkboxgroup",
-				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v, "lct_select_options" => "gravity_forms", "options_default" => false, "options_hide" => true )
-			);
-
-			$v = "use_gforms_css_tweaks";
-			echo lct_f(
-				"lct_useful_settings[$v]",
-				"checkbox",
-				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
-			);
-
 			$v = "enable_cj_spam_check";
 			echo lct_f(
 				"lct_useful_settings[$v]",
@@ -118,6 +102,22 @@ function lct_useful_settings() {
 			echo lct_f(
 				"lct_useful_settings[$v]",
 				"text",
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
+				array( "label" => $v )
+			);
+
+			$v = "use_placeholders_instead_of_labels";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"checkboxgroup",
+				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
+				array( "label" => $v, "lct_select_options" => "gravity_forms", "options_default" => false, "options_hide" => true )
+			);
+
+			$v = "use_gforms_css_tweaks";
+			echo lct_f(
+				"lct_useful_settings[$v]",
+				"checkbox",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
 				array( "label" => $v )
 			);
