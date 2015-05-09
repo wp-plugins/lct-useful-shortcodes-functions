@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.2.2.2
+Stable tag: 4.2.2.3
 Requires at least: 3.0
 Tested up to: 4.2.2
 Tags: Functions, Shortcodes
@@ -54,7 +54,7 @@ none
 
 
 == Changelog ==
-= 4.2.2.2 =
+= 4.2.2.2 - 4.2.2.3 =
 	- Additions to Avada.css
 
 = 4.2.2.1 =
