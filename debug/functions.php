@@ -4,7 +4,7 @@ if( ! function_exists( 'P_R' ) ) {
 	function P_R( $var, $name = 'Name Not Set', $return = false ) {
 		if( ! is_user_logged_in() ) return;
 
-		$skip = array( 'HTTP_COOKIE' );
+		$skip = [ 'HTTP_COOKIE' ];
 
 		$c = 'odd';
 		$c2 = 'even';
@@ -114,6 +114,7 @@ if( ! function_exists( 'P_R_STYLE' ) ) {
 			background-color: #ccc;
 		}
 		</style>';
+
 		return $style;
 	}
 }
@@ -126,37 +127,77 @@ function echo_br( $value, $label = '', $position = 'before' ) {
 
 	echo $label . ' : ' . $value;
 
-	if( $position == 'after' || $position == 'both')
+	if( $position == 'after' || $position == 'both' )
 		echo '<br />';
 }
 
 
 function lct_debug( $data, $extra = '' ) {
-    update_option( "lct_debug" . $extra, $data );
+	update_option( "lct_debug" . $extra, $data );
 }
 
 function lca_debug_to_error_log( $data ) {
-    $bt = debug_backtrace();
-    $caller = array_shift( $bt );
+	$bt = debug_backtrace();
+	$caller = array_shift( $bt );
 
-    if( is_array( $data ) )
-        error_log( '_editzz: ' . end( split( '/', $caller['file'] ) ) . ':' . $caller['line'] . ' => ' . implode( ',', $data ) );
-    else
-        error_log( '_editzz: ' . end( split( '/', $caller['file'] ) ) . ':' . $caller['line'] . ' => ' . $data );
+	if( is_array( $data ) )
+		error_log( '_editzz: ' . end( split( '/', $caller['file'] ) ) . ':' . $caller['line'] . ' => ' . implode( ',', $data ) );
+	else
+		error_log( '_editzz: ' . end( split( '/', $caller['file'] ) ) . ':' . $caller['line'] . ' => ' . $data );
 }
 
 
-function lca_send_to_console( $data ) {
-    if( is_array( $data ) )
-        $console = '_editzz: ' . implode( ',', $data );
-    else
-        $console = '_editzz: ' . $data;
+function lca_send_to_console( $data, $label = null ) {
+	if( empty( $data ) )
+		return;
 
-    $script = '<script>';
-    	$script .= 'console.log(\'' . $console . '\')';
-    $script .= '</script>';
+	$console = [];
 
-    echo $script;
+	if( ! empty( $label ) )
+		$label = '( ' . $label . ' ) ';
 
-    return;
+	if( is_object( $data ) )
+		$data = (array) $data;
+
+	if( is_array( $data ) ) {
+		foreach( $data as $k => $v ) {
+			//Weird woomcommerce bug
+			if( strpos( $k, 'product_categories' ) !== false )
+				continue;
+
+			if( is_array( $v ) ) {
+				if( ! empty( $v ) ) {
+					$sub_array = '(array) ';
+
+					foreach( $v as $sub_k => $sub_v ) {
+						$sub_array .= '[' . $sub_k . '] = ' . $sub_v;
+					}
+					$v = $sub_array;
+				} else {
+					$v = '(array) __EMPTY__';
+				}
+			}
+
+			if( $v === '' || ! strlen( $v ) )
+				$v = '__EMPTY__';
+
+			$console[] = lca_console_log_sprint( '_editzz: ARRAY' . $label . '[' . $k . ']' . ' = ' . $v );
+		}
+	} else {
+		if( $data === '' || ! strlen( $data ) )
+			$v = '__EMPTY__';
+
+		$console[] = lca_console_log_sprint( '_editzz: ' . $label  . $data );
+	}
+
+	$script = '<script>';
+	$script .= implode( "\n", $console );
+	$script .= '</script>';
+
+	echo $script;
+}
+
+
+function lca_console_log_sprint( $console ) {
+	return sprintf( "console.log('%s');", $console );
 }
