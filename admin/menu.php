@@ -15,8 +15,12 @@ function lct_register_lct_useful_settings() {
 
 	$defaults = array_merge( $defaults, $term_meta );
 
-	update_option( 'lct_useful_settings', $defaults ); ?>
+	update_option( 'lct_useful_settings', $defaults );
+}
 
+
+add_action( 'admin_head', 'lct_register_lct_useful_settings_admin_head' );
+function lct_register_lct_useful_settings_admin_head() { ?>
 	<style>
 		li [href*="lct_cleanup_guid"]{
 			display: none !important;

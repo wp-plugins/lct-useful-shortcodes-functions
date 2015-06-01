@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.2.2.5
+Stable tag: 4.2.2.6
 Requires at least: 3.0
 Tested up to: 4.2.2
 Tags: Functions, Shortcodes
@@ -54,7 +54,7 @@ none
 
 
 == Changelog ==
-= 4.2.2.5 =
+= 4.2.2.5 - 4.2.2.6 =
 	- ADDED Cleanup Guid
 
 = 4.2.2.4 =
