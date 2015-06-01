@@ -5,27 +5,26 @@ function lct_misc_shortcodes_init() {
 	//choose which function to use lct_wpautop_disable() OR lct_wpautop_disable_new()
 	switch( lct_get_lct_useful_settings( 'choose_a_raw_tag_option' ) ) {
 		case 'wpautop':
-		break;
+			break;
 
 		case 'off':
 			remove_filter( 'the_content', 'wpautop' );
 			remove_filter( 'the_content', 'wptexturize' );
-		break;
+			break;
 
 		case 'old':
 			remove_filter( 'the_content', 'wpautop' );
 			remove_filter( 'the_content', 'wptexturize' );
 			add_filter( 'the_content', 'lct_wpautop_disable', 99 );
-		break;
+			break;
 
 		case 'new':
 			remove_filter( 'the_content', 'wpautop' );
 			remove_filter( 'the_content', 'wptexturize' );
 			add_filter( 'the_content', 'lct_wpautop_disable_new', 1 );
-		break;
+			break;
 
 		default:
-		break;
 	}
 }
 
@@ -170,6 +169,14 @@ function lct_path_up() {
 add_shortcode( 'url_site', 'lct_url_site' );
 function lct_url_site() {
 	return get_bloginfo( "url" );
+}
+
+
+//[url_root_site]
+//Get the site's root URL
+add_shortcode( 'url_root_site', 'lct_url_root_site' );
+function lct_url_root_site() {
+	return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
 }
 
 
@@ -382,38 +389,38 @@ function lct_preload( $a ) {
 	$html .= '<div id="lct_preload" style="position: fixed;top: 0px;left: 0px;height: 1px;width: 100px;z-index:9999;opacity: 0.1;"></div>';
 	$html .= '<script>';
 	$html .= 'jQuery(window).load( function() {';
-		$html .= 'setTimeout(function() {';
-			if( $css ) {
-				$tmp = explode( ',', $css );
-				foreach( $tmp as $t ) {
-					$html .= 'xhr = new XMLHttpRequest();';
-					$html .= 'xhr.open(\'GET\', ' . $t . ');';
-					$html .= 'xhr.send(\'\');';
-				}
-			}
+	$html .= 'setTimeout(function() {';
+	if( $css ) {
+		$tmp = explode( ',', $css );
+		foreach( $tmp as $t ) {
+			$html .= 'xhr = new XMLHttpRequest();';
+			$html .= 'xhr.open(\'GET\', ' . $t . ');';
+			$html .= 'xhr.send(\'\');';
+		}
+	}
 
-			if( $js ) {
-				$tmp = explode( ',', $css );
-				foreach( $tmp as $t ) {
-					$html .= 'xhr = new XMLHttpRequest();';
-					$html .= 'xhr.open(\'GET\', ' . $t . ');';
-					$html .= 'xhr.send(\'\');';
-				}
-			}
+	if( $js ) {
+		$tmp = explode( ',', $css );
+		foreach( $tmp as $t ) {
+			$html .= 'xhr = new XMLHttpRequest();';
+			$html .= 'xhr.open(\'GET\', ' . $t . ');';
+			$html .= 'xhr.send(\'\');';
+		}
+	}
 
-			if( $images ) {
-				$tmp = explode( ',', $images );
-				$i = 1;
-				foreach( $tmp as $t ) {
-					$html .= 'jQuery("#lct_preload").append(\'<img id="image_' . $time . '_' . $i . '" src="' . $t . '" style="height: 1px;width: 1px;"></div>\');';
-					$i++;
-				}
-			}
-		$html .= '}, 1000 );';
+	if( $images ) {
+		$tmp = explode( ',', $images );
+		$i = 1;
+		foreach( $tmp as $t ) {
+			$html .= 'jQuery("#lct_preload").append(\'<img id="image_' . $time . '_' . $i . '" src="' . $t . '" style="height: 1px;width: 1px;"></div>\');';
+			$i++;
+		}
+	}
+	$html .= '}, 1000 );';
 
-		$html .= 'setTimeout(function() {';
-			$html .= 'jQuery("#lct_preload").hide();';
-		$html .= '}, 1200 );';
+	$html .= 'setTimeout(function() {';
+	$html .= 'jQuery("#lct_preload").hide();';
+	$html .= '}, 1200 );';
 	$html .= '});';
 	$html .= '</script>';
 

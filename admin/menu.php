@@ -2,7 +2,7 @@
 add_action( 'admin_menu', 'lct_useful_menu' );
 function lct_useful_menu() {
 	add_object_page( 'LCT Useful', 'LCT Useful', 'manage_options', 'lct_useful_settings', 'lct_useful_settings' );
-	//add_submenu_page( 'lct_useful_settings', 'Other', 'Other', 'manage_options', 'lct_other', 'lct_other' );
+	add_submenu_page( 'lct_useful_settings', 'Cleanup Guid Fields', 'Cleanup Guid Fields', 'manage_options', 'lct_cleanup_guid', 'lct_cleanup_guid' );
 }
 
 
@@ -15,8 +15,14 @@ function lct_register_lct_useful_settings() {
 
 	$defaults = array_merge( $defaults, $term_meta );
 
-	update_option( 'lct_useful_settings', $defaults );
-}
+	update_option( 'lct_useful_settings', $defaults ); ?>
+
+	<style>
+		li [href*="lct_cleanup_guid"]{
+			display: none !important;
+		}
+	</style>
+<?php }
 
 
 function lct_useful_settings() {
@@ -38,7 +44,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"checkbox",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => "Enable front.css" )
+				[ "label" => "Enable front.css" ]
 			);
 
 			$v = "disable_avada_css";
@@ -46,7 +52,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"checkbox",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => "Disable avada.css" )
+				[ "label" => "Disable avada.css" ]
 			);
 
 			$v = "Default_Taxonomy";
@@ -54,12 +60,12 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"select",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array(
+				[
 					"label" => "Default Taxonomy to Use for lct_select_options();",
 					"label_override" => true,
 					"lct_select_options" => "get_taxonomies",
 					"options_default" => false
-				)
+				]
 			);
 
 			$v = "print_user_agent_in_footer";
@@ -67,7 +73,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"checkbox",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "choose_a_raw_tag_option";
@@ -75,15 +81,15 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"select",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array(
+				[
 					"label" => $v,
 					"lct_select_options" => "get_raw_prefs",
 					"options_default" => false,
 					"options_hide" => true
-				)
+				]
 			);
 			?>
-		</tbody></table>
+			</tbody></table>
 		<p>&nbsp;</p>
 
 
@@ -95,7 +101,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"checkbox",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "enable_cj_spam_check_email";
@@ -103,7 +109,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"text",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "use_placeholders_instead_of_labels";
@@ -111,7 +117,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"checkboxgroup",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v, "lct_select_options" => "gravity_forms", "options_default" => false, "options_hide" => true )
+				[ "label" => $v, "lct_select_options" => "gravity_forms", "options_default" => false, "options_hide" => true ]
 			);
 
 			$v = "use_gforms_css_tweaks";
@@ -119,7 +125,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"checkbox",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "gforms_css_tweaks_gform_footer_margin";
@@ -127,7 +133,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"text",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => "gform_footer Margin", "label_override" => true )
+				[ "label" => "gform_footer Margin", "label_override" => true ]
 			);
 
 			$v = "gforms_css_tweaks_gform_footer_padding";
@@ -135,7 +141,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"text",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => "gform_footer Padding", "label_override" => true )
+				[ "label" => "gform_footer Padding", "label_override" => true ]
 			);
 
 			$v = "gform_button_custom_class";
@@ -143,7 +149,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"text",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "bad_red_color";
@@ -151,7 +157,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"text",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "good_black_color";
@@ -159,7 +165,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"text",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "store_hide_selected_gforms";
@@ -167,7 +173,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"radiogroup",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => "Store Form Data", "not_set_selected" => "0", "options_default" => false, "options_hide" => true )
+				[ "label" => "Store Form Data", "not_set_selected" => "0", "options_default" => false, "options_hide" => true ]
 			);
 
 			$v = "store_gforms";
@@ -175,10 +181,10 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"checkboxgroup",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => "Select Forms", "lct_select_options" => "gravity_forms", "options_default" => false, "options_hide" => true )
+				[ "label" => "Select Forms", "lct_select_options" => "gravity_forms", "options_default" => false, "options_hide" => true ]
 			);
 			?>
-		</tbody></table>
+			</tbody></table>
 		<p>&nbsp;</p>
 
 
@@ -190,10 +196,10 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"checkbox",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => 'Hide OG site_name', 'label_override' => true )
+				[ "label" => 'Hide OG site_name', 'label_override' => true ]
 			);
 			?>
-		</tbody></table>
+			</tbody></table>
 		<p>&nbsp;</p>
 
 
@@ -205,7 +211,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"checkbox",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "lct_login_logo";
@@ -213,7 +219,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"text",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "lct_show_tag_line";
@@ -221,7 +227,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"checkbox",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "lct_tag_line";
@@ -229,7 +235,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"text",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "lct_show_register_link";
@@ -237,7 +243,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"checkbox",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "lct_register_page";
@@ -245,7 +251,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"select",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v, "lct_select_options" => "get_pages", "options_default" => false, "options_hide" => false )
+				[ "label" => $v, "lct_select_options" => "get_pages", "options_default" => false, "options_hide" => false ]
 			);
 
 			$v = "lct_show_login_footer";
@@ -253,7 +259,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"checkbox",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "lct_login_footer";
@@ -261,7 +267,7 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"text",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 
 			$v = "lct_login_redirect";
@@ -269,15 +275,72 @@ function lct_useful_settings() {
 				"lct_useful_settings[$v]",
 				"text",
 				isset( $term_meta[$v] ) ? $term_meta[$v] : '',
-				array( "label" => $v )
+				[ "label" => $v ]
 			);
 			?>
-		</tbody></table>
+			</tbody></table>
+		<p>&nbsp;</p>
+
+
+		<h3>Fixes and Cleanups</h3>
+		<a href="<?php echo admin_url( 'admin.php?page=lct_cleanup_guid' ); ?>" class="button button-primary">Cleanup Guid Fields</a>
 		<p>&nbsp;</p>
 
 
 		<?php submit_button(); ?>
 	</form>
+<?php }
+
+
+function  lct_cleanup_guid() {
+	global $wpdb;
+
+	$siteurl = get_option( 'siteurl' );
+	$siteurl_tmp = explode( '/', $siteurl );
+	$siteurl_scheme = $siteurl_tmp[0];
+	$siteurl_root = $siteurl_tmp[2];
+
+	$post_types = get_post_types();
+	unset( $post_types['revision'] );
+
+	$post_info = [];
+
+	foreach( get_post_types() as $post_type ) {
+		$args = [
+			'posts_per_page'   => -1,
+			'post_type'        => $post_type,
+			'fields'        => 'ids',
+		];
+		$posts = get_posts( $args );
+
+		if( ! empty( $posts ) ) {
+			foreach( $posts as $post_id ) {
+				$guid = get_the_guid( $post_id );
+				$post_info_tmp = '<strong>' . $post_id . ': (' . $post_type . ') ' . '</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;' . $guid;
+
+				$guid_tmp = explode( '/', $guid );
+				$guid_tmp[2] = $siteurl_root;
+				$guid_new = implode( '/', $guid_tmp );
+
+				$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET guid = %s WHERE ID = %d", $guid_new, $post_id ) );
+
+				$post_info[] = $post_info_tmp . '<br />&nbsp;&nbsp;&nbsp;&nbsp;' . $guid_new . '<br />';
+			}
+		}
+	} ?>
+
+	<h3>Fixes and Cleanups: Cleanup Guid</h3>
+
+	<h4>New Scheme: <?php echo $siteurl_scheme; ?></h4>
+
+	<h4>New URL: <?php echo $siteurl_root; ?></h4>
+
+	<h4>Post Types</h4>
+	<p><?php echo implode( '<br />', $post_types ); ?></p>
+
+	<h4>Posts Updated</h4>
+	<p><?php echo implode( '<br />', $post_info ); ?></p>
+	<h1>Done</h1>
 <?php }
 
 
@@ -295,7 +358,7 @@ function lct_term_meta_default_check( $term_meta = null ) {
 
 
 function lct_term_meta_defaults( $v = null, $unset = true ) {
-	$defaults = array();
+	$defaults = [];
 	$defaults['Enable_Front_css']							= 1;		//checkbox
 	$defaults['disable_avada_css']							= 'ignore';	//checkbox
 	$defaults['Default_Taxonomy']							= 'ignore';
@@ -322,11 +385,12 @@ function lct_term_meta_defaults( $v = null, $unset = true ) {
 	$defaults['lct_show_login_footer']						= 'ignore'; //checkbox
 	$defaults['lct_login_footer']							= 'ignore';
 	$defaults['lct_login_redirect']							= 'ignore';
+	$defaults['lct_cleanup_guid']							= 'ignore';
 
-	$are_checkbox = array(
+	$are_checkbox = [
 		'Enable_Front_css',
 		'use_gforms_css_tweaks',
-	);
+	];
 
 	if( $v )
 		return $defaults[$v];

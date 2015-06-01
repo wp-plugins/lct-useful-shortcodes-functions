@@ -1,46 +1,16 @@
 <?php
-/**
- * Get details for files in a directory or a specific file.
- *
- * @since 2.5.0
- *
- * @param string $path           Path to directory or file.
- * @param bool   $include_hidden Optional. Whether to include details of hidden ("." prefixed) files.
- *                               Default true.
- * @param bool   $recursive      Optional. Whether to recursively include file details in nested directories.
- *                               Default false.
- * @return array|bool {
- *     Array of files. False if unable to list directory contents.
- *
- *     @type string 'name'        Name of the file/directory.
- *     @type string 'perms'       *nix representation of permissions.
- *     @type int    'permsn'      Octal representation of permissions.
- *     @type string 'owner'       Owner name or ID.
- *     @type int    'size'        Size of file in bytes.
- *     @type int    'lastmodunix' Last modified unix timestamp.
- *     @type mixed  'lastmod'     Last modified month (3 letter) and day (without leading 0).
- *     @type int    'time'        Last modified time.
- *     @type string 'type'        Type of resource. 'f' for file, 'd' for directory.
- *     @type mixed  'files'       If a directory and $recursive is true, contains another array of files.
- * }
- */
-function lct_example_only() {
-	return;
-}
-
-
 //disregard siteurl value
 if( LCT_DEV == 1 ) {
-	add_filter( 'option_siteurl', 'lct_clean_siteurl' );
-	function lct_clean_siteurl( $url ) {
-	 	$WP_CONTENT_URL = str_replace( array( "/x/", "/lc-content", "/wp-content" ), array( "/", "", "" ), WP_CONTENT_URL );
-		return $_SERVER['REQUEST_SCHEME'] . ":" . $WP_CONTENT_URL . '/x';
-	}
+	add_filter( 'option_siteurl', 'lct_clean_sb_url' );
+	add_filter( 'option_home', 'lct_clean_sb_url' );
+	function lct_clean_sb_url( $url ) {
+		update_option( 'siteurl_live', $url );
+		$tmp = explode( '/', $url );
+		$tmp[2] = $_SERVER['HTTP_HOST'];
 
-	add_filter( 'option_home', 'lct_clean_home' );
-	function lct_clean_home( $url ) {
-		$WP_CONTENT_URL = str_replace( array( "/x/", "/lc-content", "/wp-content" ), array( "/", "", "" ), WP_CONTENT_URL );
-		return $_SERVER['REQUEST_SCHEME'] . ":" . $WP_CONTENT_URL;
+		$new_url = implode( '/', $tmp );
+
+		return $new_url;
 	}
 }
 
@@ -81,11 +51,38 @@ function lct_execute_php( $html ) {
 }
 
 
-//remove width & height tags from img
-add_filter( 'post_thumbnail_html', 'lct_remove_thumbnail_dimensions', 10 );
-add_filter( 'image_send_to_editor', 'lct_remove_thumbnail_dimensions', 10 );
-function lct_remove_thumbnail_dimensions( $html ) {
+
+add_filter( 'post_thumbnail_html', 'lct_remove_thumbnail_dimensions', 10, 8 );
+add_filter( 'image_send_to_editor', 'lct_remove_thumbnail_dimensions', 10, 8 );
+/**
+ * Alter the html input when adding media
+ *
+ * @param $html
+ * @param $id
+ * @param $caption
+ * @param $title
+ * @param $align
+ * @param $url
+ * @param $size
+ * @param $alt
+ *
+ * @return mixed
+ */
+function lct_remove_thumbnail_dimensions( $html, $id, $caption, $title, $align, $url, $size, $alt ) {
+	//remove width & height tags from img
 	$html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
+
+	//remove the root of the url
+	$root_site = lct_url_root_site();
+	$root_site_without_scheme = str_replace( [ 'http:', 'https:' ], '', $root_site );
+
+	$find = [
+		$root_site,
+		$root_site_without_scheme,
+	];
+
+	$html = str_replace( $find, '', $html );
+
 	return $html;
 }
 
@@ -129,7 +126,7 @@ function lct_html_widget_title( $title ) {
 //Set the timezone to the logged in users default Timezone
 add_action( 'init', 'set_user_timezone' );
 function set_user_timezone( $user_ID = null ) {
- 	if( ! $user_ID )
+	if( ! $user_ID )
 		$user_ID = get_current_user_id();
 
 	if( ! $user_ID ) {
@@ -166,7 +163,7 @@ function set_user_timezone( $user_ID = null ) {
  * @parent
  * @count
  * @filter
-*/
+ */
 function lct_get_term_value( $term_id, $tax="lct_option" , $key=null, $output="OBJECT", $filter="raw" ) {
 	$term = get_term( $term_id, $tax, $output, $filter );
 
