@@ -82,6 +82,26 @@ function lct_remove_thumbnail_dimensions( $html ) {
 	//remove width & height tags from img
 	$html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
 
+	return $html;
+}
+
+
+add_filter( 'image_send_to_editor', 'lct_remove_site_root', 10, 1 );
+/**
+ * Alter the html input when adding media
+ *
+ * @param $html
+ * @param $id
+ * @param $caption
+ * @param $title
+ * @param $align
+ * @param $url
+ * @param $size
+ * @param $alt
+ *
+ * @return mixed
+ */
+function lct_remove_site_root( $html ) {
 	//remove the root of the url
 	$root_site = lct_url_root_site();
 	$root_site_without_scheme = str_replace( [ 'http:', 'https:' ], '', $root_site );
