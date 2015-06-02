@@ -323,6 +323,7 @@ function  lct_cleanup_guid() {
 				$post_info_tmp = '<strong>' . $post_id . ': (' . $post_type . ') ' . '</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;' . $guid;
 
 				$guid_tmp = explode( '/', $guid );
+				$guid_tmp[0] = $siteurl_scheme;
 				$guid_tmp[2] = $siteurl_root;
 				$guid_new = implode( '/', $guid_tmp );
 

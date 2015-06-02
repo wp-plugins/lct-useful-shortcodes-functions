@@ -4,7 +4,6 @@ if( LCT_DEV == 1 ) {
 	add_filter( 'option_siteurl', 'lct_clean_sb_url' );
 	add_filter( 'option_home', 'lct_clean_sb_url' );
 	function lct_clean_sb_url( $url ) {
-		update_option( 'siteurl_live', $url );
 		$tmp = explode( '/', $url );
 		$tmp[2] = $_SERVER['HTTP_HOST'];
 
@@ -12,6 +11,17 @@ if( LCT_DEV == 1 ) {
 
 		return $new_url;
 	}
+
+	remove_action( 'admin_init', '_maybe_update_core', 9999 );
+
+	remove_action( 'admin_init', '_maybe_update_plugins' );
+
+	remove_action( 'wp_update_plugins', 'wp_update_plugins' );
+	remove_action( 'load-plugins.php', 'wp_update_plugins' );
+	remove_action( 'load-update.php', 'wp_update_plugins' );
+	remove_action( 'load-update-core.php', 'wp_update_plugins' );
+	remove_action( 'wp_update_plugins', 'wp_update_plugins' );
+	remove_action( 'upgrader_process_complete', 'wp_update_plugins', 10, 0 );
 }
 
 
@@ -52,8 +62,8 @@ function lct_execute_php( $html ) {
 
 
 
-add_filter( 'post_thumbnail_html', 'lct_remove_thumbnail_dimensions', 10, 8 );
-add_filter( 'image_send_to_editor', 'lct_remove_thumbnail_dimensions', 10, 8 );
+add_filter( 'post_thumbnail_html', 'lct_remove_thumbnail_dimensions', 10, 1 );
+add_filter( 'image_send_to_editor', 'lct_remove_thumbnail_dimensions', 10, 1 );
 /**
  * Alter the html input when adding media
  *
@@ -68,7 +78,7 @@ add_filter( 'image_send_to_editor', 'lct_remove_thumbnail_dimensions', 10, 8 );
  *
  * @return mixed
  */
-function lct_remove_thumbnail_dimensions( $html, $id, $caption, $title, $align, $url, $size, $alt ) {
+function lct_remove_thumbnail_dimensions( $html ) {
 	//remove width & height tags from img
 	$html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
 
