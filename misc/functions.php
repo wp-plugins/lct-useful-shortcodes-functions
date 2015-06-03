@@ -11,17 +11,6 @@ if( LCT_DEV == 1 ) {
 
 		return $new_url;
 	}
-
-	remove_action( 'admin_init', '_maybe_update_core', 9999 );
-
-	remove_action( 'admin_init', '_maybe_update_plugins' );
-
-	remove_action( 'wp_update_plugins', 'wp_update_plugins' );
-	remove_action( 'load-plugins.php', 'wp_update_plugins' );
-	remove_action( 'load-update.php', 'wp_update_plugins' );
-	remove_action( 'load-update-core.php', 'wp_update_plugins' );
-	remove_action( 'wp_update_plugins', 'wp_update_plugins' );
-	remove_action( 'upgrader_process_complete', 'wp_update_plugins', 10, 0 );
 }
 
 
