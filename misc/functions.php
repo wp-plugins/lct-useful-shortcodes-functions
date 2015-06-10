@@ -93,9 +93,13 @@ add_filter( 'image_send_to_editor', 'lct_remove_site_root', 10, 1 );
 function lct_remove_site_root( $html ) {
 	//remove the root of the url
 	$root_site = lct_url_root_site();
+	$root_site_https = 'https' . $root_site;
+	$root_site_http = 'http' . $root_site;
 	$root_site_without_scheme = str_replace( [ 'http:', 'https:' ], '', $root_site );
 
 	$find = [
+		$root_site_https,
+		$root_site_http,
 		$root_site,
 		$root_site_without_scheme,
 	];
