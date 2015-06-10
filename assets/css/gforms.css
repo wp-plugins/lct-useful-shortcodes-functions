@@ -1,5 +1,21 @@
 /* Gravity Forms */
+.gform_wrapper .top_label li.gfield.gf_left_half input.large,
+.gform_wrapper .top_label li.gfield.gf_right_half input.large{
+	width: 100%;
+}
 
+.gform_wrapper .top_label li.gfield.gf_left_half{
+	float: left;
+}
+
+.gform_wrapper .top_label li.gfield.gf_right_half{
+	float: right;
+}
+
+.gfield.gf_left_half .gravity-select-parent,
+.gfield.gf_right_half .gravity-select-parent{
+	width: 100% !important;
+}
 
 
 /* Gravity Forms - ERRORS */

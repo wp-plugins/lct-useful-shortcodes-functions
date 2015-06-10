@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.2.2.10
+Stable tag: 4.2.2.11
 Requires at least: 3.0
 Tested up to: 4.2.2
 Tags: Functions, Shortcodes
@@ -54,6 +54,9 @@ none
 
 
 == Changelog ==
+= 4.2.2.11 =
+	- Tweaks to gforms CSS
+
 = 4.2.2.10 =
 	- Tweaks to lct_remove_site_root
 
