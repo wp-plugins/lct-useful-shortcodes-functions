@@ -94,6 +94,11 @@ textarea{
 	display: none !important;
 }
 
+.screen-reader-text{
+	position: absolute;
+	left: -1000em;
+}
+
 
 /* Gravity Forms */
 .hide_label label.gfield_label,
