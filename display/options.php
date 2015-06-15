@@ -42,6 +42,7 @@ function lct_select_options_default( $hide, $type, $v ) {
 	$tax = $v['options_tax'];
 	$select_options = [ ];
 	$excluded_tax_terms = [ ];
+	$parent_term = '';
 
 	if( ! empty( $v['skip_npl_organization'] ) ) {
 		if( ! empty( $type ) )
@@ -53,7 +54,7 @@ function lct_select_options_default( $hide, $type, $v ) {
 			$npl_organization = get_term_by( 'id', get_user_meta( get_current_user_id(), 'npl_organization', true ), 'npl_organization' );
 
 		if( ! empty( $npl_organization ) && ! empty( $type ) )
-				$parent_term = get_term_by( 'slug', $npl_organization->slug . '__' . $type, $tax );
+			$parent_term = get_term_by( 'slug', $npl_organization->slug . '__' . $type, $tax );
 	}
 
 	$child_of = ! empty( $parent_term ) ? $parent_term->term_id : 0;

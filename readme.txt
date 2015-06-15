@@ -54,7 +54,7 @@ none
 
 
 == Changelog ==
-= 4.2.2.14 =
+= 4.2.2.14 - 4.2.2.15 =
 	- Fixed up functions to be better:
 		- lct_select_options()
 		- lct_select_options_default()
