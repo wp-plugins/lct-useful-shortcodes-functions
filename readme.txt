@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.2.2.13
+Stable tag: 4.2.2.14
 Requires at least: 3.0
 Tested up to: 4.2.2
 Tags: Functions, Shortcodes
@@ -54,6 +54,12 @@ none
 
 
 == Changelog ==
+= 4.2.2.14 =
+	- Fixed up functions to be better:
+		- lct_select_options()
+		- lct_select_options_default()
+		- lct_get_select_blank()
+
 = 4.2.2.13 =
 	- Moved lct_select_options_meta_key() to deprecated
 	- added lct_get_select_blank() in display/options.php

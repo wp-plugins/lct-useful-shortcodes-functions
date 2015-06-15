@@ -12,21 +12,18 @@
  * }
  * @return mixed|void
  */
-function lct_select_options( $type, $default = 1, $hide = null, $v = array() ) {
-	if( ! $type )
-		return false;
-
+function lct_select_options( $type, $default = 1, $hide = null, $v = [ ] ) {
 	$v = lct_initialize_v( $v );
 
 	//Clean up $type
-	$f = array( "term_meta[", "lct_useful_settings[", "]" );
-	$r = array( "", "", "" );
+	$f = [ 'term_meta[', 'lct_useful_settings[', ']' ];
+	$r = [ '', '', '' ];
 	$type = str_replace( $f, $r, $type );
 
-	if( ! $v['options_tax'] )
+	if( empty( $v['options_tax'] ) )
 		$v['options_tax'] = lct_get_lct_useful_settings( 'Default_Taxonomy' );
 
-	if( $default )
+	if( ! empty( $default ) )
 		return call_user_func( 'lct_select_options_default', $hide, $type, $v );
 
 	return call_user_func( 'lct_select_options_' . $type, $hide, $type, $v );
@@ -34,57 +31,91 @@ function lct_select_options( $type, $default = 1, $hide = null, $v = array() ) {
 
 
 //Uses Taxonomy
+/**
+ * @param $hide
+ * @param $type
+ * @param $v
+ *
+ * @return array|string
+ */
 function lct_select_options_default( $hide, $type, $v ) {
 	$tax = $v['options_tax'];
+	$select_options = [ ];
+	$excluded_tax_terms = [ ];
 
-	if( $v['skip_npl_organization'] ) {
-		$parent_term = get_term_by( 'slug', $type, $tax );
+	if( ! empty( $v['skip_npl_organization'] ) ) {
+		if( ! empty( $type ) )
+			$parent_term = get_term_by( 'slug', $type, $tax );
 	} else {
-		if( $v['npl_organization'] )
+		if( ! empty( $v['npl_organization'] ) )
 			$npl_organization = get_term_by( 'id', $v['npl_organization'], 'npl_organization' );
 		else
 			$npl_organization = get_term_by( 'id', get_user_meta( get_current_user_id(), 'npl_organization', true ), 'npl_organization' );
 
-		if( ! $npl_organization )
-			return array();
-
-		$parent_term = get_term_by( 'slug', $npl_organization->slug . '__' . $type, $tax );
+		if( ! empty( $npl_organization ) && ! empty( $type ) )
+				$parent_term = get_term_by( 'slug', $npl_organization->slug . '__' . $type, $tax );
 	}
 
-	if( ! $parent_term )
-		return array();
+	$child_of = ! empty( $parent_term ) ? $parent_term->term_id : 0;
 
-	$args = array(
-		'type'         => 'wp-lead',
-		'child_of'     => $parent_term->term_id,
+	$tax_args = [
+		'child_of'     => $child_of,
 		'orderby'      => 'term_order',
 		'order'        => 'ASC',
 		'hide_empty'   => 0,
 		'hierarchical' => 1,
-		'taxonomy'     => $tax,
 		'pad_counts'   => false
-	);
-	$tax_children = get_categories( $args );
+	];
+	$tax_terms = get_terms( $tax, $tax_args );
 
-	$select_options = [ ];
+	if( empty( $tax_terms ) )
+		return $select_options[] = lct_get_select_blank( null, 'No taxonomies Match This Query. Please Add them first.' );
 
-	if( ! $hide )
+	if( empty( $hide ) )
 		$select_options[] = lct_get_select_blank();
 
-	foreach( $tax_children as $child ) {
-		$term_meta = get_option( $tax . "_$child->term_id" );
+	foreach( $tax_terms as $tax_term ) {
+		$term_meta = get_option( $tax . '_' . $tax_term->term_id );
 
-		if( $term_meta['lct_hide_in_dropdown'] && ! $v['override_lct_hide_in_dropdown'] ) continue;
+		if( ! empty( $term_meta['lct_hide_in_dropdown'] ) && empty( $v['override_lct_hide_in_dropdown'] ) )
+			continue;
 
-		$value = array( 'value' => $child->term_id );
-		$array = array(
-			'label' => $child->name,
+		$npl_organization_of_tax_term = get_field( 'attach_to_npl_organization', $tax . '_' . $tax_term->term_id );
+
+		if( ! empty( $npl_organization_of_tax_term ) && ! empty( $npl_organization ) && $npl_organization_of_tax_term != $npl_organization->term_id ) {
+			$excluded_tax_terms[] = $tax_term->term_id;
+			continue;
+		}
+
+		$value = [ 'value' => $tax_term->term_id ];
+		$tmp_array = [
+			'label' => $tax_term->name,
 			'color' => $term_meta['color'],
 			'icon'  => $term_meta['icon'],
 			'level' => $term_meta['level'],
-		);
-		$tmp = array_merge( $value, $array );
+		];
+
+		$tmp = array_merge( $value, $tmp_array );
+
 		$select_options[] = $tmp;
+	}
+
+	if( ! empty( $excluded_tax_terms ) ) {
+		$tax_args = [
+			'exclude'      => $excluded_tax_terms,
+			'child_of'     => $child_of,
+			'orderby'      => 'term_order',
+			'order'        => 'ASC',
+			'hide_empty'   => 0,
+			'hierarchical' => 1,
+			'pad_counts'   => false
+		];
+		$tax_terms = get_terms( $tax, $tax_args );
+
+		if( empty( $tax_terms ) ) {
+			$select_options = [ ];
+			$select_options[] = lct_get_select_blank( null, 'No taxonomies Match This Query. Please Add them first.' );
+		}
 	}
 
 	return $select_options;
@@ -101,7 +132,7 @@ function lct_get_select_blank( $return_partial = null, $label = '---', $value = 
 	if( $return_partial == 'value' )
 		return $value;
 
-	return array( 'label' => $label, 'value' => $value );
+	return [ 'label' => $label, 'value' => $value ];
 }
 
 
