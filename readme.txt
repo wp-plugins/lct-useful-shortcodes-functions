@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.2.2.14
+Stable tag: 4.2.2.16
 Requires at least: 3.0
 Tested up to: 4.2.2
 Tags: Functions, Shortcodes
@@ -54,6 +54,9 @@ none
 
 
 == Changelog ==
+= 4.2.2.16 =
+	- Added lct_close_all_pings_and_comments()
+
 = 4.2.2.14 - 4.2.2.15 =
 	- Fixed up functions to be better:
 		- lct_select_options()

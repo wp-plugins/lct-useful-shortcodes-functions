@@ -3,6 +3,7 @@ add_action( 'admin_menu', 'lct_useful_menu' );
 function lct_useful_menu() {
 	add_object_page( 'LCT Useful', 'LCT Useful', 'manage_options', 'lct_useful_settings', 'lct_useful_settings' );
 	add_submenu_page( 'lct_useful_settings', 'Cleanup Guid Fields', 'Cleanup Guid Fields', 'manage_options', 'lct_cleanup_guid', 'lct_cleanup_guid' );
+	add_submenu_page( 'lct_useful_settings', 'Close all pings and comments', 'Close all pings and comments', 'manage_options', 'lct_close_all_pings_and_comments', 'lct_close_all_pings_and_comments' );
 }
 
 
@@ -22,7 +23,8 @@ function lct_register_lct_useful_settings() {
 add_action( 'admin_head', 'lct_register_lct_useful_settings_admin_head' );
 function lct_register_lct_useful_settings_admin_head() { ?>
 	<style>
-		li [href*="lct_cleanup_guid"]{
+		li [href*="lct_cleanup_guid"],
+		li [href*="lct_close_all_pings_and_comments"]{
 			display: none !important;
 		}
 	</style>
@@ -287,7 +289,22 @@ function lct_useful_settings() {
 
 
 		<h3>Fixes and Cleanups</h3>
-		<a href="<?php echo admin_url( 'admin.php?page=lct_cleanup_guid' ); ?>" class="button button-primary">Cleanup Guid Fields</a>
+		<table style="border: 5px solid #ff0000">
+			<tr>
+				<td>
+					<p>
+						<a href="<?php echo admin_url( 'admin.php?page=lct_cleanup_guid' ); ?>" class="button button-primary">Cleanup Guid Fields</a>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>
+						<a href="<?php echo admin_url( 'admin.php?page=lct_close_all_pings_and_comments' ); ?>" class="button button-primary">Close all pings and comments</a>
+					</p>
+				</td>
+			</tr>
+		</table>
 		<p>&nbsp;</p>
 
 
@@ -345,6 +362,47 @@ function  lct_cleanup_guid() {
 
 	<h4>Posts Updated</h4>
 	<p><?php echo implode( '<br />', $post_info ); ?></p>
+	<h1>Done</h1>
+<?php }
+
+
+function  lct_close_all_pings_and_comments() {
+	$post_types = get_post_types();
+	unset( $post_types['revision'] );
+
+	$post_info = [];
+
+	foreach( get_post_types() as $post_type ) {
+		$args = [
+			'posts_per_page'   => -1,
+			'post_type'        => $post_type,
+		];
+		$posts = get_posts( $args );
+
+		if( ! empty( $posts ) ) {
+			foreach( $posts as $post ) {
+				$post_id = $post->ID;
+
+				if( $post->comment_status != 'closed' || $post->ping_status != 'closed' ) {
+					$args = [
+						'ID'             => $post_id,
+						'comment_status' => 'closed',
+						'ping_status'    => 'closed',
+					];
+					$update_success = wp_update_post( $args );
+
+					if( $update_success ) {
+						$post_info[] = '<strong>' . $post_id . ' (' . $post_type . ') ' . ':</strong> Pings and comments are now closed for ' . get_the_title( $post_id ) . '<br />';
+					}
+				}
+			}
+		}
+	} ?>
+
+	<h3>Close all pings and comments</h3>
+
+	<p><?php echo implode( '<br />', $post_info ); ?></p>
+
 	<h1>Done</h1>
 <?php }
 
