@@ -1,8 +1,8 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.2.2.16
-Requires at least: 3.0
+Stable tag: 4.2.2.17
+Requires at least: 3.5
 Tested up to: 4.2.2
 Tags: Functions, Shortcodes
 License: GPLv3 or later
@@ -38,6 +38,30 @@ EX: if your site was http://www.example.com/ and you public_html folder was loca
 <h4>is_blog() Function</h4>
 You can call this to check if the page you are on is a blogroll or single post.
 
+
+<h4>Tel Link Shortcode</h4>
+Syntax:
+[lct_tel_link phone='{REQUIRED, with formatting}' action='{defaults to "tel_link", but you can change it in the advanced options}' category='{defaults to "{pre} {phone} {post}", but you can change it in the advanced options}' class='{optional}' pre='{optional pre text}' post='{optional post text}' text='{optional link text override}']
+converts to
+<a class="{class}" href="tel:{phone}" onclick="_gaq.push(['_trackEvent', '{category}', '{action}'])">{pre} {phone} {post}</a>
+
+Examples:
+(Basic)
+[lct_tel_link phone='(970) 555-1234']
+converts to
+<a href="tel:9705551234" onclick="_gaq.push(['_trackEvent', 'tel_link', '(970) 555-1234'])">(970) 555-1234</a>
+
+(Advanced)
+[lct_tel_link phone='(970) 555-1234' action='My Custom Action' category='Something_NOT_tel_link' class='button' pre='before number:' post='after the number.']
+converts to
+<a class="button" href="tel:9705551234" onclick="_gaq.push(['_trackEvent', 'Something_NOT_tel_link', 'My Custom Action'])">before number: (970) 555-1234 after the number.</a>
+
+(Link Text Override)
+[lct_tel_link phone='(970) 555-1234' text='Link Text Here']
+converts to
+<a href="tel:9705551234" onclick="_gaq.push(['_trackEvent', 'tel_link', '(970) 555-1234'])">Link Text Here</a>
+
+
 == Installation ==
 1. Upload the zip file contents to your Wordpress plugins directory.
 2. Go to the Plugins page in your WordPress Administration area and click 'Activate' for LCT Useful Shortcodes & Functions.
@@ -54,6 +78,9 @@ none
 
 
 == Changelog ==
+= 4.2.2.17 =
+	- added lct_tel_link shortcode
+
 = 4.2.2.16 =
 	- Added lct_close_all_pings_and_comments()
 
