@@ -56,6 +56,7 @@ a.button{
 .tel,
 [href*="tel:"]{
 	cursor: default !important;
+	text-decoration: none !important;
 }
 
 
