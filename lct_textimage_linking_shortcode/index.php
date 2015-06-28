@@ -27,6 +27,7 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 					'rel'       => null,
 					'style'     => null,
 					'src'       => null,
+					'query'    => null,
 					'anchor'    => null,
 					'onclick'   => null,
 					'imagetext' => null,
@@ -92,10 +93,13 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 			$src = "src=\"{$src}\"";
 		}
 
-		if( ! empty( $anchor ) ) {
-			if( strstr( $anchor, "?" ) )
-				$anchor = str_replace( '#', '', $anchor );
+		if( ! empty( $query ) ) {
+			$query = "?{$query}";
 
+			$url .= $query;
+		}
+
+		if( ! empty( $anchor ) ) {
 			$anchor = "#{$anchor}";
 
 			$url .= $anchor;
@@ -413,7 +417,7 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 				<input type="text" name="wptisc_anchor" id="wptisc_anchor" placeholder="<?php _e( 'Link Anchor (optional)', 'lct-useful-shortcodes-functions' ); ?>" />
 				<input type="text" name="wptisc_onclick" id="wptisc_onclick" placeholder="<?php _e( 'Link onclick (optional)', 'lct-useful-shortcodes-functions' ); ?>" />
 
-				<p style="margin: 0;text-align: center;"><strong>Advanced Attributes:</strong><br />imagetext, textimage, esc_html</p>
+				<p style="margin: 0;text-align: center;"><strong>Advanced Attributes:</strong><br />query, imagetext, textimage, esc_html</p>
 
 
 				<button class="button button-primary button-large" name="wptisc_editor_button" id="wptisc_editor_button" style="margin: 0 auto; display: block;">Send To Content Area</button>
