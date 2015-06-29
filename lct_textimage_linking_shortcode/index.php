@@ -27,9 +27,10 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 					'rel'       => null,
 					'style'     => null,
 					'src'       => null,
-					'query'    => null,
+					'query'     => null,
 					'anchor'    => null,
 					'onclick'   => null,
+					'target'    => null,
 					'imagetext' => null,
 					'textimage' => null,
 					'esc_html'  => null,
@@ -110,6 +111,11 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 			$onclick = " onclick=\"{$onclick}\"";
 		}
 
+		if( ! empty( $target ) ) {
+			$target = esc_attr( $target );
+			$target = " target=\"{$target}\"";
+		}
+
 		$href = "href=\"{$url}\"";
 
 		if( ! empty( $src ) ) {
@@ -117,17 +123,17 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 			if( $imagetext || $textimage ) {
 
 				if( $imagetext ) {
-					$link = "<a {$href}{$class}{$title}{$rel}{$style}{$onclick}><img {$src}{$alt} />{$text}</a>";
+					$link = "<a {$href}{$class}{$title}{$rel}{$style}{$onclick}{$target}><img {$src}{$alt} />{$text}</a>";
 				} else if ( $textimage ) {
-					$link = "<a {$href}{$class}{$title}{$rel}{$style}{$onclick}>{$text}<img {$src}{$alt} /></a>";
+					$link = "<a {$href}{$class}{$title}{$rel}{$style}{$onclick}{$target}>{$text}<img {$src}{$alt} /></a>";
 				}
 
 			} else {
-				$link = "<a {$href}{$class}{$title}{$rel}{$style}{$onclick}><img {$src}{$alt} /></a>";
+				$link = "<a {$href}{$class}{$title}{$rel}{$style}{$onclick}{$target}><img {$src}{$alt} /></a>";
 			}
 
 		} else {
-			$link = "<a {$href}{$class}{$title}{$rel}{$style}{$onclick}>{$text}</a>";
+			$link = "<a {$href}{$class}{$title}{$rel}{$style}{$onclick}{$target}>{$text}</a>";
 		}
 
 		return $link;
@@ -233,6 +239,7 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 				var src = "";
 				var anchor = "";
 				var onclick = "";
+				var target = "";
 
 				if( $('#wptisc_text').val() )
 					text = " text=\"" + $('#wptisc_text').val() + "\"";
@@ -261,7 +268,10 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 				if( $('#wptisc_onclick').val() )
 					onclick = " onclick=\"" + $('#wptisc_onclick').val() + "\"";
 
-				window.send_to_editor( "[link" + id + text + link_class + alt + title + rel + style + src + anchor + onclick + "]" );
+				if( $('#wptisc_target').val() )
+					target = " target=\"" + $('#wptisc_target').val() + "\"";
+
+				window.send_to_editor( "[link" + id + text + link_class + alt + title + rel + style + src + anchor + onclick + target + "]" );
 
 				return false;
 			});
@@ -416,6 +426,7 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 				<input type="text" name="wptisc_src" id="wptisc_src" placeholder="<?php _e( 'Linked Image src (optional)', 'lct-useful-shortcodes-functions' ); ?>" />
 				<input type="text" name="wptisc_anchor" id="wptisc_anchor" placeholder="<?php _e( 'Link Anchor (optional)', 'lct-useful-shortcodes-functions' ); ?>" />
 				<input type="text" name="wptisc_onclick" id="wptisc_onclick" placeholder="<?php _e( 'Link onclick (optional)', 'lct-useful-shortcodes-functions' ); ?>" />
+				<input type="text" name="wptisc_target" id="wptisc_target" placeholder="<?php _e( 'Link target (optional)', 'lct-useful-shortcodes-functions' ); ?>" />
 
 				<p style="margin: 0;text-align: center;"><strong>Advanced Attributes:</strong><br />query, imagetext, textimage, esc_html</p>
 
