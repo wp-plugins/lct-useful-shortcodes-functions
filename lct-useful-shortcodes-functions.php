@@ -1,14 +1,14 @@
 <?php /**
-Plugin Name: LCT Useful Shortcodes & Functions
-Plugin URI: http://lookclassy.com/wordpress-plugins/useful-shortcodes-functions/
-Version: 4.2.2.22
-Text Domain: lct-useful-shortcodes-functions
-Author: Look Classy Technologies
-Author URI: http://lookclassy.com/
-License: GPLv3 (http://opensource.org/licenses/GPL-3.0)
-Description: Shortcodes & Functions that will help make your life easier.
-Copyright 2014 Look Classy Technologies  (email : info@lookclassy.com)
-*/
+ * Plugin Name: LCT Useful Shortcodes & Functions
+ * Plugin URI: http://lookclassy.com/wordpress-plugins/useful-shortcodes-functions/
+ * Version: 4.2.2.23
+ * Text Domain: lct-useful-shortcodes-functions
+ * Author: Look Classy Technologies
+ * Author URI: http://lookclassy.com/
+ * License: GPLv3 (http://opensource.org/licenses/GPL-3.0)
+ * Description: Shortcodes & Functions that will help make your life easier.
+ * Copyright 2014 Look Classy Technologies  (email : info@lookclassy.com)
+ */
 
 /*
 Copyright (C) 2014 Look Classy Technologies
@@ -25,16 +25,17 @@ GNU General Public License for more details.
 
 //Globals
 $g_lusf = new g_lusf;
+
 class g_lusf {
- 	public $editzz						= 'editzz';
-	public $pre							= 'lusf_';
-	public $lct_dash					= 'lct-useful-shortcodes-functions';
-	public $lct_us						= 'lct_useful_shortcodes_functions';
+	public $editzz = 'editzz';
+	public $pre = 'lusf_';
+	public $lct_dash = 'lct-useful-shortcodes-functions';
+	public $lct_us = 'lct_useful_shortcodes_functions';
 
 	public function __construct() {
-		$this->plugin_file				= __FILE__;
-		$this->plugin_dir_url			= plugin_dir_url( __FILE__ );
-		$this->plugin_dir_path			= plugin_dir_path( __FILE__ );
+		$this->plugin_file = __FILE__;
+		$this->plugin_dir_url = plugin_dir_url( __FILE__ );
+		$this->plugin_dir_path = plugin_dir_path( __FILE__ );
 
 		register_activation_hook( $this->plugin_file, 'hook_activate_' . $this->lct_us );
 		register_deactivation_hook( $this->plugin_file, 'hook_deactivate_' . $this->lct_us );

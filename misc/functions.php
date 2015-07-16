@@ -46,9 +46,9 @@ function lct_execute_php( $html ) {
 		$html = ob_get_contents();
 		ob_end_clean();
 	}
+
 	return $html;
 }
-
 
 
 add_filter( 'post_thumbnail_html', 'lct_remove_thumbnail_dimensions', 10, 1 );
@@ -119,12 +119,12 @@ function lct_remove_edit_post_link( $link ) {
 
 
 //Fix Multisite plugins_url issue
-if( ! function_exists('lct_domain_mapping_plugins_uri') && function_exists('domain_mapping_plugins_uri') ) {
+if( ! function_exists( 'lct_domain_mapping_plugins_uri' ) && function_exists( 'domain_mapping_plugins_uri' ) ) {
 	remove_filter( 'plugins_url', 'domain_mapping_plugins_uri', 1 );
 	add_filter( 'plugins_url', 'lct_domain_mapping_plugins_uri', 1 );
-	function lct_domain_mapping_plugins_uri( $full_url, $path=NULL, $plugin=NULL ) {
+	function lct_domain_mapping_plugins_uri( $full_url, $path = null, $plugin = null ) {
 		$pos = stripos( $full_url, PLUGINDIR );
-		if($pos === false)
+		if( $pos === false )
 			return $full_url;
 		else
 			return get_option( 'siteurl' ) . substr( $full_url, $pos - 1 );
@@ -149,32 +149,36 @@ function lct_html_widget_title( $title ) {
 //Set the timezone to the logged in users default Timezone
 add_action( 'init', 'set_user_timezone' );
 function set_user_timezone( $user_ID = null ) {
+	if( lct_get_lct_useful_settings( 'disable_auto_set_user_timezone' ) )
+		return;
+
 	if( ! $user_ID )
 		$user_ID = get_current_user_id();
 
 	if( ! $user_ID ) {
 		date_default_timezone_set( get_option( 'timezone_string' ) );
+
 		return get_option( 'timezone_string' );
 	}
 
 	$npl_user_timezone = get_user_meta( $user_ID, 'npl_user_timezone', true );
 	if( $npl_user_timezone ) {
 		date_default_timezone_set( $npl_user_timezone );
+
 		return $npl_user_timezone;
 	}
 
 	date_default_timezone_set( get_option( 'timezone_string' ) );
+
 	return get_option( 'timezone_string' );
 }
 
 
 /**
  * Get a single value from a WP Term
- *
  * @term_id int
- * @tax string - The terms taxonomy
- * @value string - The value you want to retrieve
- *
+ * @tax     string - The terms taxonomy
+ * @value   string - The value you want to retrieve
  * Possible values to call
  * @name
  * @slug
@@ -187,7 +191,7 @@ function set_user_timezone( $user_ID = null ) {
  * @count
  * @filter
  */
-function lct_get_term_value( $term_id, $tax="lct_option" , $key=null, $output="OBJECT", $filter="raw" ) {
+function lct_get_term_value( $term_id, $tax = "lct_option", $key = null, $output = "OBJECT", $filter = "raw" ) {
 	$term = get_term( $term_id, $tax, $output, $filter );
 
 	if( ! $term ) return 0;
@@ -198,7 +202,7 @@ function lct_get_term_value( $term_id, $tax="lct_option" , $key=null, $output="O
 	return $term;
 }
 
-function lct_get_term_meta( $term_id, $tax="lct_option" , $key=null, $output="OBJECT", $filter="raw" ) {
+function lct_get_term_meta( $term_id, $tax = "lct_option", $key = null, $output = "OBJECT", $filter = "raw" ) {
 	if( ! $term_id || ! $tax ) return;
 
 	$tax_term_id = get_option( $tax . "_" . $term_id );
@@ -210,7 +214,7 @@ function lct_get_term_meta( $term_id, $tax="lct_option" , $key=null, $output="OB
 }
 
 
-function lct_get_parent_term_value( $term_id, $tax, $key = null, $output="OBJECT", $filter="raw" ) {
+function lct_get_parent_term_value( $term_id, $tax, $key = null, $output = "OBJECT", $filter = "raw" ) {
 	$term = get_term( $term_id, $tax, $output, $filter );
 
 	$parent_term = get_term( $term->parent, $tax, $output, $filter );
@@ -224,7 +228,7 @@ function lct_get_parent_term_value( $term_id, $tax, $key = null, $output="OBJECT
 }
 
 
-function lct_get_parent_term_meta( $term_id = null, $tax = null, $key = null, $output="OBJECT", $filter="raw"  ) {
+function lct_get_parent_term_meta( $term_id = null, $tax = null, $key = null, $output = "OBJECT", $filter = "raw" ) {
 	if( ! $term_id || ! $tax ) return;
 
 	$term = get_term( $term_id, $tax, $output, $filter );
@@ -243,7 +247,7 @@ function lct_get_parent_term_meta( $term_id = null, $tax = null, $key = null, $o
 function lct_clean_number_for_math( $number ) {
 	$f = ',';
 	$r = '';
-	$new_number = floatval( preg_replace("/[^-0-9\.]/", "", $number ) );
+	$new_number = floatval( preg_replace( "/[^-0-9\.]/", "", $number ) );
 
 	return (float) $new_number;
 }

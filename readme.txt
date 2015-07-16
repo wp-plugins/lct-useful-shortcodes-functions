@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.2.2.22
+Stable tag: 4.2.2.23
 Requires at least: 3.5
 Tested up to: 4.2.2
 Tags: Functions, Shortcodes
@@ -78,6 +78,10 @@ none
 
 
 == Changelog ==
+= 4.2.2.23 =
+	- Added disable_auto_set_user_timezone feature
+	- Reformat code
+
 = 4.2.2.22 =
 	- Added target as an att to the shortcode lct_shortcode_link()
 
