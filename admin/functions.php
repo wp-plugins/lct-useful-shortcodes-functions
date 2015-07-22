@@ -3,7 +3,7 @@ function lct_use_placeholders_instead_of_labels_array() {
 	$return = lct_get_lct_useful_settings( 'use_placeholders_instead_of_labels' );
 
 	if( ! $return )
-		$return = array( 0 );
+		$return = [ 0 ];
 
 	return $return;
 }
@@ -13,7 +13,7 @@ function lct_store_gforms_array() {
 	$return = lct_get_lct_useful_settings( 'store_gforms' );
 
 	if( ! $return )
-		$return = array( 0 );
+		$return = [ 0 ];
 
 	return $return;
 }
@@ -32,7 +32,7 @@ function lct_custom_redirect_wrapper( $force_exit = true, $headers_sent_already 
 	}
 
 	if( $current_user->ID || $force_exit ) {
-		$redirect_to = home_url("/");
+		$redirect_url = $redirect_to = home_url( "/" );
 
 		if( function_exists( 'redirect_wrapper' ) )
 			$redirect_url = redirect_wrapper( $redirect_to, '', $current_user );
@@ -78,24 +78,24 @@ function lct_get_user_agent_info( $print = null, $hide = null ) {
 
 	if( file_exists( '/home/_apps/browscap/Browscap.php' ) ) {
 		require '/home/_apps/browscap/Browscap.php';
-		$bc = new Browscap('/home/_apps/browscap/cache');
+		$bc = new Browscap( '/home/_apps/browscap/cache' );
 		$ready = 1;
 	}
 
-	if( ! $ready && file_exists( 'C:/s/apps/browscap/Browscap.php' ) ) {
-		require 'C:/s/apps/browscap/Browscap.php';
-		$bc = new Browscap('C:/s/apps/browscap/cache');
+	if( ! $ready && file_exists( 'W:/wamp/apps/browscap/Browscap.php' ) ) {
+		require 'W:/wamp/apps/browscap/Browscap.php';
+		$bc = new Browscap( 'W:/wamp/apps/browscap/cache' );
 		$ready = 1;
 	}
 
 	if( ! $ready && file_exists( '/home8/visartsa/_apps/browscap/Browscap.php' ) ) {
 		require '/home8/visartsa/_apps/browscap/Browscap.php';
-		$bc = new Browscap('/home8/visartsa/_apps/browscap/cache');
+		$bc = new Browscap( '/home8/visartsa/_apps/browscap/cache' );
 		$ready = 1;
 	}
 
 	if( ! $ready )
-		return;
+		return false;
 
 	$getBrowser = $bc->getBrowser();
 
@@ -121,11 +121,43 @@ function lct_get_user_agent_info( $print = null, $hide = null ) {
 		}
 
 		echo $before;
-			print_r( $getBrowser );
+		print_r( $getBrowser );
 		echo $after;
 
-		return;
+		return false;
 	}
 
 	return $getBrowser;
+}
+
+
+function lct_get_dev_emails() {
+	$emails = [
+		'info@ircary.com',
+		'cary@capital-designs.com',
+		'cary@l-wconsulting.com',
+		'dev@eetah.com'
+	];
+
+	return $emails;
+}
+
+
+function lct_is_user_a_dev( $emails = null ) {
+	if( ! is_user_logged_in() )
+		return false;
+
+	if( empty( $emails ) )
+		$emails = lct_get_dev_emails();
+
+	$current_user = wp_get_current_user();
+
+	foreach( $emails as $email ) {
+		$user = get_user_by( 'email', $email );
+
+		if( $current_user->ID == $user->ID )
+			return true;
+	}
+
+	return false;
 }

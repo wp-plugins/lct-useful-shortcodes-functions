@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.2.2.23
+Stable tag: 4.2.2.24
 Requires at least: 3.5
 Tested up to: 4.2.2
 Tags: Functions, Shortcodes
@@ -78,6 +78,11 @@ none
 
 
 == Changelog ==
+= 4.2.2.24 =
+	- Added lct_get_dev_emails() function
+	- Added lct_is_user_a_dev() function
+	- Change C:/s to W:/wamp
+
 = 4.2.2.23 =
 	- Added disable_auto_set_user_timezone feature
 	- Reformat code
