@@ -1,7 +1,7 @@
 <?php /**
  * Plugin Name: LCT Useful Shortcodes & Functions
  * Plugin URI: http://lookclassy.com/wordpress-plugins/useful-shortcodes-functions/
- * Version: 4.2.2.24
+ * Version: 4.2.2.25
  * Text Domain: lct-useful-shortcodes-functions
  * Author: Look Classy Technologies
  * Author URI: http://lookclassy.com/
@@ -80,6 +80,12 @@ include( 'lct_textimage_linking_shortcode/index.php' );
 
 //Activation, Deactivation & Uninstall
 include( 'activate.php' );
+
+
+add_action( 'plugins_loaded', 'lct_plugins_loaded' );
+function lct_plugins_loaded() {
+	include( 'extend_plugins/acf/_init.php' );
+}
 
 
 function hook_activate_lct_useful_shortcodes_functions() {

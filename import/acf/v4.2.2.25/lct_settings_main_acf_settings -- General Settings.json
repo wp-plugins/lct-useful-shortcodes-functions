@@ -1,0 +1,22 @@
+[
+    {
+        "key": "group_55b007453cd60",
+        "title": "General Settings",
+        "fields": [],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "lct_settings_main_acf_settings"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": ""
+    }
+]

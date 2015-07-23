@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.2.2.24
+Stable tag: 4.2.2.25
 Requires at least: 3.5
 Tested up to: 4.2.2
 Tags: Functions, Shortcodes
@@ -78,6 +78,18 @@ none
 
 
 == Changelog ==
+= 4.2.2.25 =
+	- Added extend_plugin dir, now we can properly include functions. But only is the plugin is loaded up first. YAY!
+	- Added support for plugin acf
+	- changed instances of lca to lct
+	- Added lct_acf_print_scripts()
+	- Added wp-admin css
+	- Added Function to create fixed and clean ups
+	- Added a New ACF Fix/Cleanup (db_fix_add_taxonomy_field_data)
+	- Added import for:
+		- lct_settings_main_acf_fixes_and_cleanups -- DB Fix Add taxonomy field data to old entries.json
+		- lct_settings_main_acf_settings -- General Settings.json
+
 = 4.2.2.24 =
 	- Added lct_get_dev_emails() function
 	- Added lct_is_user_a_dev() function

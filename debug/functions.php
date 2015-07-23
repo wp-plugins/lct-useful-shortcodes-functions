@@ -136,7 +136,7 @@ function lct_debug( $data, $extra = '' ) {
 	update_option( "lct_debug" . $extra, $data );
 }
 
-function lca_debug_to_error_log( $data ) {
+function lct_debug_to_error_log( $data ) {
 	$bt = debug_backtrace();
 	$caller = array_shift( $bt );
 
@@ -147,7 +147,7 @@ function lca_debug_to_error_log( $data ) {
 }
 
 
-function lca_send_to_console( $data, $label = null ) {
+function lct_send_to_console( $data, $label = null ) {
 	if( empty( $data ) )
 		return;
 
@@ -181,13 +181,13 @@ function lca_send_to_console( $data, $label = null ) {
 			if( $v === '' || ! strlen( $v ) )
 				$v = '__EMPTY__';
 
-			$console[] = lca_console_log_sprint( '_editzz: ARRAY' . $label . '[' . $k . ']' . ' = ' . $v );
+			$console[] = lct_console_log_sprint( '_editzz: ARRAY' . $label . '[' . $k . ']' . ' = ' . $v );
 		}
 	} else {
 		if( $data === '' || ! strlen( $data ) )
 			$v = '__EMPTY__';
 
-		$console[] = lca_console_log_sprint( '_editzz: ' . $label  . $data );
+		$console[] = lct_console_log_sprint( '_editzz: ' . $label  . $data );
 	}
 
 	$script = '<script>';
@@ -198,6 +198,6 @@ function lca_send_to_console( $data, $label = null ) {
 }
 
 
-function lca_console_log_sprint( $console ) {
+function lct_console_log_sprint( $console ) {
 	return sprintf( "console.log('%s');", $console );
 }
