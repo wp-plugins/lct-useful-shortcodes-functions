@@ -18,4 +18,10 @@
 .hide_label .acf-label {
   display: none; }
 
+.hide_label_show_desc .acf-label label {
+  display: none; }
+
+.acf-field.acf-c0.alignright {
+  clear: none !important; }
+
 /* DO NOT add scss code in the custom.scss file. create an import above */

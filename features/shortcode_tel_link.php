@@ -44,10 +44,10 @@ class LCT_SC_tel_link {
 		$g_lusf = new g_lusf;
 		$base_url = $g_lusf->plugin_dir_url;
 
-		wp_register_script( 'lct_tooltip_init', $base_url . "/assets/js/tooltip_init.js", array( 'jquery-ui-tooltip' ), $version );
+		wp_register_script( 'lct_tooltip_init', $base_url . "/assets/js/tooltip_init.js", array( 'jquery-ui-tooltip' ), false );
 
-		wp_register_script( 'LCT_SC_tel_link_shortcode_ui', $base_url . "/assets/js/shortcode_tel_link-shortcode-ui.js", array( 'jquery', 'wp-backbone' ), $version, true );
-		wp_register_style( 'LCT_SC_tel_link_shortcode_ui', $base_url . "/assets/css/shortcode_tel_link-shortcode-ui.css", array(), $version );
+		wp_register_script( 'LCT_SC_tel_link_shortcode_ui', $base_url . "/assets/js/shortcode_tel_link-shortcode-ui.js", array( 'jquery', 'wp-backbone' ), false, true );
+		wp_register_style( 'LCT_SC_tel_link_shortcode_ui', $base_url . "/assets/css/shortcode_tel_link-shortcode-ui.css", array(), false );
 	}
 
 	public static function page_supports_add_tel_link_button() {

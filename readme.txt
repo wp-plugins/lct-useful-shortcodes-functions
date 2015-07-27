@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.2.2.25
+Stable tag: 4.2.2.26
 Requires at least: 3.5
 Tested up to: 4.2.2
 Tags: Functions, Shortcodes
@@ -78,6 +78,25 @@ none
 
 
 == Changelog ==
+= 4.2.2.26 =
+	- Added: add_filter( 'acf/load_field/type=radio', 'lct_acf_options_check_show_params' );
+	- Updated acf.css
+	- Modified Fixes and cleanups
+	- Completed: TODO: cs - Make this dynamic - 7/23/2015 12:08 AM By adding lct_acf_get_fields_by_parent()\
+	- Added lct_acf_recap_field_settings()
+	- Added lct_acf_create_table()
+	- Added lct_acf_field_groups_columns()
+	- Added lct_acf_field_groups_columns_values()
+	- Added lct_acf_acf_export_title_mod()
+	- Fixed tel_link version bug.
+	- Added lct_create_find_and_replace_arrays()
+	- Code refactoring
+	- acf.css update
+	- Added local groups
+	- REMOVED imports:
+			- options_page__lct_settings_main_acf_settings___general_settings__lct.json
+			- options_page__lct_settings_main_acf_fixes_and_cleanups___db_fix_add_taxonomy_field_data_to_old_entries.json
+
 = 4.2.2.25 =
 	- Added extend_plugin dir, now we can properly include functions. But only is the plugin is loaded up first. YAY!
 	- Added support for plugin acf

@@ -161,3 +161,21 @@ function lct_is_user_a_dev( $emails = null ) {
 
 	return false;
 }
+
+
+function lct_create_find_and_replace_arrays( $both_find_and_replace ) {
+	$find = [ ];
+	$replace = [ ];
+
+	if( is_array( $both_find_and_replace ) ) {
+		foreach( $both_find_and_replace as $k => $v ) {
+			$find[] = $k;
+			$replace[] = $v;
+		}
+	}
+
+	return [
+		'find'    => $find,
+		'replace' => $replace
+	];
+}
