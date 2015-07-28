@@ -261,16 +261,6 @@ function lct_opengraph_single_image_filter( $val ) {
 }
 
 
-//Remove front-end admin bar from non-admin users
-add_filter( 'show_admin_bar', 'lct_remove_admin_bar', 11 );
-function lct_remove_admin_bar() {
-	if( ! current_user_can( 'administrator' ) && ! is_admin() )
-		return false;
-	else
-		return true;
-}
-
-
 function lct_excerpt_of_string( $content, $maxchars ) {
 	$content = substr( $content, 0, $maxchars );
 	$pos = strrpos( $content, " " );

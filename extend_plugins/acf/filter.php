@@ -111,3 +111,32 @@ function lct_acf_acf_export_title_mod( $field_groups ) {
 
 	return $field_groups;
 }
+
+
+add_filter( 'show_admin_bar', 'lct_show_admin_bar', 11 );
+/**
+ * Remove the front-end admin bar from selected users in the LCT Useful ACF Settings
+ * @return bool
+ */
+function lct_show_admin_bar() {
+	//always show in wp-admin
+	if( is_admin() )
+		return true;
+
+	//hide it if the profile says so
+	if( get_user_meta( get_current_user_id(), 'show_admin_bar_front', true ) == 'false' )
+		return false;
+
+	//get the rols that are to be hidden
+	$roles_to_hide = get_field( 'lct:::hide_admin_bar__by_role', 'option' );
+
+	//compare those roles to what this user's roles are
+	foreach( $roles_to_hide as $user_can ) {
+		//if there is a match, hide the admin bar
+		if( current_user_can( $user_can ) )
+			return false;
+	}
+
+	//if we made it through all that show the dang the admin bar
+	return true;
+}

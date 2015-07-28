@@ -9,8 +9,8 @@ if( function_exists( 'acf_add_local_field_group' ) && ! $dev ):
 		'title'                 => 'General Settings',      //TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE
 		'fields'                => [
 			[
-				'key'               => 'field_55b27e8dd2719',
-				'label'             => 'No Settings Yet',
+				'key'               => 'field_55b7d1ecd6712',
+				'label'             => 'Hide the admin bar on the front-end',
 				'name'              => '',
 				'type'              => 'message',
 				'instructions'      => '',
@@ -23,6 +23,36 @@ if( function_exists( 'acf_add_local_field_group' ) && ! $dev ):
 				],
 				'message'           => '',
 				'esc_html'          => 0,
+			],
+			[
+				'key'               => 'field_55b27e8dd2719',
+				'label'             => 'For All...',
+				'name'              => 'lct:::hide_admin_bar__by_role',
+				'type'              => 'checkbox',
+				'instructions'      => '',
+				'required'          => 0,
+				'conditional_logic' => 0,
+				'wrapper'           => [
+					'width' => '',
+					'class' => '//TODO: cs - make_this_dynamic',
+					'id'    => '',
+				],
+				'choices'           => [
+					'administrator' => 'Administrators',
+					'author'        => 'Authors',
+					'editor'        => 'Editors',
+					'contributor'   => 'Contributors',
+					'subscriber'    => 'Subscribers',
+					'shop_manager'  => 'Shop_managers',
+					'customer'      => 'Customers',
+				],
+				'default_value'     => [
+					'contributor' => 'contributor',
+					'subscriber'  => 'subscriber',
+					'customer'    => 'customer',
+				],
+				'layout'            => 'vertical',
+				'toggle'            => 1,
 			],
 		],
 		'location'              => [

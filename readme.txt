@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.2.2.26
+Stable tag: 4.2.2.27
 Requires at least: 3.5
 Tested up to: 4.2.2
 Tags: Functions, Shortcodes
@@ -78,6 +78,11 @@ none
 
 
 == Changelog ==
+= 4.2.2.27 =
+	- Moved: lct_remove_admin_bar() to lct_show_admin_bar(), under /acf/filter.php
+	- Modified lct_show_admin_bar() so that it will be a dynamic setting in LCT Useful ACF, rather than being hard coded.
+	- Updated fields in lct_acf_op_main_settings_groups.php to support lct_show_admin_bar()
+
 = 4.2.2.26 =
 	- Added: add_filter( 'acf/load_field/type=radio', 'lct_acf_options_check_show_params' );
 	- Updated acf.css
@@ -93,7 +98,7 @@ none
 	- Code refactoring
 	- acf.css update
 	- Added local groups
-	- REMOVED imports:
+	- Updated import for:
 			- options_page__lct_settings_main_acf_settings___general_settings__lct.json
 			- options_page__lct_settings_main_acf_fixes_and_cleanups___db_fix_add_taxonomy_field_data_to_old_entries.json
 
