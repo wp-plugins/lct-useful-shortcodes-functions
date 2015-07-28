@@ -1,9 +1,9 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.2.2.27
+Stable tag: 4.3
 Requires at least: 3.5
-Tested up to: 4.2.2
+Tested up to: 4.2.3
 Tags: Functions, Shortcodes
 License: GPLv3 or later
 License URI: http://opensource.org/licenses/GPL-3.0
@@ -78,6 +78,16 @@ none
 
 
 == Changelog ==
+= 4.3 =
+	- WP v4.2.3 Ready
+	- Added shortcode.php to ACF
+	- Added $prefix_2 to lct_acf_get_fields_by_parent()
+	- Added lct_acf_get_mapped_fields()
+	- Added Shortcode [lct_copyright]
+	- Added lct_acf_get_mapped_fields_of_object()
+	- Added lct_acf_get_fields_by_object()
+	- Added Shortcodes group to lct_acf_op_main_settings
+
 = 4.2.2.27 =
 	- Moved: lct_remove_admin_bar() to lct_show_admin_bar(), under /acf/filter.php
 	- Modified lct_show_admin_bar() so that it will be a dynamic setting in LCT Useful ACF, rather than being hard coded.

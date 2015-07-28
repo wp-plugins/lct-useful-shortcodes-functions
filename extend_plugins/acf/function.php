@@ -20,14 +20,13 @@ function lct_acf_get_full_field_name( $prefix = null, $field_name = null, $delim
 
 /**
  * Unsave the values in the DB, so the fields are empty again
-
  *
-*@param       $fields
+ * @param       $fields
  * @param       $prefix
  * @param array $custom_exclude
  * @param array $custom_include
  *
-*@return bool
+ * @return bool
  */
 function lct_acf_unsave_db_values( $fields, $prefix, $custom_exclude = [ ], $custom_include = [ ] ) {
 	if( empty( $fields['show_params::save_field_values'][0] ) ) {
@@ -107,7 +106,35 @@ function lct_acf_get_fields_mapped( $field_names, $prefix ) {
 }
 
 
-function lct_acf_get_fields_by_parent( $parent, $prefix, $excluded_fields, $just_field_name = false ) {
+/**
+ * Get fields and create our $fields array
+ *
+ * @param $field_names
+ * @param $prefix
+ *
+ * @return mixed
+ */
+function lct_acf_get_mapped_fields( $parent, $prefix, $excluded_fields = null, $just_field_name = false, $prefix_2 = null, $delimiter = ':::' ) {
+	$fields = [ ];
+
+	$field_names = lct_acf_get_fields_by_parent( $parent, $prefix, $excluded_fields, $just_field_name, $prefix_2 );
+
+	foreach( $field_names as $field_name ) {
+		if( $prefix_2 )
+			$full_field_name = lct_acf_get_full_field_name( $prefix . $delimiter . $prefix_2, $field_name, null );
+		else
+			$full_field_name = lct_acf_get_full_field_name( $prefix, $field_name );
+
+		$field_value = get_field( $full_field_name, "option" );
+
+		$fields[$field_name] = $field_value;
+	}
+
+	return $fields;
+}
+
+
+function lct_acf_get_fields_by_parent( $parent, $prefix, $excluded_fields, $just_field_name = false, $prefix_2 = null ) {
 	$fields = [ ];
 
 	$args = [
@@ -123,7 +150,10 @@ function lct_acf_get_fields_by_parent( $parent, $prefix, $excluded_fields, $just
 			//TODO: cs - Need to make ::: dynamic - 7/24/2015 2:06 PM
 			$post_excerpt = str_replace( $prefix . ':::', '', $field_object->post_excerpt );
 
-			if( in_array( $post_excerpt, $excluded_fields ) )
+			if( $prefix_2 )
+				$post_excerpt = str_replace( $prefix_2, '', $post_excerpt );
+
+			if( is_array( $excluded_fields ) && in_array( $post_excerpt, $excluded_fields ) )
 				continue;
 
 			if( $just_field_name ) {
@@ -135,6 +165,70 @@ function lct_acf_get_fields_by_parent( $parent, $prefix, $excluded_fields, $just
 	}
 
 	sort( $fields );
+
+	$fields = array_filter( $fields );
+
+	return $fields;
+}
+
+
+/**
+ * Get fields and create our $fields array
+ *
+ * @param $field_names
+ * @param $prefix
+ *
+ * @return mixed
+ */
+function lct_acf_get_mapped_fields_of_object( $prefix, $excluded_fields = null, $just_field_name = false, $prefix_2 = null, $delimiter = ':::' ) {
+	$fields = [ ];
+
+	$field_names = lct_acf_get_fields_by_object( $prefix, $excluded_fields, $just_field_name, $prefix_2 );
+
+	foreach( $field_names as $field_name ) {
+		if( $prefix_2 )
+			$full_field_name = lct_acf_get_full_field_name( $prefix . $delimiter . $prefix_2, $field_name, null );
+		else
+			$full_field_name = lct_acf_get_full_field_name( $prefix, $field_name );
+
+		$field_value = get_field( $full_field_name, "option" );
+
+		$fields[$field_name] = $field_value;
+	}
+
+	return $fields;
+}
+
+
+function lct_acf_get_fields_by_object( $prefix, $excluded_fields, $just_field_name = false, $prefix_2 = null ) {
+	$fields = [ ];
+
+	$field_objects = get_field_objects( 'option' );
+
+	foreach( $field_objects as $key => $field_object ) {
+		//TODO: cs - Need to make ::: dynamic - 7/24/2015 2:06 PM
+		if( $prefix_2 && strpos( $key, $prefix . ':::' . $prefix_2 ) === false )
+			continue;
+
+		//TODO: cs - Need to make ::: dynamic - 7/24/2015 2:06 PM
+		$post_excerpt = str_replace( $prefix . ':::', '', $key );
+
+		if( $prefix_2 )
+			$post_excerpt = str_replace( $prefix_2, '', $post_excerpt );
+
+		if( is_array( $excluded_fields ) && in_array( $post_excerpt, $excluded_fields ) )
+			continue;
+
+		if( $just_field_name ) {
+			$fields[$field_object['menu_order']] = $post_excerpt;
+		} else {
+			$fields[$field_object['name']] = $post_excerpt;
+		}
+	}
+
+	sort( $fields );
+
+	$fields = array_filter( $fields );
 
 	return $fields;
 }
