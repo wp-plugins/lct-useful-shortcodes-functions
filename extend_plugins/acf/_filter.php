@@ -123,6 +123,10 @@ function lct_show_admin_bar() {
 	if( is_admin() )
 		return true;
 
+	//always hide if noone is logged in
+	if( ! is_user_logged_in() )
+		return false;
+
 	//hide it if the profile says so
 	if( get_user_meta( get_current_user_id(), 'show_admin_bar_front', true ) == 'false' )
 		return false;

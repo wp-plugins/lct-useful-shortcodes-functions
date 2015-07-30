@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.3.1
+Stable tag: 4.3.2
 Requires at least: 3.5
 Tested up to: 4.2.3
 Tags: Functions, Shortcodes
@@ -78,6 +78,10 @@ none
 
 
 == Changelog ==
+= 4.3.2 =
+	- Added lct_avada_save_options() to do_action( 'avada_save_options' );
+	- Fixed bug that was showing an empty admin bar to visitors
+
 = 4.3.1 =
 	- Added shortcode [theme_css]
 	- Cleaned up some code bugs in /misc/shortcodes.php
