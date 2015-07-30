@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.3
+Stable tag: 4.3.1
 Requires at least: 3.5
 Tested up to: 4.2.3
 Tags: Functions, Shortcodes
@@ -78,6 +78,32 @@ none
 
 
 == Changelog ==
+= 4.3.1 =
+	- Added shortcode [theme_css]
+	- Cleaned up some code bugs in /misc/shortcodes.php
+	- Stopped saving lct directory in uploads when the plugin is activated
+	- Deprecated lct_get_test()
+	- Deprecated lct_php()
+	- Deprecated lct_copyyear()
+	- Moved /misc/shortcodes.php TO /features/shortcode/shortcode.php
+	- Moved /features/lct_post_content_shortcode/index.php TO /features/shortcode/lct_post_content.php
+	- Moved /features/shortcode_tel_link.php TO /features/shortcode/tel_link.php
+	- Moved /features/misc_functions.php TO /features/function/_function.php
+	- Changed all lusf to lct
+	- Code Reformat plugin wide
+	- Deprecated lct_css_uploads_dir()
+	- Deprecated lct_js_uploads_dir()
+	- Moved lct_theme_css() into file_processor.php
+	- Finished lct_shortcode_file_processor()
+	- Added shortcode [lct_css] that grab files from the lct-useful-shortcodes-functions plugin directory
+	- Added shortcode [lct_js] that grab files from the lct-useful-shortcodes-functions plugin directory
+	- gforms.css tweaks
+	- Added add_filter( 'avada_blog_read_more_excerpt', 'lct_acf_avada_blog_read_more_excerpt' );
+	- Added ACF Group Theme Settings: Avada
+	- Added Fix/Cleanup 'DB Fix::: Add Post Meta to Multiple Posts'
+	- Removed lct_acf_get_fields_mapped()
+	- Removed lct_acf_get_mapped_fields_of_object()
+
 = 4.3 =
 	- WP v4.2.3 Ready
 	- Added shortcode.php to ACF

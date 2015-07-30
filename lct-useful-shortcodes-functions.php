@@ -1,7 +1,7 @@
 <?php /**
  * Plugin Name: LCT Useful Shortcodes & Functions
  * Plugin URI: http://lookclassy.com/wordpress-plugins/useful-shortcodes-functions/
- * Version: 4.3
+ * Version: 4.3.1
  * Text Domain: lct-useful-shortcodes-functions
  * Author: Look Classy Technologies
  * Author URI: http://lookclassy.com/
@@ -20,15 +20,15 @@ GNU General Public License for more details.
 */
 
 
-//PLUGIN PREFIX: lusf
+//PLUGIN PREFIX: lct
 
 
 //Globals
-$g_lusf = new g_lusf;
+$g_lct = new g_lct;
 
-class g_lusf {
+class g_lct {
 	public $editzz = 'editzz';
-	public $pre = 'lusf_';
+	public $pre = 'lct_';
 	public $lct_dash = 'lct-useful-shortcodes-functions';
 	public $lct_us = 'lct_useful_shortcodes_functions';
 
@@ -58,9 +58,7 @@ include( 'debug/shortcodes.php' );
 include( 'display/fields.php' );
 include( 'display/options.php' );
 
-include( 'features/lct_post_content_shortcode/index.php' );
-include( 'features/misc_functions.php' );
-include( 'features/shortcode_tel_link.php' );
+include( 'features/__init.php' );
 
 include( 'front/functions.php' );
 
@@ -70,7 +68,6 @@ include( 'helpers/helper.php' );
 
 include( 'misc/functions.php' );
 include( 'misc/login.php' );
-include( 'misc/shortcodes.php' );
 
 
 include( 'lct_baw_force_plugin_updates/index.php' );
@@ -84,36 +81,39 @@ include( 'activate.php' );
 
 add_action( 'plugins_loaded', 'lct_plugins_loaded' );
 function lct_plugins_loaded() {
-	include( 'extend_plugins/acf/_init.php' );
+	include( 'extend_plugins/acf/__init.php' );
 }
 
 
 function hook_activate_lct_useful_shortcodes_functions() {
-	$g_lusf = new g_lusf;
+	$g_lct = new g_lct;
 
-	add_option( $g_lusf->lct_us, 'activate' );
+	add_option( $g_lct->lct_us, 'activate' );
 }
 
 
 function hook_deactivate_lct_useful_shortcodes_functions() {
-	global $g_lusf;
+	global $g_lct;
 
-	delete_option( $g_lusf->lct_us );
+	delete_option( $g_lct->lct_us );
 
+	//TODO: cs - Let's not do this for now. Find a way to completely deprovision this action - 7/29/2015 10:18 AM
 	//Move /lct/* dir from the /uploads dir, back to the plugin dir
-	rename( lct_path_up() . '/lct', $g_lusf->plugin_dir_path . 'lct' );
+	//rename( lct_path_up() . '/lct', $g_lct->plugin_dir_path . 'lct' );
 }
 
 
 function hook_uninstall_lct_useful_shortcodes_functions() {
-	global $g_lusf;
+	global $g_lct;
 	$wp_upload_dir = wp_upload_dir();
 
-	delete_option( $g_lusf->lct_us );
+	delete_option( $g_lct->lct_us );
 
+	//TODO: cs - Let's not do this for now. Find a way to completely deprovision this action - 7/29/2015 10:18 AM
 	//Move /lct/* dir from the plugin dir, to the /uploads dir
-	rename( $g_lusf->plugin_dir_path . 'lct', $wp_upload_dir['basedir'] . '/lct' );
+	//rename( $g_lct->plugin_dir_path . 'lct', $wp_upload_dir['basedir'] . '/lct' );
 
+	//TODO: cs - Let's not do this for now. Find a way to completely deprovision this action - 7/29/2015 10:18 AM
 	//rename /lct to /lct-old-time
-	rename( $wp_upload_dir['basedir'] . '/lct', $wp_upload_dir['basedir'] . '/lct-old-' . current_time( 'timestamp', 1 ) );
+	//rename( $wp_upload_dir['basedir'] . '/lct', $wp_upload_dir['basedir'] . '/lct-old-' . current_time( 'timestamp', 1 ) );
 }

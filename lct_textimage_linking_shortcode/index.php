@@ -13,30 +13,30 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 
 	function lct_shortcode_link( $a ) {
 		foreach( $a as $k => $v ) {
-			$a[$k] = do_shortcode( str_replace( array( "{", "}" ), array( "[", "]" ), $v ) );
+			$a[$k] = do_shortcode( str_replace( [ "{", "}" ], [ "[", "]" ], $v ) );
 		}
 
 		extract(
-			shortcode_atts(
-				array(
-					'id'        => null,
-					'text'      => null,
-					'class'     => null,
-					'alt'       => null,
-					'title'     => null,
-					'rel'       => null,
-					'style'     => null,
-					'src'       => null,
-					'query'     => null,
-					'anchor'    => null,
-					'onclick'   => null,
-					'target'    => null,
-					'imagetext' => null,
-					'textimage' => null,
-					'esc_html'  => null,
-				),
-				$a
-			)
+				shortcode_atts(
+						[
+								'id'        => null,
+								'text'      => null,
+								'class'     => null,
+								'alt'       => null,
+								'title'     => null,
+								'rel'       => null,
+								'style'     => null,
+								'src'       => null,
+								'query'     => null,
+								'anchor'    => null,
+								'onclick'   => null,
+								'target'    => null,
+								'imagetext' => null,
+								'textimage' => null,
+								'esc_html'  => null,
+						],
+						$a
+				)
 		);
 
 		if( empty( $id ) )
@@ -90,7 +90,7 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 		if( ! empty( $src ) && $esc_html == 'true' ) {
 			$src = esc_html( $src );
 			$src = "src=\"{$src}\"";
-		} else if ( ! empty( $src ) ) {
+		} else if( ! empty( $src ) ) {
 			$src = "src=\"{$src}\"";
 		}
 
@@ -124,7 +124,7 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 
 				if( $imagetext ) {
 					$link = "<a {$href}{$class}{$title}{$rel}{$style}{$onclick}{$target}><img {$src}{$alt} />{$text}</a>";
-				} else if ( $textimage ) {
+				} else if( $textimage ) {
 					$link = "<a {$href}{$class}{$title}{$rel}{$style}{$onclick}{$target}>{$text}<img {$src}{$alt} /></a>";
 				}
 
@@ -221,98 +221,98 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 	function wptisc_admin_js() {
 		header( 'Content-type: text/javascript' ); ?>
 		jQuery(function($) {
-			$('#wptisc_meta_box a.wptisc_help').click(function() {
-				$('#wptisc_meta_box div.wptisc_readme').slideToggle(function() {
-					$('#wptisc_id').css('background', '#fff');
-				});
-				return false;
-			});
+		$('#wptisc_meta_box a.wptisc_help').click(function() {
+		$('#wptisc_meta_box div.wptisc_readme').slideToggle(function() {
+		$('#wptisc_id').css('background', '#fff');
+		});
+		return false;
+		});
 
-			$('#wptisc_editor_button').click(function() {
-				var id = " id=\"" + $('#wptisc_id').val() + "\"";
-				var text = "";
-				var link_class = "";
-				var alt = "";
-				var title = "";
-				var rel = "";
-				var style = "";
-				var src = "";
-				var anchor = "";
-				var onclick = "";
-				var target = "";
+		$('#wptisc_editor_button').click(function() {
+		var id = " id=\"" + $('#wptisc_id').val() + "\"";
+		var text = "";
+		var link_class = "";
+		var alt = "";
+		var title = "";
+		var rel = "";
+		var style = "";
+		var src = "";
+		var anchor = "";
+		var onclick = "";
+		var target = "";
 
-				if( $('#wptisc_text').val() )
-					text = " text=\"" + $('#wptisc_text').val() + "\"";
+		if( $('#wptisc_text').val() )
+		text = " text=\"" + $('#wptisc_text').val() + "\"";
 
-				if( $('#wptisc_class').val() )
-					link_class = " class=\"" + $('#wptisc_class').val() + "\"";
+		if( $('#wptisc_class').val() )
+		link_class = " class=\"" + $('#wptisc_class').val() + "\"";
 
-				if( $('#wptisc_alt').val() )
-					alt = " alt=\"" + $('#wptisc_alt').val() + "\"";
+		if( $('#wptisc_alt').val() )
+		alt = " alt=\"" + $('#wptisc_alt').val() + "\"";
 
-				if( $('#wptisc_title').val() )
-					title = " title=\"" + $('#wptisc_title').val() + "\"";
+		if( $('#wptisc_title').val() )
+		title = " title=\"" + $('#wptisc_title').val() + "\"";
 
-				if( $('#wptisc_rel').val() )
-					rel = " rel=\"" + $('#wptisc_rel').val() + "\"";
+		if( $('#wptisc_rel').val() )
+		rel = " rel=\"" + $('#wptisc_rel').val() + "\"";
 
-				if( $('#wptisc_style').val() )
-					style = " style=\"" + $('#wptisc_style').val() + "\"";
+		if( $('#wptisc_style').val() )
+		style = " style=\"" + $('#wptisc_style').val() + "\"";
 
-				if( $('#wptisc_src').val() )
-					src = " src=\"" + $('#wptisc_src').val() + "\"";
+		if( $('#wptisc_src').val() )
+		src = " src=\"" + $('#wptisc_src').val() + "\"";
 
-				if( $('#wptisc_anchor').val() )
-					anchor = " anchor=\"" + $('#wptisc_anchor').val() + "\"";
+		if( $('#wptisc_anchor').val() )
+		anchor = " anchor=\"" + $('#wptisc_anchor').val() + "\"";
 
-				if( $('#wptisc_onclick').val() )
-					onclick = " onclick=\"" + $('#wptisc_onclick').val() + "\"";
+		if( $('#wptisc_onclick').val() )
+		onclick = " onclick=\"" + $('#wptisc_onclick').val() + "\"";
 
-				if( $('#wptisc_target').val() )
-					target = " target=\"" + $('#wptisc_target').val() + "\"";
+		if( $('#wptisc_target').val() )
+		target = " target=\"" + $('#wptisc_target').val() + "\"";
 
-				window.send_to_editor( "[link" + id + text + link_class + alt + title + rel + style + src + anchor + onclick + target + "]" );
+		window.send_to_editor( "[link" + id + text + link_class + alt + title + rel + style + src + anchor + onclick + target + "]" );
 
-				return false;
-			});
+		return false;
+		});
 
-			$('#wptisc_id').keyup(function(e) {
-				form = $('#wptisc_meta_box');
-				term = $(this).val();
-				// catch everything except up/down arrow
-				switch (e.which) {
-					case 27: // esc
-						form.find('.live_search_results ul').remove();
-						break;
-					case 13: // enter
-					case 38: // up
-					case 40: // down
-						break;
-					default:
-						if (term == '') {
-							form.find('.live_search_results ul').remove();
-						}
-						if (term.length > 2) {
-							$.get(
-								'<?php echo admin_url( 'index.php' ); ?>',
-							{
-								tisc_action: 'wptisc_id_lookup',
-								post_title: term
-							},
-								function(response) {
-									$('#wptisc_meta_box div.live_search_results').html(response).find('li').click(function() {
-										$('#wptisc_id').val( $(this).attr( 'class' ) );
-										$('#wptisc_extras').show();
-										$('#wptisc_extras [id*="wptisc_"]').val('');
-										form.find('.live_search_results ul').remove();
-										return false;
-									});
-								},
-								'html'
-						);
-						}
-				}
-			});
+		$('#wptisc_id').keyup(function(e) {
+		form = $('#wptisc_meta_box');
+		term = $(this).val();
+		// catch everything except up/down arrow
+		switch (e.which) {
+		case 27: // esc
+		form.find('.live_search_results ul').remove();
+		break;
+		case 13: // enter
+		case 38: // up
+		case 40: // down
+		break;
+		default:
+		if (term == '') {
+		form.find('.live_search_results ul').remove();
+		}
+		if (term.length > 2) {
+		$.get(
+		'<?php echo admin_url( 'index.php' ); ?>',
+		{
+		tisc_action: 'wptisc_id_lookup',
+		post_title: term
+		},
+		function(response) {
+		$('#wptisc_meta_box div.live_search_results').html(response).find('li').click(function() {
+		$('#wptisc_id').val( $(this).attr( 'class' ) );
+		$('#wptisc_extras').show();
+		$('#wptisc_extras [id*="wptisc_"]').val('');
+		form.find('.live_search_results ul').remove();
+		return false;
+		});
+		},
+		'html'
+		);
+		}
+		}
+		});
 		});
 		<?php
 		die();
@@ -323,77 +323,77 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 
 
 	function wptisc_admin_js_call() {
-		wp_enqueue_script( 'wptisc_admin_js', trailingslashit( get_bloginfo( 'url' ) ) . '?tisc_action=wptisc_admin_js', array( 'jquery' ) );
+		wp_enqueue_script( 'wptisc_admin_js', trailingslashit( get_bloginfo( 'url' ) ) . '?tisc_action=wptisc_admin_js', [ 'jquery' ] );
 	}
 
 
 	function wptisc_admin_css() {
 		header( 'Content-type: text/css' ); ?>
 		#wptisc_meta_box fieldset a.wptisc_help {
-			background: #f5f5f5;
-			border-radius: 6px;
-			-moz-border-radius: 6px;
-			-webkit-border-radius: 6px;
-			color: #666;
-			display: block;
-			font-size: 11px;
-			float: right;
-			padding: 4px 6px;
-			text-decoration: none;
+		background: #f5f5f5;
+		border-radius: 6px;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		color: #666;
+		display: block;
+		font-size: 11px;
+		float: right;
+		padding: 4px 6px;
+		text-decoration: none;
 		}
 
 		#wptisc_meta_box fieldset label {
-			display: none;
+		display: none;
 		}
 
 		#wptisc_meta_box fieldset input {
-			width: 235px;
+		width: 235px;
 		}
 
 		#wptisc_meta_box .live_search_results {
-			position: relative;
-			z-index: 500;
+		position: relative;
+		z-index: 500;
 		}
 
 		#wptisc_meta_box .live_search_results ul {
-			background: #fff;
-			list-style: none;
-			margin: 0 0 0 1px;
-			padding: 0 2px 3px;
-			position: absolute;
-			width: 230px;
+		background: #fff;
+		list-style: none;
+		margin: 0 0 0 1px;
+		padding: 0 2px 3px;
+		position: absolute;
+		width: 230px;
 		}
 
 		#wptisc_meta_box .live_search_results ul li {
-			border: 1px solid #eee;
-			border-top: 0;
-			cursor: pointer;
-			line-height: 100%;
-			margin: 0;
-			overflow: hidden;
-			padding: 5px;
+		border: 1px solid #eee;
+		border-top: 0;
+		cursor: pointer;
+		line-height: 100%;
+		margin: 0;
+		overflow: hidden;
+		padding: 5px;
 		}
 
 		#wptisc_meta_box .live_search_results ul li.active,
 		#wptisc_meta_box .live_search_results ul li:hover {
-			background: #e0edf5;
-			font-weight: bold;
+		background: #e0edf5;
+		font-weight: bold;
 		}
 
 		#wptisc_meta_box .live_search_results input {
-			width: 200px;
+		width: 200px;
 		}
 
 		#wptisc_meta_box div.wptisc_readme {
-			display: none;
+		display: none;
 		}
 
 		#wptisc_meta_box div.wptisc_readme li {
-			margin: 0 10px 10px;
+		margin: 0 10px 10px;
 		}
 
 		#wptisc_extras input{
-			margin-bottom: 6px;
+		margin-bottom: 6px;
 		}
 		<?php
 		die();
@@ -408,14 +408,18 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 
 	function wptisc_meta_box() { ?>
 		<fieldset>
-			<p style="margin: 0;text-align: center;"><strong>To start:</strong><br />Search for a page to create a link.<br />Or just type in the url if it is external.</p>
+			<p style="margin: 0;text-align: center;"><strong>To start:</strong><br />Search for a page to create a link.<br />Or just type in the url if it is external.
+			</p>
 			<a href="#" class="wptisc_help"><?php _e( '?', 'lct-useful-shortcodes-functions' ); ?></a>
 
 			<input type="text" name="wptisc_id" id="wptisc_id" placeholder="<?php _e( 'Search by Page/Post Title...', 'lct-useful-shortcodes-functions' ); ?>" autocomplete="off" />
+
 			<div class="live_search_results"></div>
 
 			<div id="wptisc_extras" style="display: none;">
-				<p style="margin: 0;text-align: center;"><strong>Now:</strong><br />Add any of the optional features.<br />And click Send To Content Area.</p>
+				<p style="margin: 0;text-align: center;">
+					<strong>Now:</strong><br />Add any of the optional features.<br />And click Send To Content Area.
+				</p>
 
 				<input type="text" name="wptisc_text" id="wptisc_text" placeholder="<?php _e( 'Link Text (optional)', 'lct-useful-shortcodes-functions' ); ?>" />
 				<input type="text" name="wptisc_class" id="wptisc_class" placeholder="<?php _e( 'Link Class (optional)', 'lct-useful-shortcodes-functions' ); ?>" />
@@ -428,7 +432,8 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 				<input type="text" name="wptisc_onclick" id="wptisc_onclick" placeholder="<?php _e( 'Link onclick (optional)', 'lct-useful-shortcodes-functions' ); ?>" />
 				<input type="text" name="wptisc_target" id="wptisc_target" placeholder="<?php _e( 'Link target (optional)', 'lct-useful-shortcodes-functions' ); ?>" />
 
-				<p style="margin: 0;text-align: center;"><strong>Advanced Attributes:</strong><br />query, imagetext, textimage, esc_html</p>
+				<p style="margin: 0;text-align: center;">
+					<strong>Advanced Attributes:</strong><br />query, imagetext, textimage, esc_html</p>
 
 
 				<button class="button button-primary button-large" name="wptisc_editor_button" id="wptisc_editor_button" style="margin: 0 auto; display: block;">Send To Content Area</button>
@@ -445,13 +450,20 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 
 			<p><?php _e( 'There are several different ways that you can enter the shortcode:', 'lct-useful-shortcodes-functions' ); ?></p>
 			<ul>
-				<li><code>[link id='123']</code> = <code>&lt;a href="{<?php _e( 'url of post/page #123', 'lct-useful-shortcodes-functions' ); ?>}">{<?php _e( 'title of post/page #123', 'lct-useful-shortcodes-functions' ); ?>}&lt;/a></code></li>
-				<li><code>[link id='123' text='<b><?php _e( 'my link text', 'lct-useful-shortcodes-functions' ); ?></b>']</code> = <code>&lt;a href="{<?php _e( 'url of post/page #123', 'lct-useful-shortcodes-functions' ); ?>}"><b><?php _e( 'my link text', 'lct-useful-shortcodes-functions' ); ?></b>&lt;/a></code></li>
+				<li><code>[link id='123']</code> =
+					<code>&lt;a href="{<?php _e( 'url of post/page #123', 'lct-useful-shortcodes-functions' ); ?>}">{<?php _e( 'title of post/page #123', 'lct-useful-shortcodes-functions' ); ?>}&lt;/a></code>
+				</li>
+				<li><code>[link id='123' text='<b><?php _e( 'my link text', 'lct-useful-shortcodes-functions' ); ?></b>']</code> =
+					<code>&lt;a href="{<?php _e( 'url of post/page #123', 'lct-useful-shortcodes-functions' ); ?>}"><b><?php _e( 'my link text', 'lct-useful-shortcodes-functions' ); ?></b>&lt;/a></code>
+				</li>
 			</ul>
 
 			<p><?php _e( 'You can also add a <code>class</code> or <code>rel</code> attribute to the shortcode, and it will be included in the resulting <code>&lt;a></code> tag:', 'lct-useful-shortcodes-functions' ); ?></p>
 			<ul>
-				<li><code>[link id='123' text='<?php _e( 'my link text', 'lct-useful-shortcodes-functions' ); ?>' class='my-class' rel='external']</code> = <code>&lt;a href="{<?php _e( 'url of post/page #123', 'lct-useful-shortcodes-functions' ); ?>}" class="my-class" rel="external"><?php _e( 'my link text', 'lct-useful-shortcodes-functions' ); ?>&lt;/a></code></li>
+				<li>
+					<code>[link id='123' text='<?php _e( 'my link text', 'lct-useful-shortcodes-functions' ); ?>' class='my-class' rel='external']</code> =
+					<code>&lt;a href="{<?php _e( 'url of post/page #123', 'lct-useful-shortcodes-functions' ); ?>}" class="my-class" rel="external"><?php _e( 'my link text', 'lct-useful-shortcodes-functions' ); ?>&lt;/a></code>
+				</li>
 			</ul>
 
 			<h4><?php _e( 'Usage', 'lct-useful-shortcodes-functions' ); ?></h4>
@@ -474,10 +486,10 @@ if( ! function_exists( 'shortcode_textimage' ) ) {
 		add_meta_box( 'wptisc_meta_box', __( 'Link Shortcode Creator', 'lct-useful-shortcodes-functions' ), 'wptisc_meta_box', 'post', 'side' );
 		add_meta_box( 'wptisc_meta_box', __( 'Link Shortcode Creator', 'lct-useful-shortcodes-functions' ), 'wptisc_meta_box', 'page', 'side' );
 
-		$args = array(
-			'public'   => true,
-			'_builtin' => false
-		);
+		$args = [
+				'public'   => true,
+				'_builtin' => false
+		];
 
 		$output = 'names';
 		$post_types = get_post_types( $args, $output );

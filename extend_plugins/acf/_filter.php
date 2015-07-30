@@ -140,3 +140,20 @@ function lct_show_admin_bar() {
 	//if we made it through all that show the dang the admin bar
 	return true;
 }
+
+
+add_filter( 'avada_blog_read_more_excerpt', 'lct_acf_avada_blog_read_more_excerpt' );
+/**
+ * Replace the default read more text with an ACF value
+ *
+ * @param $read_more_text
+ *
+ * @return bool|mixed|null|void
+ */
+function lct_acf_avada_blog_read_more_excerpt( $read_more_text ) {
+
+	if( $new_read_more_text = get_field( 'lct:::avada::post_excerpt_read_more', 'option', true ) )
+		$read_more_text = $new_read_more_text;
+
+	return $read_more_text;
+}

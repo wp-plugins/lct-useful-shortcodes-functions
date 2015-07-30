@@ -396,12 +396,59 @@ if( function_exists( 'acf_add_local_field_group' ) && ! $dev ):
 				],
 			],
 		],
-		'menu_order'            => 0,
+		'menu_order'            => 2,
 		'position'              => 'normal',
 		'style'                 => 'default',
 		'label_placement'       => 'top',
 		'instruction_placement' => 'label',
 		'hide_on_screen'        => '',
 	] );
+
+
+	$Avada = wp_get_theme( 'Avada' );
+	if( $Avada->exists() ) {
+		acf_add_local_field_group( [
+			'key'                   => 'group_55b94b2bcdb25',
+			'title'                 => 'Theme Settings: Avada',      //TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE----TITLE
+			'fields'                => [
+				[
+					'key'               => 'field_55b94b4f5caa0',
+					'label'             => 'Post Excerpt Read More Replacement',
+					'name'              => 'lct:::avada::post_excerpt_read_more',
+					'type'              => 'textarea',
+					'instructions'      => 'Replace [...] with what ever you want.',
+					'required'          => 0,
+					'conditional_logic' => 0,
+					'wrapper'           => [
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					],
+					'default_value'     => '',
+					'placeholder'       => '',
+					'maxlength'         => '',
+					'rows'              => '',
+					'new_lines'         => 'br',
+					'readonly'          => 0,
+					'disabled'          => 0,
+				],
+			],
+			'location'              => [
+				[
+					[
+						'param'    => 'options_page',
+						'operator' => '==',
+						'value'    => 'lct_acf_op_main_settings',
+					],
+				],
+			],
+			'menu_order'            => 3,
+			'position'              => 'normal',
+			'style'                 => 'default',
+			'label_placement'       => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen'        => '',
+		] );
+	}
 
 endif;

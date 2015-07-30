@@ -30,28 +30,28 @@ function lct_hack_site_transient_update_plugins( $plugin_paths ) {
 
 		if( $plugin_file ) {
 			if( ! function_exists( 'plugins_api' ) ) {
-				include ( ABSPATH . '/wp-admin/includes/plugin-install.php' );
+				include( ABSPATH . '/wp-admin/includes/plugin-install.php' );
 			}
 
 			$plugin_api = plugins_api(
-									'plugin_information',
-									array(
-										'slug' => $plugin_folder,
-										'fields' => array(
-											'sections' => false,
-											'compatibility' => false,
-											'tags' => false
-										)
-									)
-								);
+				'plugin_information',
+				[
+					'slug'   => $plugin_folder,
+					'fields' => [
+						'sections'      => false,
+						'compatibility' => false,
+						'tags'          => false
+					]
+				]
+			);
 
-			$temp_array = array(
-							'slug' => $plugin_folder,
-							'new_version' => $plugin_api->version,
-							'package' => $plugin_api->download_link
-						);
+			$temp_array = [
+				'slug'        => $plugin_folder,
+				'new_version' => $plugin_api->version,
+				'package'     => $plugin_api->download_link
+			];
 
-			$temp_object = ( object )$temp_array;
+			$temp_object = ( object ) $temp_array;
 			$plugin_transient->response[$plugin_path] = $temp_object;
 		}
 	}

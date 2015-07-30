@@ -12,8 +12,8 @@ function lct_get_lct_useful_settings( $value = null ) {
 			return;
 	}
 
-  	if( ! $lct_useful_settings )
-  		$lct_useful_settings = array();
+	if( ! $lct_useful_settings )
+		$lct_useful_settings = [ ];
 
 	return $lct_useful_settings;
 }

@@ -7,9 +7,9 @@ function lct_front_css() {
 	if( ! lct_get_lct_useful_settings( 'Enable_Front_css' ) )
 		return;
 
-	$g_lusf = new g_lusf;
+	$g_lct = new g_lct;
 
-	wp_enqueue_style( 'lct_front_css', $g_lusf->plugin_dir_url . 'assets/css/front.css' );
+	wp_enqueue_style( 'lct_front_css', $g_lct->plugin_dir_url . 'assets/css/front.css' );
 }
 
 
@@ -21,9 +21,9 @@ function lct_gforms_css() {
 	if( ! lct_get_lct_useful_settings( 'use_gforms_css_tweaks' ) )
 		return;
 
-	$g_lusf = new g_lusf;
+	$g_lct = new g_lct;
 
-	wp_enqueue_style( 'lct_gforms_css', $g_lusf->plugin_dir_url . 'assets/css/gforms.css' );
+	wp_enqueue_style( 'lct_gforms_css', $g_lct->plugin_dir_url . 'assets/css/gforms.css' );
 }
 
 
@@ -35,9 +35,9 @@ function lct_avada_css() {
 	if( lct_get_lct_useful_settings( 'disable_avada_css' ) )
 		return;
 
-	$g_lusf = new g_lusf;
+	$g_lct = new g_lct;
 
-	wp_enqueue_style( 'lct_avada_css', $g_lusf->plugin_dir_url . 'assets/css/avada.css' );
+	wp_enqueue_style( 'lct_avada_css', $g_lct->plugin_dir_url . 'assets/css/avada.css' );
 }
 
 
@@ -46,8 +46,8 @@ function lct_avada_css() {
  */
 add_action( 'lct_jquery_autosize_min_js', 'lct_jquery_autosize_min_js' );
 function lct_jquery_autosize_min_js() {
-	$g_lusf = new g_lusf;
+	$g_lct = new g_lct;
 
-	wp_register_script( 'lct_jquery_autosize_min_js', $g_lusf->plugin_dir_url . 'includes/autosize/jquery.autosize.min.js', array('jquery') );
+	wp_register_script( 'lct_jquery_autosize_min_js', $g_lct->plugin_dir_url . 'includes/autosize/jquery.autosize.min.js', [ 'jquery' ] );
 	wp_enqueue_script( 'lct_jquery_autosize_min_js' );
 }

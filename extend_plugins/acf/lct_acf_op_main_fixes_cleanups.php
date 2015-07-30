@@ -48,6 +48,7 @@ function lca_get_fixes_cleanups_message( $prefix = null, $parent = null ) {
 
 
 /**
+ * DB Fix::: Add taxonomy field data to old entries
  * Adds ACF taxonomy meta to newly created fields for existing groups
  *
  * @param $prefix
@@ -63,9 +64,7 @@ function lca_get_fixes_cleanups_message___db_fix_atfd_7637( $prefix, $parent ) {
 		'lct_fix'
 	];
 
-	$field_names = lct_acf_get_fields_by_parent( $parent, $prefix, $excluded_fields, true );
-
-	$fields = lct_acf_get_fields_mapped( $field_names, $prefix );
+	$fields = lct_acf_get_mapped_fields( $parent, $prefix, $excluded_fields, true );
 
 	//Unsave the values in the DB, so the fields are empty again
 	lct_acf_unsave_db_values( $fields, $prefix );
@@ -119,6 +118,84 @@ function lca_get_fixes_cleanups_message___db_fix_atfd_7637( $prefix, $parent ) {
 		$message .= '</ul>';
 	} else {
 		$message = "<h1 style='color: red;font-weight: bold'>Invalid Taxonomy</h1>";
+
+		return $message;
+	}
+
+
+	//Done with the fix
+
+
+	$message .= lct_acf_recap_field_settings( $fields, $prefix );
+
+	return $message;
+}
+
+
+/**
+ * DB Fix::: Add Post Meta to Multiple Posts
+ * Adds/Updates your desired post meta key and value to your noted array of posts
+ *
+ * @param $prefix
+ * @param $parent
+ *
+ * @return string
+ */
+function lca_get_fixes_cleanups_message___db_fix_apmmp_5545( $prefix, $parent ) {
+	$message = '';
+
+	$excluded_fields = [
+		'show_params',
+		'lct_fix'
+	];
+
+	$fields = lct_acf_get_mapped_fields( $parent, $prefix, $excluded_fields, true );
+
+	//Unsave the values in the DB, so the fields are empty again
+	lct_acf_unsave_db_values( $fields, $prefix );
+
+
+	if( ! isset( $fields['run_this'][0] ) ) {
+		$message = "<h1 style='color: green;font-weight: bold'>Select some options below to run this Fix/Cleanup.</h1>";
+
+		return $message;
+	}
+
+
+	//Ok, We are finally able to run the fix if we made it this far.
+
+
+	if( ! empty( $fields['posts'] ) ) {
+		$posts = explode( ',', $fields['posts'] );
+		$meta_value = '';
+
+		if( $fields['is_array'][0] ) {
+			$meta_value = explode( ",", $fields['meta_value'] );
+		}
+
+		$message .= '<h2>Updated Post IDs</h2>';
+
+		$message .= '<ul>';
+
+		foreach( $posts as $post_id ) {
+			if( ! is_numeric( $post_id ) )
+				continue;
+
+			if( ! $fields['overwrite_value'][0] ) {
+				$current_value = get_post_meta( $post_id, $fields['meta_key'], true );
+
+				if( ! empty( $current_value ) )
+					continue;
+			}
+
+			$message .= "<li><span style='font-weight: bold;'>Post ID " . $post_id . ":</span> " . get_the_title( $post_id ) . "</li>";
+
+			update_post_meta( $post_id, $fields['meta_key'], $meta_value );
+		}
+
+		$message .= '</ul>';
+	} else {
+		$message = "<h1 style='color: red;font-weight: bold'>Invalid Post ID Array</h1>";
 
 		return $message;
 	}

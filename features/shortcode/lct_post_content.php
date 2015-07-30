@@ -11,17 +11,17 @@ if( ! function_exists( 'lct_post_content_shortcode' ) ) {
 
 	function lct_post_content_shortcode( $a ) {
 		foreach( $a as $k => $v ) {
-			$a[$k] = do_shortcode( str_replace( array( "{", "}" ), array( "[", "]" ), $v ) );
+			$a[$k] = do_shortcode( str_replace( [ "{", "}" ], [ "[", "]" ], $v ) );
 		}
 
 		extract(
-			shortcode_atts(
-				array(
-					'id'        => null,
-					'esc_html'  => null,
-				),
-				$a
-			)
+				shortcode_atts(
+						[
+								'id'       => null,
+								'esc_html' => null,
+						],
+						$a
+				)
 		);
 
 		if( empty( $id ) )
@@ -123,51 +123,51 @@ if( ! function_exists( 'lct_post_content_shortcode' ) ) {
 	function lctpcs_admin_js() {
 		header( 'Content-type: text/javascript' ); ?>
 		jQuery(function($) {
-			$('#lctpcs_editor_button').click(function() {
-				var id = " id=\"" + $('#lctpcs_id').val() + "\"";
+		$('#lctpcs_editor_button').click(function() {
+		var id = " id=\"" + $('#lctpcs_id').val() + "\"";
 
-				window.send_to_editor( "[lct_post_content" + id + "]" );
+		window.send_to_editor( "[lct_post_content" + id + "]" );
 
-				return false;
-			});
+		return false;
+		});
 
-			$('#lctpcs_id').keyup(function(e) {
-				form = $('#lctpcs_meta_box');
-				term = $(this).val();
-				// catch everything except up/down arrow
-				switch (e.which) {
-					case 27: // esc
-						form.find('.live_search_results ul').remove();
-						break;
-					case 13: // enter
-					case 38: // up
-					case 40: // down
-						break;
-					default:
-						if (term == '') {
-							form.find('.live_search_results ul').remove();
-						}
-						if (term.length > 2) {
-							$.get(
-								'<?php echo admin_url( 'index.php' ); ?>',
-							{
-								lctpcs_action: 'lctpcs_id_lookup',
-								post_title: term
-							},
-								function(response) {
-									$('#lctpcs_meta_box div.live_search_results').html(response).find('li').click(function() {
-										$('#lctpcs_id').val( $(this).attr( 'class' ) );
-										$('#lctpcs_extras').show();
-										$('#lctpcs_extras [id*="lctpcs_"]').val('');
-										form.find('.live_search_results ul').remove();
-										return false;
-									});
-								},
-								'html'
-						);
-						}
-				}
-			});
+		$('#lctpcs_id').keyup(function(e) {
+		form = $('#lctpcs_meta_box');
+		term = $(this).val();
+		// catch everything except up/down arrow
+		switch (e.which) {
+		case 27: // esc
+		form.find('.live_search_results ul').remove();
+		break;
+		case 13: // enter
+		case 38: // up
+		case 40: // down
+		break;
+		default:
+		if (term == '') {
+		form.find('.live_search_results ul').remove();
+		}
+		if (term.length > 2) {
+		$.get(
+		'<?php echo admin_url( 'index.php' ); ?>',
+		{
+		lctpcs_action: 'lctpcs_id_lookup',
+		post_title: term
+		},
+		function(response) {
+		$('#lctpcs_meta_box div.live_search_results').html(response).find('li').click(function() {
+		$('#lctpcs_id').val( $(this).attr( 'class' ) );
+		$('#lctpcs_extras').show();
+		$('#lctpcs_extras [id*="lctpcs_"]').val('');
+		form.find('.live_search_results ul').remove();
+		return false;
+		});
+		},
+		'html'
+		);
+		}
+		}
+		});
 		});
 		<?php
 		die();
@@ -178,77 +178,77 @@ if( ! function_exists( 'lct_post_content_shortcode' ) ) {
 
 
 	function lctpcs_admin_js_call() {
-		wp_enqueue_script( 'lctpcs_admin_js', trailingslashit( get_bloginfo( 'url' ) ) . '?lctpcs_action=lctpcs_admin_js', array( 'jquery' ) );
+		wp_enqueue_script( 'lctpcs_admin_js', trailingslashit( get_bloginfo( 'url' ) ) . '?lctpcs_action=lctpcs_admin_js', [ 'jquery' ] );
 	}
 
 
 	function lctpcs_admin_css() {
 		header( 'Content-type: text/css' ); ?>
 		#lctpcs_meta_box fieldset a.lctpcs_help {
-			background: #f5f5f5;
-			border-radius: 6px;
-			-moz-border-radius: 6px;
-			-webkit-border-radius: 6px;
-			color: #666;
-			display: block;
-			font-size: 11px;
-			float: right;
-			padding: 4px 6px;
-			text-decoration: none;
+		background: #f5f5f5;
+		border-radius: 6px;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		color: #666;
+		display: block;
+		font-size: 11px;
+		float: right;
+		padding: 4px 6px;
+		text-decoration: none;
 		}
 
 		#lctpcs_meta_box fieldset label {
-			display: none;
+		display: none;
 		}
 
 		#lctpcs_meta_box fieldset input {
-			width: 235px;
+		width: 235px;
 		}
 
 		#lctpcs_meta_box .live_search_results {
-			position: relative;
-			z-index: 500;
+		position: relative;
+		z-index: 500;
 		}
 
 		#lctpcs_meta_box .live_search_results ul {
-			background: #fff;
-			list-style: none;
-			margin: 0 0 0 1px;
-			padding: 0 2px 3px;
-			position: absolute;
-			width: 230px;
+		background: #fff;
+		list-style: none;
+		margin: 0 0 0 1px;
+		padding: 0 2px 3px;
+		position: absolute;
+		width: 230px;
 		}
 
 		#lctpcs_meta_box .live_search_results ul li {
-			border: 1px solid #eee;
-			border-top: 0;
-			cursor: pointer;
-			line-height: 100%;
-			margin: 0;
-			overflow: hidden;
-			padding: 5px;
+		border: 1px solid #eee;
+		border-top: 0;
+		cursor: pointer;
+		line-height: 100%;
+		margin: 0;
+		overflow: hidden;
+		padding: 5px;
 		}
 
 		#lctpcs_meta_box .live_search_results ul li.active,
 		#lctpcs_meta_box .live_search_results ul li:hover {
-			background: #e0edf5;
-			font-weight: bold;
+		background: #e0edf5;
+		font-weight: bold;
 		}
 
 		#lctpcs_meta_box .live_search_results input {
-			width: 200px;
+		width: 200px;
 		}
 
 		#lctpcs_meta_box div.lctpcs_readme {
-			display: none;
+		display: none;
 		}
 
 		#lctpcs_meta_box div.lctpcs_readme li {
-			margin: 0 10px 10px;
+		margin: 0 10px 10px;
 		}
 
 		#lctpcs_extras input{
-			margin-bottom: 6px;
+		margin-bottom: 6px;
 		}
 		<?php
 		die();
@@ -263,13 +263,17 @@ if( ! function_exists( 'lct_post_content_shortcode' ) ) {
 
 	function lctpcs_meta_box() { ?>
 		<fieldset>
-			<p style="margin: 0;text-align: center;"><strong>To start:</strong><br />Search for a page that you would like to pull content from.</p>
+			<p style="margin: 0;text-align: center;">
+				<strong>To start:</strong><br />Search for a page that you would like to pull content from.</p>
 
 			<input type="text" name="lctpcs_id" id="lctpcs_id" placeholder="<?php _e( 'Search by Page/Post Title...', 'lct-useful-shortcodes-functions' ); ?>" autocomplete="off" />
+
 			<div class="live_search_results"></div>
 
 			<div id="lctpcs_extras" style="display: none;">
-				<p style="margin: 0;text-align: center;"><strong>Now:</strong><br />Add any of the optional features.<br />And click Send To Content Area.</p>
+				<p style="margin: 0;text-align: center;">
+					<strong>Now:</strong><br />Add any of the optional features.<br />And click Send To Content Area.
+				</p>
 
 				<p style="margin: 0;text-align: center;"><strong>Advanced Attributes:</strong><br />esc_html</p>
 
@@ -284,10 +288,10 @@ if( ! function_exists( 'lct_post_content_shortcode' ) ) {
 		add_meta_box( 'lctpcs_meta_box', __( 'Other Post Content Grabber', 'lct-useful-shortcodes-functions' ), 'lctpcs_meta_box', 'post', 'side' );
 		add_meta_box( 'lctpcs_meta_box', __( 'Other Post Content Grabber', 'lct-useful-shortcodes-functions' ), 'lctpcs_meta_box', 'page', 'side' );
 
-		$args = array(
-			'public'   => true,
-			'_builtin' => false
-		);
+		$args = [
+				'public'   => true,
+				'_builtin' => false
+		];
 
 		$output = 'names';
 		$post_types = get_post_types( $args, $output );

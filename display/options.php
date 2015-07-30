@@ -142,7 +142,7 @@ function lct_select_options_all_tax( $hide, $type, $v ) {
 	$tax = $v['options_tax'];
 	$tax_parent = $v['options_tax_parent'];
 
-	$args = array(
+	$args = [
 		'orderby'      => 'term_order',
 		'order'        => 'ASC',
 		'hide_empty'   => 0,
@@ -150,7 +150,7 @@ function lct_select_options_all_tax( $hide, $type, $v ) {
 		'taxonomy'     => $tax,
 		'parent'       => $tax_parent,
 		'pad_counts'   => false
-	);
+	];
 	$cats = get_categories( $args );
 
 	$select_options = [ ];
@@ -160,13 +160,13 @@ function lct_select_options_all_tax( $hide, $type, $v ) {
 
 	foreach( $cats as $cat ) {
 		$term_meta = get_option( $tax . "_$cat->term_id" );
-		$value = array( 'value' => $cat->term_id );
-		$array = array(
+		$value = [ 'value' => $cat->term_id ];
+		$array = [
 			'label' => $cat->name,
 			'color' => $term_meta['color'],
 			'icon'  => $term_meta['icon'],
 			'level' => $term_meta['level'],
-		);
+		];
 		$tmp = array_merge( $value, $array );
 		$select_options[] = $tmp;
 	}
@@ -191,7 +191,7 @@ function lct_select_options_gravity_forms( $hide, $type, $v ) {
 		$select_options[] = lct_get_select_blank();
 
 	foreach( $forms as $form ) {
-		$select_options[] = array( 'label' => $form->title, 'value' => $form->id );
+		$select_options[] = [ 'label' => $form->title, 'value' => $form->id ];
 	}
 
 	return $select_options;
@@ -211,10 +211,10 @@ function lct_select_options_gravity_forms_form_fields( $hide, $type, $v ) {
 		$select_options[] = lct_get_select_blank();
 
 	foreach( $form['fields'] as $fields ) {
-		$exclude_type = array(
+		$exclude_type = [
 			'section',
 			'html',
-		);
+		];
 
 		if( in_array( $fields['type'], $exclude_type ) )
 			continue;
@@ -222,18 +222,18 @@ function lct_select_options_gravity_forms_form_fields( $hide, $type, $v ) {
 		switch( $fields['type'] ) {
 			case 'address':
 				foreach( $fields['inputs'] as $tmp ) {
-					$select_options[] = array( 'label' => $tmp['label'], 'value' => $tmp['id'] );
+					$select_options[] = [ 'label' => $tmp['label'], 'value' => $tmp['id'] ];
 				}
 				break;
 
 			case 'checkbox':
 				foreach( $fields['inputs'] as $tmp ) {
-					$select_options[] = array( 'label' => $fields['label'] . ': ' . $tmp['label'], 'value' => $tmp['id'] );
+					$select_options[] = [ 'label' => $fields['label'] . ': ' . $tmp['label'], 'value' => $tmp['id'] ];
 				}
 				break;
 
 			default:
-				$select_options[] = array( 'label' => $fields['label'], 'value' => $fields['id'] );
+				$select_options[] = [ 'label' => $fields['label'], 'value' => $fields['id'] ];
 				break;
 		}
 	}
@@ -256,7 +256,7 @@ function lct_select_options_get_pages( $hide, $type, $v ) {
 		$select_options[] = lct_get_select_blank();
 
 	foreach( $pages as $page ) {
-		$select_options[] = array( 'label' => $page->post_title . ' (ID: ' . $page->ID . ')', 'value' => $page->ID );
+		$select_options[] = [ 'label' => $page->post_title . ' (ID: ' . $page->ID . ')', 'value' => $page->ID ];
 	}
 
 	return $select_options;
@@ -285,7 +285,7 @@ function lct_select_options_get_taxonomies( $hide, $type, $v ) {
 		$select_options[] = lct_get_select_blank();
 
 	foreach( $taxonomies as $taxonomy ) {
-		$select_options[] = array( 'label' => $taxonomy, 'value' => $taxonomy );
+		$select_options[] = [ 'label' => $taxonomy, 'value' => $taxonomy ];
 	}
 
 	return $select_options;
@@ -295,10 +295,10 @@ function lct_select_options_get_taxonomies( $hide, $type, $v ) {
 //Get a list of ALL Wordpress taxonomies
 function lct_select_options_get_raw_prefs( $hide, $type, $v ) {
 	$prefs = [ ];
-	$prefs[] = array( 'v' => 'wpautop', 'l' => 'Use the default Wordpress wpautop' );
-	$prefs[] = array( 'v' => 'off', 'l' => 'Off: turn wpautop off sitewide.' );
-	$prefs[] = array( 'v' => 'old', 'l' => 'Old: [raw] tag only works once.' );
-	$prefs[] = array( 'v' => 'new', 'l' => '[raw] tags work multi time and only on content contained in tags.' );
+	$prefs[] = [ 'v' => 'wpautop', 'l' => 'Use the default Wordpress wpautop' ];
+	$prefs[] = [ 'v' => 'off', 'l' => 'Off: turn wpautop off sitewide.' ];
+	$prefs[] = [ 'v' => 'old', 'l' => 'Old: [raw] tag only works once.' ];
+	$prefs[] = [ 'v' => 'new', 'l' => '[raw] tags work multi time and only on content contained in tags.' ];
 
 	$select_options = [ ];
 
@@ -306,7 +306,7 @@ function lct_select_options_get_raw_prefs( $hide, $type, $v ) {
 		$select_options[] = lct_get_select_blank();
 
 	foreach( $prefs as $pref ) {
-		$select_options[] = array( 'label' => $pref['l'], 'value' => $pref['v'] );
+		$select_options[] = [ 'label' => $pref['l'], 'value' => $pref['v'] ];
 	}
 
 	return $select_options;
@@ -324,14 +324,14 @@ function lct_select_options_lct_user_timezone( $hide, $type, $v ) {
 	if( ! $hide )
 		$select_options[] = lct_get_select_blank();
 
-	$select_options[] = array( 'label' => 'Pacific', 'value' => 'America/Los_Angeles' );
-	$select_options[] = array( 'label' => 'Mountain', 'value' => 'America/Denver' );
-	$select_options[] = array( 'label' => 'Central', 'value' => 'America/Chicago' );
-	$select_options[] = array( 'label' => 'Eastern', 'value' => 'America/New_York' );
-	$select_options[] = array( 'label' => 'Mountain no DST', 'value' => 'America/Phoenix' );
-	$select_options[] = array( 'label' => 'Hawaii', 'value' => 'America/Adak' );
-	$select_options[] = array( 'label' => 'Hawaii no DST', 'value' => 'Pacific/Honolulu' );
-	$select_options[] = array( 'label' => 'Alaska', 'value' => 'America/Anchorage' );
+	$select_options[] = [ 'label' => 'Pacific', 'value' => 'America/Los_Angeles' ];
+	$select_options[] = [ 'label' => 'Mountain', 'value' => 'America/Denver' ];
+	$select_options[] = [ 'label' => 'Central', 'value' => 'America/Chicago' ];
+	$select_options[] = [ 'label' => 'Eastern', 'value' => 'America/New_York' ];
+	$select_options[] = [ 'label' => 'Mountain no DST', 'value' => 'America/Phoenix' ];
+	$select_options[] = [ 'label' => 'Hawaii', 'value' => 'America/Adak' ];
+	$select_options[] = [ 'label' => 'Hawaii no DST', 'value' => 'Pacific/Honolulu' ];
+	$select_options[] = [ 'label' => 'Alaska', 'value' => 'America/Anchorage' ];
 
 	return $select_options;
 }
@@ -343,18 +343,18 @@ function lct_select_options_lct_standard_month( $hide, $type, $v ) {
 	if( ! $hide )
 		$select_options[] = lct_get_select_blank();
 
-	$select_options[] = array( 'label' => 'January', 'value' => '01' );
-	$select_options[] = array( 'label' => 'February', 'value' => '02' );
-	$select_options[] = array( 'label' => 'March', 'value' => '03' );
-	$select_options[] = array( 'label' => 'April', 'value' => '04' );
-	$select_options[] = array( 'label' => 'May', 'value' => '05' );
-	$select_options[] = array( 'label' => 'June', 'value' => '06' );
-	$select_options[] = array( 'label' => 'July', 'value' => '07' );
-	$select_options[] = array( 'label' => 'August', 'value' => '08' );
-	$select_options[] = array( 'label' => 'September', 'value' => '09' );
-	$select_options[] = array( 'label' => 'October', 'value' => '10' );
-	$select_options[] = array( 'label' => 'November', 'value' => '11' );
-	$select_options[] = array( 'label' => 'December', 'value' => '12' );
+	$select_options[] = [ 'label' => 'January', 'value' => '01' ];
+	$select_options[] = [ 'label' => 'February', 'value' => '02' ];
+	$select_options[] = [ 'label' => 'March', 'value' => '03' ];
+	$select_options[] = [ 'label' => 'April', 'value' => '04' ];
+	$select_options[] = [ 'label' => 'May', 'value' => '05' ];
+	$select_options[] = [ 'label' => 'June', 'value' => '06' ];
+	$select_options[] = [ 'label' => 'July', 'value' => '07' ];
+	$select_options[] = [ 'label' => 'August', 'value' => '08' ];
+	$select_options[] = [ 'label' => 'September', 'value' => '09' ];
+	$select_options[] = [ 'label' => 'October', 'value' => '10' ];
+	$select_options[] = [ 'label' => 'November', 'value' => '11' ];
+	$select_options[] = [ 'label' => 'December', 'value' => '12' ];
 
 	return $select_options;
 }
@@ -373,7 +373,7 @@ function lct_select_options_lct_standard_day( $hide, $type, $v ) {
 			$value = $i;
 		$label = $i;
 
-		$select_options[] = array( 'label' => $label, 'value' => $value );
+		$select_options[] = [ 'label' => $label, 'value' => $value ];
 	}
 
 	return $select_options;
@@ -394,7 +394,7 @@ function lct_select_options_lct_standard_year( $hide, $type, $v ) {
 		$value = $i;
 		$label = $i;
 
-		$select_options[] = array( 'label' => $label, 'value' => $value );
+		$select_options[] = [ 'label' => $label, 'value' => $value ];
 	}
 
 	return $select_options;
@@ -414,7 +414,7 @@ function lct_select_options_lct_standard_hour( $hide, $type, $v ) {
 			$value = $i;
 		$label = $i;
 
-		$select_options[] = array( 'label' => $label, 'value' => $value );
+		$select_options[] = [ 'label' => $label, 'value' => $value ];
 	}
 
 	return $select_options;
@@ -436,7 +436,7 @@ function lct_select_options_lct_standard_minute( $hide, $type, $v ) {
 			$label = $i;
 		}
 
-		$select_options[] = array( 'label' => $label, 'value' => $value );
+		$select_options[] = [ 'label' => $label, 'value' => $value ];
 	}
 
 	return $select_options;
@@ -449,8 +449,8 @@ function lct_select_options_lct_standard_ampm( $hide, $type, $v ) {
 	if( ! $hide )
 		$select_options[] = lct_get_select_blank();
 
-	$select_options[] = array( 'label' => 'AM', 'value' => 'AM' );
-	$select_options[] = array( 'label' => 'PM', 'value' => 'PM' );
+	$select_options[] = [ 'label' => 'AM', 'value' => 'AM' ];
+	$select_options[] = [ 'label' => 'PM', 'value' => 'PM' ];
 
 	return $select_options;
 }
@@ -462,18 +462,18 @@ function lct_select_options_states( $hide, $type, $v ) {
 	if( ! $hide )
 		$select_options[] = lct_get_select_blank();
 
-	$select_options[] = array( 'label' => 'Maryland', 'value' => 'MD' );
-	$select_options[] = array( 'label' => 'Virginia', 'value' => 'VA' );
+	$select_options[] = [ 'label' => 'Maryland', 'value' => 'MD' ];
+	$select_options[] = [ 'label' => 'Virginia', 'value' => 'VA' ];
 
 	return $select_options;
 }
 
 
 function lct_select_options_store_hide_selected_gforms( $hide, $type, $v ) {
-	$options = array(
+	$options = [
 		0 => 'Don\'t store the selected forms',
 		1 => 'Yes, store the selected forms',
-	);
+	];
 
 	$select_options = [ ];
 
@@ -481,7 +481,7 @@ function lct_select_options_store_hide_selected_gforms( $hide, $type, $v ) {
 		$select_options[] = lct_get_select_blank();
 
 	foreach( $options as $k => $v )
-		$select_options[] = array( 'label' => $v, 'value' => $k );
+		$select_options[] = [ 'label' => $v, 'value' => $k ];
 
 	return $select_options;
 }
@@ -504,7 +504,7 @@ function lct_select_options_number( $hide, $type, $v ) {
 			$value = $i;
 		$label = $i;
 
-		$select_options[] = array( 'label' => $label, 'value' => $value );
+		$select_options[] = [ 'label' => $label, 'value' => $value ];
 	}
 
 	return $select_options;

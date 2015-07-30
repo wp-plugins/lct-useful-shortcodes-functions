@@ -1,7 +1,7 @@
 <?php
 //create a long path if it does not exist, returns true if exists or finished creating
 if( ! function_exists( 'createPath' ) ) {
-	function createPath( $path, $startPath = NULL, $string = "<?php header('Location: /');\n" ) {
+	function createPath( $path, $startPath = null, $string = "<?php header('Location: /');\n" ) {
 		createPathFolders( $path );
 
 		if( ! $startPath )
@@ -11,7 +11,7 @@ if( ! function_exists( 'createPath' ) ) {
 		$objects = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $startPath ), RecursiveIteratorIterator::SELF_FIRST );
 
 		foreach( $objects as $name => $object ) {
-			if( is_dir( $object->getPathname() ) && strpos( $object->getPathname(), '.svn' ) === FALSE && strpos( $object->getPathname(), '..' ) === FALSE )
+			if( is_dir( $object->getPathname() ) && strpos( $object->getPathname(), '.svn' ) === false && strpos( $object->getPathname(), '..' ) === false )
 				$dirs[] = $object->getPathname();
 		}
 
@@ -32,6 +32,7 @@ if( ! function_exists( 'createPathFolders' ) ) {
 
 		$lastPath = substr( $path, 0, strrpos( $path, '/', -2 ) + 1 );
 		$r = createPath( $lastPath );
+
 		return ( $r && is_writable( $lastPath ) ) ? mkdir( $path, 0755, true ) : false;
 	}
 }

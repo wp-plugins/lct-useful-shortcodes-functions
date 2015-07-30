@@ -8,7 +8,7 @@ add_shortcode( 'lct_copyright', 'lct_shortcode_copyright' );
 function lct_shortcode_copyright() {
 	$prefix = 'lct';
 	$prefix_2 = 'sc::';
-	$fields = lct_acf_get_mapped_fields_of_object( $prefix, null, true, $prefix_2 );
+	$fields = lct_acf_get_mapped_fields( null, $prefix, null, true, $prefix_2 );
 
 	if( ! $fields["use_this_shortcode"][0] )
 		return false;

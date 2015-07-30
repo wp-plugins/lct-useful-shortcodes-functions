@@ -151,7 +151,7 @@ function lct_send_to_console( $data, $label = null ) {
 	if( empty( $data ) )
 		return;
 
-	$console = [];
+	$console = [ ];
 
 	if( ! empty( $label ) )
 		$label = '( ' . $label . ' ) ';
@@ -187,7 +187,7 @@ function lct_send_to_console( $data, $label = null ) {
 		if( $data === '' || ! strlen( $data ) )
 			$v = '__EMPTY__';
 
-		$console[] = lct_console_log_sprint( '_editzz: ' . $label  . $data );
+		$console[] = lct_console_log_sprint( '_editzz: ' . $label . $data );
 	}
 
 	$script = '<script>';
