@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.3.2
+Stable tag: 4.3.3
 Requires at least: 3.5
 Tested up to: 4.2.3
 Tags: Functions, Shortcodes
@@ -78,6 +78,9 @@ none
 
 
 == Changelog ==
+= 4.3.3 =
+	- Fixed a bug that will now redirect to the lct directory to check if a file exists and then it will return false. lct_js_uploads_dir() & lct_css_uploads_dir()
+
 = 4.3.2 =
 	- Added lct_avada_save_options() to do_action( 'avada_save_options' );
 	- Fixed bug that was showing an empty admin bar to visitors
