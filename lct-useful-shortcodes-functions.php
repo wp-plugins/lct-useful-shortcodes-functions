@@ -1,7 +1,7 @@
 <?php /**
  * Plugin Name: LCT Useful Shortcodes & Functions
  * Plugin URI: http://lookclassy.com/wordpress-plugins/useful-shortcodes-functions/
- * Version: 4.3.4
+ * Version: 4.3.5
  * Text Domain: lct-useful-shortcodes-functions
  * Author: Look Classy Technologies
  * Author URI: http://lookclassy.com/
@@ -83,6 +83,7 @@ add_action( 'plugins_loaded', 'lct_plugins_loaded' );
 function lct_plugins_loaded() {
 	include( 'extend_plugins/acf/__init.php' );
 	include( 'extend_plugins/Adava/__init.php' );
+	include( 'extend_plugins/better-wp-security/__init.php');
 }
 
 

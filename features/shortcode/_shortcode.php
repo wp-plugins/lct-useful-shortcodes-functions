@@ -118,10 +118,7 @@ add_shortcode( 'path_site_wp', 'lct_path_site_wp' );
  * @return string
  */
 function lct_path_site_wp() {
-	if( trim( get_site_url(), '/' ) != trim( get_bloginfo( "url" ), '/' ) )
-		return $_SERVER['DOCUMENT_ROOT'] . rtrim( str_replace( trim( get_bloginfo( "url" ), '/' ), "", trim( get_site_url(), '/' ) ) );
-
-	return $_SERVER['DOCUMENT_ROOT'];
+	return str_replace( '\\', '/', rtrim( rtrim( ABSPATH, '/' ), '\\' ) );
 }
 
 
