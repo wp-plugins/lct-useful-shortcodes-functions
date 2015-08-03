@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.3.3
+Stable tag: 4.3.4
 Requires at least: 3.5
 Tested up to: 4.2.3
 Tags: Functions, Shortcodes
@@ -78,6 +78,9 @@ none
 
 
 == Changelog ==
+= 4.3.4 =
+	- Added strpos_array()
+
 = 4.3.3 =
 	- Fixed a bug that will now redirect to the lct directory to check if a file exists and then it will return false. lct_js_uploads_dir() & lct_css_uploads_dir()
 

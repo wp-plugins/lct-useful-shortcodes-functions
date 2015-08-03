@@ -12,3 +12,28 @@ function lct_is_in_url( $search_this_in_url ) {
 	else
 		return false;
 }
+
+
+/**
+ * check an array with strpos
+ *
+ * @param $haystack
+ * @param $needle
+ *
+ * @return bool
+ */
+function strpos_array( $haystack, $needle ) {
+	if( is_array( $needle ) ) {
+		foreach( $needle as $need ) {
+			if( strpos( $haystack, $need ) !== false ) {
+				return true;
+			}
+		}
+	} else {
+		if( strpos( $haystack, $needle ) !== false ) {
+			return true;
+		}
+	}
+
+	return false;
+}
