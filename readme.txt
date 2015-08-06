@@ -1,7 +1,7 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.3.5
+Stable tag: 4.3.6
 Requires at least: 3.5
 Tested up to: 4.2.3
 Tags: Functions, Shortcodes
@@ -78,6 +78,9 @@ none
 
 
 == Changelog ==
+= 4.3.6 =
+	- Added lct_maintenance_Avada_fix()
+
 = 4.3.5 =
 	- Added: add_filter( 'itsec_filter_server_config_file_path', 'lct_itsec_filter_server_config_file_path', 10, 2 );
 	- Fixed buggy lct_path_site_wp()
