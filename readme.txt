@@ -1,9 +1,9 @@
 === LCT Useful Shortcodes & Functions ===
 Contributors: ircary
 Donate link: http://lookclassy.com/
-Stable tag: 4.3.6
+Stable tag: 4.3.7
 Requires at least: 3.5
-Tested up to: 4.2.3
+Tested up to: 4.3
 Tags: Functions, Shortcodes
 License: GPLv3 or later
 License URI: http://opensource.org/licenses/GPL-3.0
@@ -78,6 +78,9 @@ none
 
 
 == Changelog ==
+= 4.3.7 =
+	- Tweaked acf.css
+
 = 4.3.6 =
 	- Added lct_maintenance_Avada_fix()
 
